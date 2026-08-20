@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>V.I.V.A – Visualização Ilustrada para Valorização da Aprendizagem</title>
+  <meta name="description" content="Site educativo que ajuda pessoas com Transtorno do Espectro Autista e Transtorno de Desenvolvimento Global a entender matérias com explicações claras e imagens geradas por IA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Tema Claro - Branco e Amarelo */
+      --bg: #FFFDF5;
+      --bg-card: #FFFFFF;
+      --text: #1A1A1A;
+      --text-soft: #4A4A4A;
+      --accent: #F5C518;
+      --accent-hover: #E0B000;
+      --accent-soft: #FFF3C4;
+      --border: #F0E6C0;
+      --shadow: 0 4px 20px rgba(245, 197, 24, 0.15);
+      --shadow-hover: 0 8px 30px rgba(245, 197, 24, 0.25);
+      --success: #2E7D32;
+      --header-bg: #FFFFFF;
+    }
+
+    [data-theme="dark"] {
+      /* Tema Escuro - Preto e Azul Claro */
+      --bg: #0B0F1A;
+      --bg-card: #151B2B;
+      --text: #F0F4FF;
+      --text-soft: #A8B5D1;
+      --accent: #5BA3F5;
+      --accent-hover: #3D8BE0;
+      --accent-soft: #1A2A45;
+      --border: #2A3650;
+      --shadow: 0 4px 20px rgba(91, 163, 245, 0.12);
+      --shadow-hover: 0 8px 30px rgba(91, 163, 245, 0.22);
+      --success: #66BB6A;
+      --header-bg: #0F1525;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: var(--header-bg);
+      border-bottom: 2px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #1A1A1A;
+      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .logo:hover .logo-icon {
+      transform: scale(1.08) rotate(-3deg);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text strong {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-text span {
+      font-size: 0.75rem;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .theme-btn {
+      background: var(--accent-soft);
+      border: 2px solid var(--border);
+      color: var(--text);
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      background: var(--accent);
+      color: #1A1A1A;
+      transform: scale(1.08);
+      box-shadow: var(--shadow);
+    }
+
+    /* Main */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding: 2rem 1rem;
+      background: var(--bg-card);
+      border-radius: 24px;
+      border: 2px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-soft);
+      max-width: 640px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-soft);
+      color: var(--text);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+
+    /* Subjects Grid */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .subject-card {
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 1.75rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: center;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .subject-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent);
+    }
+
+    .subject-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .subject-card.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .subject-card.active::before {
+      transform: scaleX(1);
+    }
+
+    .subject-icon {
+      font-size: 2.8rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .subject-card h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 0.35rem;
+    }
+
+    .subject-card p {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+    }
+
+    /* Learning Panel */
+    .learning-panel {
+      display: none;
+      background: var(--bg-card);
+      border: 2px solid var(--border);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      margin-bottom: 2rem;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .learning-panel.visible {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .panel-header h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-btn {
+      background: transparent;
+      border: 2px solid var(--border);
+      color: var(--text);
+      padding: 0.5rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #1A1A1A;
+      transform: scale(1.05);
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      font-size: 1.1rem;
+      font-family: inherit;
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    .input-group input::placeholder {
+      color: var(--text-soft);
+      opacity: 0.7;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #1A1A1A;
+      border: none;
+      padding: 1rem 1.75rem;
+      border-radius: 14px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Result Area */
+    .result-area {
+      display: none;
+      margin-top: 2rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .result-area.visible {
+      display: block;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .result-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .explanation-box, .image-box {
+      background: var(--bg);
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 1.5rem;
+    }
+
+    .explanation-box h3, .image-box h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .explanation-content {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .explanation-content p {
+      margin-bottom: 1rem;
+    }
+
+    .explanation-content strong {
+      color: var(--accent);
+    }
+
+    .image-placeholder {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: var(--accent-soft);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      border: 2px solid var(--border);
+      text-align: center;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .image-placeholder .ai-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--accent);
+      color: #1A1A1A;
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.3rem 0.7rem;
+      border-radius: 8px;
+      z-index: 5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .image-placeholder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .image-placeholder .placeholder-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      width: 100%;
+      height: 100%;
+    }
+
+    .image-placeholder .emoji {
+      font-size: 4rem;
+    }
+
+    .image-placeholder p {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      max-width: 220px;
+    }
+
+    .image-loading-text {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      margin-top: 0.5rem;
+    }
+
+    /* Loading */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .loading.visible {
+      display: block;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-top: 2px solid var(--border);
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    footer strong {
+      color: var(--text);
+    }
+
+    /* Tips */
+    .tips {
+      background: var(--accent-soft);
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .tips strong {
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    /* Examples chips */
+    .examples {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .example-chip {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .example-chip:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #1A1A1A;
+      transform: scale(1.05);
+    }
+
+    /* Accessibility focus */
+    button:focus-visible,
+    input:focus-visible,
+    .subject-card:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="#" class="logo" onclick="voltarInicio(); return false;">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+          <strong>V.I.V.A</strong>
+          <span>Visualização Ilustrada</span>
+        </div>
+      </a>
+      <button class="theme-btn" id="themeBtn" title="Trocar tema" aria-label="Trocar entre tema claro e escuro">
+        🌙
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="badge">🌟 Feito para apoiar a aprendizagem</div>
+      <h1>Aprender fica mais fácil<br>com <span>imagens e explicações claras</span></h1>
+      <p>
+        O <strong>V.I.V.A</strong> ajuda pessoas com Transtorno do Espectro Autista (TEA) 
+        e Transtorno de Desenvolvimento Global a entender matérias escolares 
+        de forma visual, simples e acolhedora.
+      </p>
+    </section>
+
+    <!-- Subjects -->
+    <h2 class="section-title" id="subjectsTitle">📚 Escolha a matéria</h2>
+    <div class="subjects-grid" id="subjectsGrid">
+      <div class="subject-card" tabindex="0" data-subject="portugues" role="button" aria-label="Português">
+        <span class="subject-icon">📖</span>
+        <h3>Português</h3>
+        <p>Letras, palavras, textos e gramática</p>
+      </div>
+      <div class="subject-card" tabindex="0" data-subject="matematica" role="button" aria-label="Matemática">
+        <span class="subject-icon">🔢</span>
+        <h3>Matemática</h3>
+        <p>Números, contas e raciocínio</p>
+      </div>
+      <div class="subject-card" tabindex="0" data-subject="historia" role="button" aria-label="História">
+        <span class="subject-icon">🏛️</span>
+        <h3>História</h3>
+        <p>Eventos, pessoas e o passado</p>
+      </div>
+      <div class="subject-card" tabindex="0" data-subject="geografia" role="button" aria-label="Geografia">
+        <span class="subject-icon">🌍</span>
+        <h3>Geografia</h3>
+        <p>Mapas, países e o planeta</p>
+      </div>
+    </div>
+
+    <!-- Learning Panel -->
+    <section class="learning-panel" id="learningPanel">
+      <div class="panel-header">
+        <h2 id="panelTitle">📖 Português</h2>
+        <button class="back-btn" onclick="voltarInicio()">← Voltar às matérias</button>
+      </div>
+
+      <div class="input-group">
+        <label for="topicInput">O que você quer aprender hoje?</label>
+        <input 
+          type="text" 
+          id="topicInput" 
+          placeholder="Ex: O que é substantivo? ou Como fazer conta de dividir?"
+          autocomplete="off"
+        />
+        <div class="examples" id="examplesContainer"></div>
+      </div>
+
+      <button class="btn-primary" id="explainBtn" onclick="gerarExplicacao()">
+        ✨ Explicar e Ilustrar
+      </button>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Gerando explicação e imagem com Inteligência Artificial...</p>
+        <p style="font-size: 0.9rem; color: var(--text-soft); margin-top: 0.5rem;">Isso pode levar alguns segundos</p>
+      </div>
+
+      <div class="result-area" id="resultArea">
+        <div class="result-grid">
+          <div class="explanation-box">
+            <h3>📝 Explicação simples</h3>
+            <div class="explanation-content" id="explanationContent"></div>
+          </div>
+          <div class="image-box">
+            <h3>🖼️ Imagem ilustrativa (IA)</h3>
+            <div class="image-placeholder" id="imagePlaceholder">
+              <span class="ai-badge">Gerada por IA</span>
+              <div class="placeholder-content" id="placeholderContent">
+                <span class="emoji" id="imageEmoji">🎨</span>
+                <p id="imageDesc">A imagem será gerada pela IA aqui.</p>
+              </div>
+              <img id="aiImage" alt="Ilustração gerada por inteligência artificial" style="display: none;" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tips">
+        <strong>💡 Dica:</strong>
+        Use frases curtas e palavras simples. Se quiser, peça para o adulto te ajudar a digitar.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      <strong>V.I.V.A</strong> — Visualização Ilustrada para Valorização da Aprendizagem<br>
+      Projeto apresentado na <strong>FECCI 2026</strong> • Curitiba
+    </p>
+  </footer>
+
+  <script>
+    // ========== Dados das matérias ==========
+    const materias = {
+      portugues: {
+        nome: "Português",
+        icon: "📖",
+        exemplos: [
+          "O que é substantivo?",
+          "Diferença entre verbo e adjetivo",
+          "Como usar a vírgula",
+          "O que é um parágrafo"
+        ],
+        imagens: {
+          default: "📚",
+          substantivo: "🐶",
+          verbo: "🏃",
+          adjetivo: "🌈",
+          virgula: "✍️",
+          paragrafo: "📄"
+        }
+      },
+      matematica: {
+        nome: "Matemática",
+        icon: "🔢",
+        exemplos: [
+          "Como fazer conta de somar",
+          "O que é multiplicação",
+          "Como fazer divisão",
+          "O que são frações"
+        ],
+        imagens: {
+          default: "🧮",
+          somar: "➕",
+          multiplicacao: "✖️",
+          divisao: "➗",
+          fracoes: "🍕"
+        }
+      },
+      historia: {
+        nome: "História",
+        icon: "🏛️",
+        exemplos: [
+          "Quem descobriu o Brasil",
+          "O que foi a Independência",
+          "Quem foi Dom Pedro I",
+          "O que é a Pré-História"
+        ],
+        imagens: {
+          default: "📜",
+          brasil: "🇧🇷",
+          independencia: "🎉",
+          "dom pedro": "👑",
+          "pre-historia": "🦕"
+        }
+      },
+      geografia: {
+        nome: "Geografia",
+        icon: "🌍",
+        exemplos: [
+          "O que são continentes",
+          "Quais são os oceanos",
+          "O que é o equador",
+          "Capitais do Brasil"
+        ],
+        imagens: {
+          default: "🗺️",
+          continentes: "🌎",
+          oceanos: "🌊",
+          equador: "🌐",
+          capitais: "🏙️"
+        }
+      }
+    };
+
+    // Explicações simples e claras (simulando IA)
+    const explicacoes = {
+      // Português
+      "o que é substantivo": `
+        <p><strong>Substantivo</strong> é a palavra que dá nome às coisas.</p>
+        <p>Exemplos:</p>
+        <p>• <strong>Cachorro</strong> → nome de um animal</p>
+        <p>• <strong>Casa</strong> → nome de um lugar</p>
+        <p>• <strong>Maria</strong> → nome de uma pessoa</p>
+        <p>Tudo que tem nome é um substantivo!</p>
+      `,
+      "diferença entre verbo e adjetivo": `
+        <p><strong>Verbo</strong> é a palavra que mostra ação ou estado.</p>
+        <p>Exemplo: correr, pular, dormir, ser.</p>
+        <p><strong>Adjetivo</strong> é a palavra que descreve o substantivo.</p>
+        <p>Exemplo: bonito, grande, azul, feliz.</p>
+        <p>Verbo = o que faz | Adjetivo = como é</p>
+      `,
+      "como usar a vírgula": `
+        <p>A <strong>vírgula</strong> serve para separar ideias e fazer a leitura ficar mais clara.</p>
+        <p>Use vírgula quando:</p>
+        <p>• Listar coisas: eu gosto de maçã, banana e laranja.</p>
+        <p>• Separar partes da frase para respirar melhor.</p>
+        <p>Não use vírgula entre o sujeito e o verbo!</p>
+      `,
+      "o que é um parágrafo": `
+        <p>Um <strong>parágrafo</strong> é um grupo de frases que falam sobre a mesma ideia.</p>
+        <p>Ele começa com um espaço (recuo) e termina quando a ideia acaba.</p>
+        <p>Textos bem organizados têm vários parágrafos.</p>
+      `,
+
+      // Matemática
+      "como fazer conta de somar": `
+        <p><strong>Somar</strong> é juntar quantidades.</p>
+        <p>Exemplo: 3 + 2 = 5</p>
+        <p>Imagine 3 maçãs e depois ganha mais 2 maçãs. Agora você tem 5 maçãs!</p>
+        <p>O sinal de somar é o <strong>+</strong>.</p>
+      `,
+      "o que é multiplicação": `
+        <p><strong>Multiplicação</strong> é uma forma rápida de somar o mesmo número várias vezes.</p>
+        <p>Exemplo: 4 × 3 = 12</p>
+        <p>Significa: 4 + 4 + 4 = 12</p>
+        <p>O sinal de multiplicar é o <strong>×</strong> ou <strong>*</strong>.</p>
+      `,
+      "como fazer divisão": `
+        <p><strong>Divisão</strong> é repartir em partes iguais.</p>
+        <p>Exemplo: 8 ÷ 2 = 4</p>
+        <p>Se você tem 8 balas e divide com 2 amigos, cada um fica com 4 balas.</p>
+        <p>O sinal de dividir é o <strong>÷</strong>.</p>
+      `,
+      "o que são frações": `
+        <p><strong>Fração</strong> representa uma parte de um todo.</p>
+        <p>Exemplo: 1/2 (um meio) = metade de uma pizza.</p>
+        <p>O número de cima (numerador) mostra quantas partes você tem.</p>
+        <p>O número de baixo (denominador) mostra em quantas partes o todo foi dividido.</p>
+      `,
+
+      // História
+      "quem descobriu o brasil": `
+        <p>O Brasil foi “descoberto” pelos portugueses em <strong>1500</strong>.</p>
+        <p>O navegador <strong>Pedro Álvares Cabral</strong> chegou ao litoral brasileiro.</p>
+        <p>Na verdade, já existiam povos indígenas vivendo aqui há milhares de anos.</p>
+        <p>A data oficial do “descobrimento” é 22 de abril de 1500.</p>
+      `,
+      "o que foi a independência": `
+        <p>A <strong>Independência do Brasil</strong> aconteceu em <strong>7 de setembro de 1822</strong>.</p>
+        <p>Dom Pedro I declarou que o Brasil não seria mais colônia de Portugal.</p>
+        <p>O grito “Independência ou Morte!” ficou famoso.</p>
+        <p>A partir daí o Brasil se tornou um país independente.</p>
+      `,
+      "quem foi dom pedro i": `
+        <p><strong>Dom Pedro I</strong> foi o primeiro imperador do Brasil.</p>
+        <p>Ele proclamou a Independência em 1822.</p>
+        <p>Foi filho do rei de Portugal e ficou no Brasil quando a família real voltou.</p>
+        <p>Ele é uma figura muito importante na nossa história.</p>
+      `,
+      "o que é a pré-história": `
+        <p>A <strong>Pré-História</strong> é o período antes da invenção da escrita.</p>
+        <p>As pessoas viviam em cavernas, caçavam e coletavam alimentos.</p>
+        <p>Elas faziam ferramentas de pedra e pintavam nas paredes das cavernas.</p>
+        <p>Esse período durou milhões de anos.</p>
+      `,
+
+      // Geografia
+      "o que são continentes": `
+        <p><strong>Continentes</strong> são grandes massas de terra no planeta.</p>
+        <p>Existem 6 continentes principais:</p>
+        <p>• América • Europa • África • Ásia • Oceania • Antártida</p>
+        <p>O Brasil fica no continente americano.</p>
+      `,
+      "quais são os oceanos": `
+        <p>Os <strong>oceanos</strong> são grandes massas de água salgada.</p>
+        <p>Os 5 oceanos são:</p>
+        <p>• Oceano Atlântico • Oceano Pacífico • Oceano Índico</p>
+        <p>• Oceano Ártico • Oceano Antártico</p>
+        <p>O Brasil é banhado pelo Oceano Atlântico.</p>
+      `,
+      "o que é o equador": `
+        <p>O <strong>Equador</strong> é uma linha imaginária que divide a Terra ao meio.</p>
+        <p>Ele separa o Hemisfério Norte do Hemisfério Sul.</p>
+        <p>Perto do Equador o clima é mais quente o ano todo.</p>
+        <p>O Brasil tem parte do seu território cortada pela linha do Equador.</p>
+      `,
+      "capitais do brasil": `
+        <p>A <strong>capital do Brasil</strong> é <strong>Brasília</strong>.</p>
+        <p>Cada estado também tem sua capital. Exemplos:</p>
+        <p>• São Paulo → São Paulo</p>
+        <p>• Rio de Janeiro → Rio de Janeiro</p>
+        <p>• Paraná → Curitiba</p>
+        <p>• Bahia → Salvador</p>
+      `
+    };
+
+    let materiaAtual = null;
+
+    // ========== Tema ==========
+    const themeBtn = document.getElementById('themeBtn');
+    const html = document.documentElement;
+
+    // Carrega tema salvo
+    const savedTheme = localStorage.getItem('viva-theme') || 'light';
+    if (savedTheme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      themeBtn.textContent = '☀️';
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        themeBtn.textContent = '🌙';
+        localStorage.setItem('viva-theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        themeBtn.textContent = '☀️';
+        localStorage.setItem('viva-theme', 'dark');
+      }
+    });
+
+    // ========== Seleção de matéria ==========
+    document.querySelectorAll('.subject-card').forEach(card => {
+      card.addEventListener('click', () => selecionarMateria(card.dataset.subject));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selecionarMateria(card.dataset.subject);
+        }
+      });
+    });
+
+    function selecionarMateria(chave) {
+      materiaAtual = chave;
+      const mat = materias[chave];
+
+      // Atualiza UI
+      document.getElementById('panelTitle').innerHTML = `${mat.icon} ${mat.nome}`;
+      document.getElementById('learningPanel').classList.add('visible');
+      document.getElementById('subjectsGrid').style.display = 'none';
+      document.getElementById('subjectsTitle').style.display = 'none';
+      document.getElementById('hero').style.display = 'none';
+
+      // Limpa resultados anteriores
+      document.getElementById('resultArea').classList.remove('visible');
+      document.getElementById('loading').classList.remove('visible');
+      document.getElementById('topicInput').value = '';
+
+      // Exemplos
+      const container = document.getElementById('examplesContainer');
+      container.innerHTML = mat.exemplos.map(ex => 
+        `<button class="example-chip" onclick="usarExemplo('${ex.replace(/'/g, "\\'")}')">${ex}</button>`
+      ).join('');
+
+      // Foca no input
+      setTimeout(() => document.getElementById('topicInput').focus(), 100);
+
+      // Marca card ativo (caso volte)
+      document.querySelectorAll('.subject-card').forEach(c => c.classList.remove('active'));
+    }
+
+    function usarExemplo(texto) {
+      document.getElementById('topicInput').value = texto;
+      document.getElementById('topicInput').focus();
+    }
+
+    function voltarInicio() {
+      document.getElementById('learningPanel').classList.remove('visible');
+      document.getElementById('subjectsGrid').style.display = 'grid';
+      document.getElementById('subjectsTitle').style.display = 'flex';
+      document.getElementById('hero').style.display = 'block';
+      materiaAtual = null;
+    }
+
+    // ========== Gerar explicação + imagem com IA ==========
+    function gerarExplicacao() {
+      const input = document.getElementById('topicInput');
+      const tema = input.value.trim().toLowerCase();
+      const temaOriginal = input.value.trim();
+
+      if (!tema) {
+        input.focus();
+        input.style.borderColor = '#e53935';
+        setTimeout(() => input.style.borderColor = '', 1500);
+        return;
+      }
+
+      const btn = document.getElementById('explainBtn');
+      const loading = document.getElementById('loading');
+      const result = document.getElementById('resultArea');
+      const aiImage = document.getElementById('aiImage');
+      const placeholderContent = document.getElementById('placeholderContent');
+
+      btn.disabled = true;
+      result.classList.remove('visible');
+      loading.classList.add('visible');
+
+      // Esconde imagem anterior e mostra placeholder
+      aiImage.style.display = 'none';
+      aiImage.src = '';
+      placeholderContent.style.display = 'flex';
+
+      // Simula um pequeno tempo + gera imagem
+      setTimeout(() => {
+        loading.classList.remove('visible');
+        result.classList.add('visible');
+        btn.disabled = false;
+
+        // ===== 1. Explicação em texto =====
+        let texto = explicacoes[tema];
+        if (!texto) {
+          const chave = Object.keys(explicacoes).find(k => tema.includes(k) || k.includes(tema));
+          texto = chave ? explicacoes[chave] : `
+            <p>Aqui está uma explicação simples sobre <strong>${temaOriginal}</strong>:</p>
+            <p>Este é um tema importante da matéria de <strong>${materias[materiaAtual].nome}</strong>.</p>
+            <p>Para uma explicação ainda mais precisa, tente digitar uma das sugestões ou use palavras como “o que é…”, “como fazer…” ou “quem foi…”.</p>
+            <p>A imagem ao lado foi gerada por Inteligência Artificial especialmente para este tema!</p>
+          `;
+        }
+        document.getElementById('explanationContent').innerHTML = texto;
+
+        // ===== 2. Gera imagem real com IA (Pollinations) =====
+        const mat = materias[materiaAtual];
+        const prompt = criarPromptImagem(temaOriginal, mat.nome);
+
+        // API Pollinations com chave da conta (sk_) + modelo GPT Image
+        const POLLINATIONS_KEY = "sk_6ZnqJ20UEgg1qCAEsArGEJ272tsrQHY7";
+        const imageUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=gptimage&width=512&height=512&nologo=true&key=${POLLINATIONS_KEY}`;
+
+        // Atualiza texto de carregamento da imagem
+        document.getElementById('imageEmoji').textContent = '⏳';
+        document.getElementById('imageDesc').textContent = 'Gerando imagem com Inteligência Artificial...';
+
+        // Carrega a imagem
+        aiImage.onload = () => {
+          placeholderContent.style.display = 'none';
+          aiImage.style.display = 'block';
+        };
+        aiImage.onerror = () => {
+          // Se der erro, mostra fallback amigável
+          document.getElementById('imageEmoji').textContent = '🎨';
+          document.getElementById('imageDesc').textContent = 'Não foi possível gerar a imagem agora. Tente novamente em alguns segundos.';
+        };
+        aiImage.src = imageUrl;
+        aiImage.alt = `Ilustração sobre: ${temaOriginal}`;
+
+        // Scroll suave até o resultado
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 900);
+    }
+
+    // Cria um prompt bom para a IA gerar imagem educativa e clara
+    function criarPromptImagem(tema, materia) {
+      // Prompt em inglês funciona melhor na maioria das IAs de imagem
+      return `Educational illustration for children and neurodivergent students about "${tema}" in the subject of ${materia}. Simple, clear, colorful, friendly, high contrast, easy to understand, no text in the image, cartoon style, clean background, suitable for autism spectrum and learning support`;
+    }
+
+    // Enter no input também gera
+    document.getElementById('topicInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') gerarExplicacao();
+    });
+  </script>
+</body>
+</html>
