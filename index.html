@@ -727,15 +727,7 @@
           "Diferença entre verbo e adjetivo",
           "Como usar a vírgula",
           "O que é um parágrafo"
-        ],
-        imagens: {
-          default: "📚",
-          substantivo: "🐶",
-          verbo: "🏃",
-          adjetivo: "🌈",
-          virgula: "✍️",
-          paragrafo: "📄"
-        }
+        ]
       },
       matematica: {
         nome: "Matemática",
@@ -745,14 +737,7 @@
           "O que é multiplicação",
           "Como fazer divisão",
           "O que são frações"
-        ],
-        imagens: {
-          default: "🧮",
-          somar: "➕",
-          multiplicacao: "✖️",
-          divisao: "➗",
-          fracoes: "🍕"
-        }
+        ]
       },
       historia: {
         nome: "História",
@@ -762,14 +747,7 @@
           "O que foi a Independência",
           "Quem foi Dom Pedro I",
           "O que é a Pré-História"
-        ],
-        imagens: {
-          default: "📜",
-          brasil: "🇧🇷",
-          independencia: "🎉",
-          "dom pedro": "👑",
-          "pre-historia": "🦕"
-        }
+        ]
       },
       geografia: {
         nome: "Geografia",
@@ -779,128 +757,8 @@
           "Quais são os oceanos",
           "O que é o equador",
           "Capitais do Brasil"
-        ],
-        imagens: {
-          default: "🗺️",
-          continentes: "🌎",
-          oceanos: "🌊",
-          equador: "🌐",
-          capitais: "🏙️"
-        }
+        ]
       }
-    };
-
-    // Explicações simples e claras (simulando IA)
-    const explicacoes = {
-      // Português
-      "o que é substantivo": `
-        <p><strong>Substantivo</strong> é a palavra que dá nome às coisas.</p>
-        <p>Exemplos:</p>
-        <p>• <strong>Cachorro</strong> → nome de um animal</p>
-        <p>• <strong>Casa</strong> → nome de um lugar</p>
-        <p>• <strong>Maria</strong> → nome de uma pessoa</p>
-        <p>Tudo que tem nome é um substantivo!</p>
-      `,
-      "diferença entre verbo e adjetivo": `
-        <p><strong>Verbo</strong> é a palavra que mostra ação ou estado.</p>
-        <p>Exemplo: correr, pular, dormir, ser.</p>
-        <p><strong>Adjetivo</strong> é a palavra que descreve o substantivo.</p>
-        <p>Exemplo: bonito, grande, azul, feliz.</p>
-        <p>Verbo = o que faz | Adjetivo = como é</p>
-      `,
-      "como usar a vírgula": `
-        <p>A <strong>vírgula</strong> serve para separar ideias e fazer a leitura ficar mais clara.</p>
-        <p>Use vírgula quando:</p>
-        <p>• Listar coisas: eu gosto de maçã, banana e laranja.</p>
-        <p>• Separar partes da frase para respirar melhor.</p>
-        <p>Não use vírgula entre o sujeito e o verbo!</p>
-      `,
-      "o que é um parágrafo": `
-        <p>Um <strong>parágrafo</strong> é um grupo de frases que falam sobre a mesma ideia.</p>
-        <p>Ele começa com um espaço (recuo) e termina quando a ideia acaba.</p>
-        <p>Textos bem organizados têm vários parágrafos.</p>
-      `,
-
-      // Matemática
-      "como fazer conta de somar": `
-        <p><strong>Somar</strong> é juntar quantidades.</p>
-        <p>Exemplo: 3 + 2 = 5</p>
-        <p>Imagine 3 maçãs e depois ganha mais 2 maçãs. Agora você tem 5 maçãs!</p>
-        <p>O sinal de somar é o <strong>+</strong>.</p>
-      `,
-      "o que é multiplicação": `
-        <p><strong>Multiplicação</strong> é uma forma rápida de somar o mesmo número várias vezes.</p>
-        <p>Exemplo: 4 × 3 = 12</p>
-        <p>Significa: 4 + 4 + 4 = 12</p>
-        <p>O sinal de multiplicar é o <strong>×</strong> ou <strong>*</strong>.</p>
-      `,
-      "como fazer divisão": `
-        <p><strong>Divisão</strong> é repartir em partes iguais.</p>
-        <p>Exemplo: 8 ÷ 2 = 4</p>
-        <p>Se você tem 8 balas e divide com 2 amigos, cada um fica com 4 balas.</p>
-        <p>O sinal de dividir é o <strong>÷</strong>.</p>
-      `,
-      "o que são frações": `
-        <p><strong>Fração</strong> representa uma parte de um todo.</p>
-        <p>Exemplo: 1/2 (um meio) = metade de uma pizza.</p>
-        <p>O número de cima (numerador) mostra quantas partes você tem.</p>
-        <p>O número de baixo (denominador) mostra em quantas partes o todo foi dividido.</p>
-      `,
-
-      // História
-      "quem descobriu o brasil": `
-        <p>O Brasil foi “descoberto” pelos portugueses em <strong>1500</strong>.</p>
-        <p>O navegador <strong>Pedro Álvares Cabral</strong> chegou ao litoral brasileiro.</p>
-        <p>Na verdade, já existiam povos indígenas vivendo aqui há milhares de anos.</p>
-        <p>A data oficial do “descobrimento” é 22 de abril de 1500.</p>
-      `,
-      "o que foi a independência": `
-        <p>A <strong>Independência do Brasil</strong> aconteceu em <strong>7 de setembro de 1822</strong>.</p>
-        <p>Dom Pedro I declarou que o Brasil não seria mais colônia de Portugal.</p>
-        <p>O grito “Independência ou Morte!” ficou famoso.</p>
-        <p>A partir daí o Brasil se tornou um país independente.</p>
-      `,
-      "quem foi dom pedro i": `
-        <p><strong>Dom Pedro I</strong> foi o primeiro imperador do Brasil.</p>
-        <p>Ele proclamou a Independência em 1822.</p>
-        <p>Foi filho do rei de Portugal e ficou no Brasil quando a família real voltou.</p>
-        <p>Ele é uma figura muito importante na nossa história.</p>
-      `,
-      "o que é a pré-história": `
-        <p>A <strong>Pré-História</strong> é o período antes da invenção da escrita.</p>
-        <p>As pessoas viviam em cavernas, caçavam e coletavam alimentos.</p>
-        <p>Elas faziam ferramentas de pedra e pintavam nas paredes das cavernas.</p>
-        <p>Esse período durou milhões de anos.</p>
-      `,
-
-      // Geografia
-      "o que são continentes": `
-        <p><strong>Continentes</strong> são grandes massas de terra no planeta.</p>
-        <p>Existem 6 continentes principais:</p>
-        <p>• América • Europa • África • Ásia • Oceania • Antártida</p>
-        <p>O Brasil fica no continente americano.</p>
-      `,
-      "quais são os oceanos": `
-        <p>Os <strong>oceanos</strong> são grandes massas de água salgada.</p>
-        <p>Os 5 oceanos são:</p>
-        <p>• Oceano Atlântico • Oceano Pacífico • Oceano Índico</p>
-        <p>• Oceano Ártico • Oceano Antártico</p>
-        <p>O Brasil é banhado pelo Oceano Atlântico.</p>
-      `,
-      "o que é o equador": `
-        <p>O <strong>Equador</strong> é uma linha imaginária que divide a Terra ao meio.</p>
-        <p>Ele separa o Hemisfério Norte do Hemisfério Sul.</p>
-        <p>Perto do Equador o clima é mais quente o ano todo.</p>
-        <p>O Brasil tem parte do seu território cortada pela linha do Equador.</p>
-      `,
-      "capitais do brasil": `
-        <p>A <strong>capital do Brasil</strong> é <strong>Brasília</strong>.</p>
-        <p>Cada estado também tem sua capital. Exemplos:</p>
-        <p>• São Paulo → São Paulo</p>
-        <p>• Rio de Janeiro → Rio de Janeiro</p>
-        <p>• Paraná → Curitiba</p>
-        <p>• Bahia → Salvador</p>
-      `
     };
 
     let materiaAtual = null;
@@ -909,7 +767,6 @@
     const themeBtn = document.getElementById('themeBtn');
     const html = document.documentElement;
 
-    // Carrega tema salvo
     const savedTheme = localStorage.getItem('viva-theme') || 'light';
     if (savedTheme === 'dark') {
       html.setAttribute('data-theme', 'dark');
@@ -944,29 +801,22 @@
       materiaAtual = chave;
       const mat = materias[chave];
 
-      // Atualiza UI
       document.getElementById('panelTitle').innerHTML = `${mat.icon} ${mat.nome}`;
       document.getElementById('learningPanel').classList.add('visible');
       document.getElementById('subjectsGrid').style.display = 'none';
       document.getElementById('subjectsTitle').style.display = 'none';
       document.getElementById('hero').style.display = 'none';
 
-      // Limpa resultados anteriores
       document.getElementById('resultArea').classList.remove('visible');
       document.getElementById('loading').classList.remove('visible');
       document.getElementById('topicInput').value = '';
 
-      // Exemplos
       const container = document.getElementById('examplesContainer');
       container.innerHTML = mat.exemplos.map(ex => 
         `<button class="example-chip" onclick="usarExemplo('${ex.replace(/'/g, "\\'")}')">${ex}</button>`
       ).join('');
 
-      // Foca no input
       setTimeout(() => document.getElementById('topicInput').focus(), 100);
-
-      // Marca card ativo (caso volte)
-      document.querySelectorAll('.subject-card').forEach(c => c.classList.remove('active'));
     }
 
     function usarExemplo(texto) {
@@ -982,13 +832,15 @@
       materiaAtual = null;
     }
 
+    // ========== Chave da API ==========
+    const POLLINATIONS_KEY = "sk_6ZnqJ20UEgg1qCAEsArGEJ272tsrQHY7";
+
     // ========== Gerar explicação + imagem com IA ==========
-    function gerarExplicacao() {
+    async function gerarExplicacao() {
       const input = document.getElementById('topicInput');
-      const tema = input.value.trim().toLowerCase();
       const temaOriginal = input.value.trim();
 
-      if (!tema) {
+      if (!temaOriginal) {
         input.focus();
         input.style.borderColor = '#e53935';
         setTimeout(() => input.style.borderColor = '', 1500);
@@ -1000,72 +852,95 @@
       const result = document.getElementById('resultArea');
       const aiImage = document.getElementById('aiImage');
       const placeholderContent = document.getElementById('placeholderContent');
+      const explanationContent = document.getElementById('explanationContent');
 
       btn.disabled = true;
       result.classList.remove('visible');
       loading.classList.add('visible');
 
-      // Esconde imagem anterior e mostra placeholder
       aiImage.style.display = 'none';
       aiImage.src = '';
       placeholderContent.style.display = 'flex';
+      document.getElementById('imageEmoji').textContent = '⏳';
+      document.getElementById('imageDesc').textContent = 'Gerando imagem com Inteligência Artificial...';
 
-      // Simula um pequeno tempo + gera imagem
-      setTimeout(() => {
-        loading.classList.remove('visible');
-        result.classList.add('visible');
-        btn.disabled = false;
+      const mat = materias[materiaAtual];
 
-        // ===== 1. Explicação em texto =====
-        let texto = explicacoes[tema];
-        if (!texto) {
-          const chave = Object.keys(explicacoes).find(k => tema.includes(k) || k.includes(tema));
-          texto = chave ? explicacoes[chave] : `
-            <p>Aqui está uma explicação simples sobre <strong>${temaOriginal}</strong>:</p>
-            <p>Este é um tema importante da matéria de <strong>${materias[materiaAtual].nome}</strong>.</p>
-            <p>Para uma explicação ainda mais precisa, tente digitar uma das sugestões ou use palavras como “o que é…”, “como fazer…” ou “quem foi…”.</p>
-            <p>A imagem ao lado foi gerada por Inteligência Artificial especialmente para este tema!</p>
-          `;
-        }
-        document.getElementById('explanationContent').innerHTML = texto;
+      try {
+        // 1. Gera explicação em texto com IA
+        const textoExplicacao = await gerarTextoComIA(temaOriginal, mat.nome);
+        explanationContent.innerHTML = textoExplicacao;
 
-        // ===== 2. Gera imagem real com IA (Pollinations) =====
-        const mat = materias[materiaAtual];
-        const prompt = criarPromptImagem(temaOriginal, mat.nome);
+        // 2. Gera imagem com IA (GPT Image)
+        const promptImagem = criarPromptImagem(temaOriginal, mat.nome);
+        const imageUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(promptImagem)}?model=gptimage&width=512&height=512&nologo=true&key=${POLLINATIONS_KEY}`;
 
-        // API Pollinations com chave da conta (sk_) + modelo GPT Image
-        const POLLINATIONS_KEY = "sk_6ZnqJ20UEgg1qCAEsArGEJ272tsrQHY7";
-        const imageUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(prompt)}?model=gptimage&width=512&height=512&nologo=true&key=${POLLINATIONS_KEY}`;
-
-        // Atualiza texto de carregamento da imagem
-        document.getElementById('imageEmoji').textContent = '⏳';
-        document.getElementById('imageDesc').textContent = 'Gerando imagem com Inteligência Artificial...';
-
-        // Carrega a imagem
         aiImage.onload = () => {
           placeholderContent.style.display = 'none';
           aiImage.style.display = 'block';
         };
         aiImage.onerror = () => {
-          // Se der erro, mostra fallback amigável
           document.getElementById('imageEmoji').textContent = '🎨';
-          document.getElementById('imageDesc').textContent = 'Não foi possível gerar a imagem agora. Tente novamente em alguns segundos.';
+          document.getElementById('imageDesc').textContent = 'Não foi possível gerar a imagem agora. Tente novamente.';
         };
         aiImage.src = imageUrl;
         aiImage.alt = `Ilustração sobre: ${temaOriginal}`;
 
-        // Scroll suave até o resultado
+        loading.classList.remove('visible');
+        result.classList.add('visible');
         result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 900);
+
+      } catch (erro) {
+        console.error(erro);
+        explanationContent.innerHTML = `
+          <p>Não foi possível gerar a explicação neste momento.</p>
+          <p>Verifique sua conexão com a internet e tente novamente.</p>
+        `;
+        loading.classList.remove('visible');
+        result.classList.add('visible');
+      }
+
+      btn.disabled = false;
     }
 
-    // Cria um prompt bom para a IA gerar imagem educativa e clara
+    // Gera texto explicativo simples com a IA
+    async function gerarTextoComIA(tema, materia) {
+      const prompt = `Explique de forma muito simples e clara, em português do Brasil, o seguinte tema da matéria de ${materia}: "${tema}".
+
+Regras importantes:
+- Use frases curtas e palavras fáceis
+- Linguagem adequada para crianças e pessoas com autismo ou dificuldades de aprendizagem
+- Seja objetivo e didático
+- Use exemplos do dia a dia quando possível
+- Não use termos difíceis sem explicar
+- Organize em parágrafos curtos
+- Não invente informações falsas
+- Responda apenas com a explicação, sem introduções como "Claro!" ou "Aqui está"`;
+
+      const url = `https://gen.pollinations.ai/text/${encodeURIComponent(prompt)}?key=${POLLINATIONS_KEY}`;
+
+      const resposta = await fetch(url);
+      if (!resposta.ok) throw new Error('Erro ao gerar texto');
+
+      let texto = await resposta.text();
+      texto = texto.trim();
+
+      const paragrafos = texto
+        .split(/\n+/)
+        .map(p => p.trim())
+        .filter(p => p.length > 0)
+        .map(p => `<p>${p}</p>`)
+        .join('');
+
+      return paragrafos || `<p>${texto}</p>`;
+    }
+
+    // Prompt para a imagem
     function criarPromptImagem(tema, materia) {
-      // Prompt em inglês funciona melhor na maioria das IAs de imagem
       return `Educational illustration for children and neurodivergent students about "${tema}" in the subject of ${materia}. Simple, clear, colorful, friendly, high contrast, easy to understand, no text in the image, cartoon style, clean background, suitable for autism spectrum and learning support`;
     }
 
-    // Enter no input também gera
+    // Enter também gera
     document.getElementById('topicInput').addEventListener('keydown', (e) => {
       if (e.key === 'Enter') gerarExplicacao();
     });
