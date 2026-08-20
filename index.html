@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>V.I.V.A – Visualização Ilustrada para Valorização da Aprendizagem</title>
-  <meta name="description" content="Site educativo que ajuda pessoas com Transtorno do Espectro Autista e Transtorno de Desenvolvimento Global a entender matérias com explicações claras e imagens geradas por IA." />
+  <meta name="description" content="Plataforma educativa inclusiva com foco em acessibilidade e neurodiversidade. Explicações claras e imagens geradas por IA." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -79,29 +79,25 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.85rem;
       text-decoration: none;
       color: var(--text);
     }
 
-    .logo-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--accent);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.25rem;
-      color: #1A1A1A;
-      box-shadow: var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    .logo-svg {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      transition: transform 0.25s ease;
     }
 
-    .logo:hover .logo-icon {
-      transform: scale(1.08) rotate(-3deg);
-      box-shadow: var(--shadow-hover);
+    .logo:hover .logo-svg {
+      transform: scale(1.08);
+    }
+
+    .logo-svg .logo-fill {
+      fill: var(--accent);
+      transition: fill 0.3s ease;
     }
 
     .logo-text {
@@ -110,15 +106,18 @@
     }
 
     .logo-text strong {
-      font-size: 1.4rem;
+      font-size: 1.45rem;
       font-weight: 800;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
+      color: var(--accent);
+      transition: color 0.3s ease;
     }
 
     .logo-text span {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-soft);
       font-weight: 600;
+      line-height: 1.2;
     }
 
     .theme-btn {
@@ -506,12 +505,6 @@
       max-width: 220px;
     }
 
-    .image-loading-text {
-      font-size: 0.95rem;
-      color: var(--text-soft);
-      margin-top: 0.5rem;
-    }
-
     /* Loading */
     .loading {
       display: none;
@@ -605,7 +598,13 @@
   <header>
     <div class="header-inner">
       <a href="#" class="logo" onclick="voltarInicio(); return false;">
-        <div class="logo-icon">V</div>
+        <!-- Logo V.I.V.A inspirada na identidade visual da camiseta -->
+        <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect class="logo-fill" x="2" y="2" width="60" height="60" rx="16"/>
+          <path fill="var(--bg-card)" d="M14 42V20c0-2.2 2.8-3.2 5-1.8L32 26l13-7.8c2.2-1.4 5-.4 5 1.8v22c0 2.2-2.8 3.2-5 1.8L32 36l-13 7.8c-2.2 1.4-5 .4-5-1.8z"/>
+          <circle cx="39" cy="25" r="3.2" fill="var(--bg-card)"/>
+          <path fill="var(--bg-card)" d="M20 38l7-9 5 5 6-8 8 12H20z" opacity="0.95"/>
+        </svg>
         <div class="logo-text">
           <strong>V.I.V.A</strong>
           <span>Visualização Ilustrada</span>
@@ -620,12 +619,14 @@
   <main>
     <!-- Hero -->
     <section class="hero" id="hero">
-      <div class="badge">🌟 Feito para apoiar a aprendizagem</div>
+      <div class="badge">Inclusão • Aprendizagem Visual • Tecnologia Acessível</div>
       <h1>Aprender fica mais fácil<br>com <span>imagens e explicações claras</span></h1>
       <p>
-        O <strong>V.I.V.A</strong> ajuda pessoas com Transtorno do Espectro Autista (TEA) 
-        e Transtorno de Desenvolvimento Global a entender matérias escolares 
-        de forma visual, simples e acolhedora.
+        O <strong>V.I.V.A</strong> (Visualização Ilustrada para a Valorização da Aprendizagem) 
+        é uma plataforma educativa desenvolvida para todos os públicos, 
+        com especial atenção às pessoas com Transtorno do Espectro Autista (TEA) 
+        e Transtorno do Desenvolvimento Global, utilizando recursos visuais 
+        e linguagem acessível para facilitar a compreensão dos conteúdos escolares.
       </p>
     </section>
 
@@ -711,8 +712,8 @@
 
   <footer>
     <p>
-      <strong>V.I.V.A</strong> — Visualização Ilustrada para Valorização da Aprendizagem<br>
-      Projeto apresentado na <strong>FECCI 2026</strong> • Curitiba
+      <strong>V.I.V.A</strong> — Visualização Ilustrada para a Valorização da Aprendizagem<br>
+      Plataforma educativa inclusiva • Foco em acessibilidade e neurodiversidade
     </p>
   </footer>
 
