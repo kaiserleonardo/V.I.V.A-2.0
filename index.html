@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>V.I.V.A – Visualização Ilustrada para Valorização da Aprendizagem</title>
-  <meta name="description" content="Plataforma educativa inclusiva com foco em acessibilidade e neurodiversidade. Explicações claras e imagens geradas por IA." />
+  <meta name="description" content="Plataforma educativa inclusiva com foco em acessibilidade e neurodiversidade." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -22,7 +22,6 @@
       --shadow-hover: 0 8px 30px rgba(245, 197, 24, 0.25);
       --header-bg: #FFFFFF;
     }
-
     [data-theme="dark"] {
       --bg: #0B0F1A;
       --bg-card: #151B2B;
@@ -36,9 +35,7 @@
       --shadow-hover: 0 8px 30px rgba(91, 163, 245, 0.22);
       --header-bg: #0F1525;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Nunito', system-ui, sans-serif;
       background: var(--bg);
@@ -47,16 +44,13 @@
       transition: background 0.3s ease, color 0.3s ease;
       min-height: 100vh;
     }
-
     header {
       background: var(--header-bg);
       border-bottom: 2px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
-      transition: background 0.3s ease, border-color 0.3s ease;
     }
-
     .header-inner {
       max-width: 1100px;
       margin: 0 auto;
@@ -66,7 +60,6 @@
       justify-content: space-between;
       gap: 1rem;
     }
-
     .logo {
       display: flex;
       align-items: center;
@@ -74,23 +67,18 @@
       text-decoration: none;
       color: var(--text);
     }
-
     .logo-svg {
       width: 52px;
       height: 52px;
       flex-shrink: 0;
       transition: transform 0.25s ease;
     }
-
     .logo:hover .logo-svg { transform: scale(1.08); }
-
     .logo-svg .logo-fill {
       fill: var(--accent);
       transition: fill 0.3s ease;
     }
-
     .logo-text { display: flex; flex-direction: column; }
-
     .logo-text strong {
       font-size: 1.45rem;
       font-weight: 800;
@@ -98,14 +86,12 @@
       color: var(--accent);
       transition: color 0.3s ease;
     }
-
     .logo-text span {
       font-size: 0.72rem;
       color: var(--text-soft);
       font-weight: 600;
       line-height: 1.2;
     }
-
     .theme-btn {
       background: var(--accent-soft);
       border: 2px solid var(--border);
@@ -120,20 +106,17 @@
       justify-content: center;
       transition: all 0.2s ease;
     }
-
     .theme-btn:hover {
       background: var(--accent);
       color: #1A1A1A;
       transform: scale(1.08);
       box-shadow: var(--shadow);
     }
-
     main {
       max-width: 1100px;
       margin: 0 auto;
       padding: 2rem 1.5rem 4rem;
     }
-
     .hero {
       text-align: center;
       margin-bottom: 3rem;
@@ -143,23 +126,19 @@
       border: 2px solid var(--border);
       box-shadow: var(--shadow);
     }
-
     .hero h1 {
       font-size: clamp(1.8rem, 5vw, 2.6rem);
       font-weight: 800;
       margin-bottom: 0.75rem;
       line-height: 1.2;
     }
-
     .hero h1 span { color: var(--accent); }
-
     .hero p {
       font-size: 1.15rem;
       color: var(--text-soft);
       max-width: 640px;
       margin: 0 auto 1.5rem;
     }
-
     .badge {
       display: inline-flex;
       align-items: center;
@@ -171,8 +150,8 @@
       font-size: 0.9rem;
       font-weight: 700;
       border: 1px solid var(--border);
+      margin-bottom: 1rem;
     }
-
     .section-title {
       font-size: 1.5rem;
       font-weight: 800;
@@ -181,14 +160,12 @@
       align-items: center;
       gap: 0.5rem;
     }
-
     .subjects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.25rem;
       margin-bottom: 3rem;
     }
-
     .subject-card {
       background: var(--bg-card);
       border: 2px solid var(--border);
@@ -201,7 +178,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .subject-card::before {
       content: '';
       position: absolute;
@@ -211,32 +187,26 @@
       transform: scaleX(0);
       transition: transform 0.25s ease;
     }
-
     .subject-card:hover {
       transform: translateY(-6px);
       box-shadow: var(--shadow-hover);
       border-color: var(--accent);
     }
-
     .subject-card:hover::before { transform: scaleX(1); }
-
     .subject-icon {
       font-size: 2.8rem;
       margin-bottom: 0.75rem;
       display: block;
     }
-
     .subject-card h3 {
       font-size: 1.25rem;
       font-weight: 800;
       margin-bottom: 0.35rem;
     }
-
     .subject-card p {
       font-size: 0.95rem;
       color: var(--text-soft);
     }
-
     .learning-panel {
       display: none;
       background: var(--bg-card);
@@ -247,14 +217,11 @@
       margin-bottom: 2rem;
       animation: fadeIn 0.35s ease;
     }
-
     .learning-panel.visible { display: block; }
-
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .panel-header {
       display: flex;
       align-items: center;
@@ -263,7 +230,6 @@
       flex-wrap: wrap;
       gap: 1rem;
     }
-
     .panel-header h2 {
       font-size: 1.5rem;
       font-weight: 800;
@@ -271,7 +237,6 @@
       align-items: center;
       gap: 0.5rem;
     }
-
     .back-btn {
       background: transparent;
       border: 2px solid var(--border);
@@ -283,23 +248,19 @@
       font-size: 0.95rem;
       transition: all 0.2s ease;
     }
-
     .back-btn:hover {
       background: var(--accent);
       border-color: var(--accent);
       color: #1A1A1A;
       transform: scale(1.05);
     }
-
     .input-group { margin-bottom: 1.5rem; }
-
     .input-group label {
       display: block;
       font-weight: 700;
       margin-bottom: 0.5rem;
       font-size: 1.05rem;
     }
-
     .input-group input {
       width: 100%;
       padding: 1rem 1.25rem;
@@ -311,18 +272,15 @@
       color: var(--text);
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-
     .input-group input:focus {
       outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 4px var(--accent-soft);
     }
-
     .input-group input::placeholder {
       color: var(--text-soft);
       opacity: 0.7;
     }
-
     .btn-primary {
       background: var(--accent);
       color: #1A1A1A;
@@ -338,41 +296,36 @@
       transition: all 0.2s ease;
       box-shadow: var(--shadow);
     }
-
     .btn-primary:hover {
       background: var(--accent-hover);
       transform: translateY(-3px) scale(1.03);
       box-shadow: var(--shadow-hover);
     }
-
-    .btn-primary:active { transform: translateY(0) scale(0.98); }
-    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
     .result-area {
       display: none;
       margin-top: 2rem;
       animation: fadeIn 0.4s ease;
     }
-
     .result-area.visible { display: block; }
-
     .result-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1.5rem;
     }
-
     @media (max-width: 768px) {
       .result-grid { grid-template-columns: 1fr; }
     }
-
     .explanation-box, .image-box {
       background: var(--bg);
       border: 2px solid var(--border);
       border-radius: 18px;
       padding: 1.5rem;
     }
-
     .explanation-box h3, .image-box h3 {
       font-size: 1.15rem;
       font-weight: 800;
@@ -381,19 +334,16 @@
       align-items: center;
       gap: 0.5rem;
     }
-
     .explanation-content {
       font-size: 1.1rem;
       line-height: 1.7;
       color: var(--text);
     }
-
     .explanation-content p { margin-bottom: 1rem; }
     .explanation-content strong { color: var(--accent); }
-
     .image-placeholder {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1/1;
       background: var(--accent-soft);
       border-radius: 14px;
       display: flex;
@@ -407,7 +357,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .image-placeholder .ai-badge {
       position: absolute;
       top: 12px;
@@ -419,9 +368,7 @@
       padding: 0.3rem 0.7rem;
       border-radius: 8px;
       z-index: 5;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
-
     .image-placeholder img {
       width: 100%;
       height: 100%;
@@ -429,7 +376,6 @@
       border-radius: 12px;
       display: block;
     }
-
     .image-placeholder .placeholder-content {
       display: flex;
       flex-direction: column;
@@ -440,22 +386,18 @@
       width: 100%;
       height: 100%;
     }
-
     .image-placeholder .emoji { font-size: 4rem; }
     .image-placeholder p {
       font-size: 0.95rem;
       color: var(--text-soft);
       max-width: 220px;
     }
-
     .loading {
       display: none;
       text-align: center;
       padding: 2rem;
     }
-
     .loading.visible { display: block; }
-
     .spinner {
       width: 48px;
       height: 48px;
@@ -465,9 +407,7 @@
       animation: spin 0.8s linear infinite;
       margin: 0 auto 1rem;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
-
     footer {
       text-align: center;
       padding: 2rem 1.5rem;
@@ -475,9 +415,7 @@
       color: var(--text-soft);
       font-size: 0.95rem;
     }
-
     footer strong { color: var(--text); }
-
     .tips {
       background: var(--accent-soft);
       border: 2px solid var(--border);
@@ -486,16 +424,13 @@
       margin-top: 2rem;
       font-size: 0.95rem;
     }
-
     .tips strong { display: block; margin-bottom: 0.35rem; }
-
     .examples {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 0.75rem;
     }
-
     .example-chip {
       background: var(--bg);
       border: 1.5px solid var(--border);
@@ -507,17 +442,13 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-
     .example-chip:hover {
       background: var(--accent);
       border-color: var(--accent);
       color: #1A1A1A;
       transform: scale(1.05);
     }
-
-    button:focus-visible,
-    input:focus-visible,
-    .subject-card:focus-visible {
+    button:focus-visible, input:focus-visible, .subject-card:focus-visible {
       outline: 3px solid var(--accent);
       outline-offset: 3px;
     }
@@ -538,7 +469,7 @@
           <span>Visualização Ilustrada</span>
         </div>
       </a>
-      <button class="theme-btn" id="themeBtn" title="Trocar tema" aria-label="Trocar entre tema claro e escuro">🌙</button>
+      <button class="theme-btn" id="themeBtn" title="Trocar tema">🌙</button>
     </div>
   </header>
 
@@ -557,9 +488,300 @@
 
     <h2 class="section-title" id="subjectsTitle">📚 Escolha a matéria</h2>
     <div class="subjects-grid" id="subjectsGrid">
-      <div class="subject-card" tabindex="0" data-subject="portugues" role="button" aria-label="Português">
+      <div class="subject-card" tabindex="0" data-subject="portugues">
         <span class="subject-icon">📖</span>
         <h3>Português</h3>
         <p>Letras, palavras, textos e gramática</p>
       </div>
-      <div class="subject-card" tabindex="0" data-subject="matematica" role="button" 
+      <div class="subject-card" tabindex="0" data-subject="matematica">
+        <span class="subject-icon">🔢</span>
+        <h3>Matemática</h3>
+        <p>Números, contas e raciocínio</p>
+      </div>
+      <div class="subject-card" tabindex="0" data-subject="historia">
+        <span class="subject-icon">🏛️</span>
+        <h3>História</h3>
+        <p>Eventos, pessoas e o passado</p>
+      </div>
+      <div class="subject-card" tabindex="0" data-subject="geografia">
+        <span class="subject-icon">🌍</span>
+        <h3>Geografia</h3>
+        <p>Mapas, países e o planeta</p>
+      </div>
+    </div>
+
+    <section class="learning-panel" id="learningPanel">
+      <div class="panel-header">
+        <h2 id="panelTitle">📖 Português</h2>
+        <button class="back-btn" onclick="voltarInicio()">← Voltar às matérias</button>
+      </div>
+      <div class="input-group">
+        <label for="topicInput">O que você quer aprender hoje?</label>
+        <input type="text" id="topicInput" placeholder="Ex: O que é substantivo? ou Como fazer conta de dividir?" autocomplete="off" />
+        <div class="examples" id="examplesContainer"></div>
+      </div>
+      <button class="btn-primary" id="explainBtn" onclick="gerarExplicacao()">✨ Explicar e Ilustrar</button>
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Gerando explicação e imagem com Inteligência Artificial...</p>
+        <p style="font-size:0.9rem;color:var(--text-soft);margin-top:0.5rem">Isso pode levar alguns segundos</p>
+      </div>
+      <div class="result-area" id="resultArea">
+        <div class="result-grid">
+          <div class="explanation-box">
+            <h3>📝 Explicação simples</h3>
+            <div class="explanation-content" id="explanationContent"></div>
+          </div>
+          <div class="image-box">
+            <h3>🖼️ Imagem ilustrativa (IA)</h3>
+            <div class="image-placeholder" id="imagePlaceholder">
+              <span class="ai-badge">Gerada por IA</span>
+              <div class="placeholder-content" id="placeholderContent">
+                <span class="emoji" id="imageEmoji">🎨</span>
+                <p id="imageDesc">A imagem será gerada pela IA aqui.</p>
+              </div>
+              <img id="aiImage" alt="Ilustração gerada por IA" style="display:none" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tips">
+        <strong>💡 Dica:</strong>
+        Use frases curtas e palavras simples. Se quiser, peça para o adulto te ajudar a digitar.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>
+      <strong>V.I.V.A</strong> — Visualização Ilustrada para a Valorização da Aprendizagem<br>
+      Plataforma educativa inclusiva • Foco em acessibilidade e neurodiversidade
+    </p>
+  </footer>
+
+  <script>
+    const materias = {
+      portugues: {
+        nome: "Português",
+        icon: "📖",
+        exemplos: ["O que é substantivo?", "Diferença entre verbo e adjetivo", "Como usar a vírgula", "O que é um parágrafo"]
+      },
+      matematica: {
+        nome: "Matemática",
+        icon: "🔢",
+        exemplos: ["Como fazer conta de somar", "O que é multiplicação", "Como fazer divisão", "O que são frações"]
+      },
+      historia: {
+        nome: "História",
+        icon: "🏛️",
+        exemplos: ["Quem descobriu o Brasil", "O que foi a Independência", "Quem foi Dom Pedro I", "O que é a Pré-História"]
+      },
+      geografia: {
+        nome: "Geografia",
+        icon: "🌍",
+        exemplos: ["O que são continentes", "Quais são os oceanos", "O que é o equador", "Capitais do Brasil"]
+      }
+    };
+
+    let materiaAtual = null;
+
+    // Tema
+    const themeBtn = document.getElementById('themeBtn');
+    const html = document.documentElement;
+    if (localStorage.getItem('viva-theme') === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      themeBtn.textContent = '☀️';
+    }
+    themeBtn.addEventListener('click', () => {
+      if (html.getAttribute('data-theme') === 'dark') {
+        html.removeAttribute('data-theme');
+        themeBtn.textContent = '🌙';
+        localStorage.setItem('viva-theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        themeBtn.textContent = '☀️';
+        localStorage.setItem('viva-theme', 'dark');
+      }
+    });
+
+    // Clique nas matérias
+    document.querySelectorAll('.subject-card').forEach(card => {
+      card.addEventListener('click', () => selecionarMateria(card.dataset.subject));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selecionarMateria(card.dataset.subject);
+        }
+      });
+    });
+
+    function selecionarMateria(chave) {
+      materiaAtual = chave;
+      const mat = materias[chave];
+      document.getElementById('panelTitle').innerHTML = mat.icon + ' ' + mat.nome;
+      document.getElementById('learningPanel').classList.add('visible');
+      document.getElementById('subjectsGrid').style.display = 'none';
+      document.getElementById('subjectsTitle').style.display = 'none';
+      document.getElementById('hero').style.display = 'none';
+      document.getElementById('resultArea').classList.remove('visible');
+      document.getElementById('loading').classList.remove('visible');
+      document.getElementById('topicInput').value = '';
+      document.getElementById('examplesContainer').innerHTML = mat.exemplos.map(function(ex) {
+        return '<button class="example-chip" onclick="usarExemplo(\'' + ex.replace(/'/g, "\\'") + '\')">' + ex + '</button>';
+      }).join('');
+      setTimeout(function() { document.getElementById('topicInput').focus(); }, 100);
+    }
+
+    function usarExemplo(texto) {
+      document.getElementById('topicInput').value = texto;
+      document.getElementById('topicInput').focus();
+    }
+
+    function voltarInicio() {
+      document.getElementById('learningPanel').classList.remove('visible');
+      document.getElementById('subjectsGrid').style.display = 'grid';
+      document.getElementById('subjectsTitle').style.display = 'flex';
+      document.getElementById('hero').style.display = 'block';
+      materiaAtual = null;
+    }
+
+    // ========== ORCA ROUTER ==========
+    const ORCA_API_KEY = "sk-orca-Mfi9iwG3DVSAYmWv2eFvJftZK9GZIDaizPOm4WfkrbV";
+    const ORCA_BASE = "https://api.orcarouter.ai/v1";
+    const MODELO_TEXTO = "google/gemini-2.5-flash";
+    const MODELO_IMAGEM = "openai/gpt-image-1";
+
+    async function gerarExplicacao() {
+      var input = document.getElementById('topicInput');
+      var tema = input.value.trim();
+      if (!tema) {
+        input.focus();
+        input.style.borderColor = '#e53935';
+        setTimeout(function() { input.style.borderColor = ''; }, 1500);
+        return;
+      }
+
+      var btn = document.getElementById('explainBtn');
+      var loading = document.getElementById('loading');
+      var result = document.getElementById('resultArea');
+      var aiImage = document.getElementById('aiImage');
+      var placeholder = document.getElementById('placeholderContent');
+      var explanation = document.getElementById('explanationContent');
+
+      btn.disabled = true;
+      result.classList.remove('visible');
+      loading.classList.add('visible');
+      aiImage.style.display = 'none';
+      aiImage.src = '';
+      placeholder.style.display = 'flex';
+      document.getElementById('imageEmoji').textContent = '⏳';
+      document.getElementById('imageDesc').textContent = 'Gerando imagem com Inteligência Artificial...';
+
+      var mat = materias[materiaAtual];
+
+      try {
+        // 1. Texto
+        var texto = await gerarTexto(tema, mat.nome);
+        explanation.innerHTML = texto;
+
+        // 2. Imagem
+        var promptImg = 'Educational illustration for children and neurodivergent students about "' + tema + '" in the subject of ' + mat.nome + '. Simple, clear, colorful, friendly, high contrast, easy to understand, no text in the image, cartoon style, clean background, suitable for autism spectrum and learning support';
+        var imgUrl = await gerarImagem(promptImg);
+
+        if (imgUrl) {
+          aiImage.onload = function() {
+            placeholder.style.display = 'none';
+            aiImage.style.display = 'block';
+          };
+          aiImage.onerror = function() {
+            document.getElementById('imageEmoji').textContent = '🎨';
+            document.getElementById('imageDesc').textContent = 'Não foi possível carregar a imagem.';
+          };
+          aiImage.src = imgUrl;
+          aiImage.alt = 'Ilustração sobre: ' + tema;
+        } else {
+          document.getElementById('imageEmoji').textContent = '🎨';
+          document.getElementById('imageDesc').textContent = 'Não foi possível gerar a imagem agora.';
+        }
+
+        loading.classList.remove('visible');
+        result.classList.add('visible');
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } catch (err) {
+        console.error(err);
+        explanation.innerHTML = '<p>Não foi possível gerar a explicação neste momento.</p><p>Verifique a internet e tente novamente.</p><p style="font-size:0.9rem;opacity:0.8">' + (err.message || '') + '</p>';
+        loading.classList.remove('visible');
+        result.classList.add('visible');
+      }
+      btn.disabled = false;
+    }
+
+    async function gerarTexto(tema, materia) {
+      var systemPrompt = 'Você é um professor paciente e didático. Explique de forma muito simples e clara, em português do Brasil. Use frases curtas e palavras fáceis. Linguagem adequada para crianças e pessoas com autismo. Seja objetivo, use exemplos do dia a dia. Não invente informações. Responda APENAS com a explicação, sem introduções.';
+
+      var res = await fetch(ORCA_BASE + '/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + ORCA_API_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: MODELO_TEXTO,
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: 'Explique o seguinte tema da matéria de ' + materia + ': "' + tema + '"' }
+          ],
+          temperature: 0.5,
+          max_tokens: 600
+        })
+      });
+
+      if (!res.ok) {
+        var t = await res.text();
+        throw new Error('Erro texto (' + res.status + '): ' + t.slice(0, 100));
+      }
+
+      var data = await res.json();
+      var texto = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
+      texto = texto.trim();
+
+      return texto.split(/\n+/).map(function(p) {
+        p = p.trim();
+        return p ? '<p>' + p + '</p>' : '';
+      }).join('') || '<p>' + texto + '</p>';
+    }
+
+    async function gerarImagem(prompt) {
+      var res = await fetch(ORCA_BASE + '/images/generations', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + ORCA_API_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          model: MODELO_IMAGEM,
+          prompt: prompt,
+          size: '1024x1024',
+          n: 1
+        })
+      });
+
+      if (!res.ok) {
+        console.error('Erro imagem:', await res.text());
+        return null;
+      }
+
+      var data = await res.json();
+      var item = data.data && data.data[0];
+      if (!item) return null;
+      if (item.url) return item.url;
+      if (item.b64_json) return 'data:image/png;base64,' + item.b64_json;
+      return null;
+    }
+
+    document.getElementById('topicInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') gerarExplicacao();
+    });
+  </script>
+</body>
+</html>
