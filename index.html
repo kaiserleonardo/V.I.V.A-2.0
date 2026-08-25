@@ -833,7 +833,10 @@
       materiaAtual = null;
     }
 
-    // ========== Chave da API ==========
+    // ========== Chaves de API ==========
+    // Texto: OrcaRouter + Qwen3.8-27B (grátis)
+    const ORCA_API_KEY = "sk-orca-HSBNLu2TRdCJWjCG0iRXggQB0LQIY6vwAWvfW8XUuSm";
+    // Imagem: Pollinations
     const POLLINATIONS_KEY = "sk_6ZnqJ20UEgg1qCAEsArGEJ272tsrQHY7";
 
     // ========== Gerar explicação + imagem com IA ==========
@@ -868,11 +871,11 @@
       const mat = materias[materiaAtual];
 
       try {
-        // 1. Gera explicação em texto com IA
+        // 1. Gera explicação em texto com Qwen (OrcaRouter)
         const textoExplicacao = await gerarTextoComIA(temaOriginal, mat.nome);
         explanationContent.innerHTML = textoExplicacao;
 
-        // 2. Gera imagem com IA (GPT Image)
+        // 2. Gera imagem com Pollinations (GPT Image)
         const promptImagem = criarPromptImagem(temaOriginal, mat.nome);
         const imageUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(promptImagem)}?model=gptimage&width=512&height=512&nologo=true&key=${POLLINATIONS_KEY}`;
 
@@ -904,7 +907,7 @@
       btn.disabled = false;
     }
 
-    // Gera texto explicativo simples com a IA
+    // Gera texto explicativo simples com Qwen3.8-27B via OrcaRouter
     async function gerarTextoComIA(tema, materia) {
       const prompt = `Explique de forma muito simples e clara, em português do Brasil, o seguinte tema da matéria de ${materia}: "${tema}".
 
@@ -918,25 +921,52 @@ Regras importantes:
 - Não invente informações falsas
 - Responda apenas com a explicação, sem introduções como "Claro!" ou "Aqui está"`;
 
-      const url = `https://gen.pollinations.ai/text/${encodeURIComponent(prompt)}?key=${POLLINATIONS_KEY}`;
+      const resposta = await fetch("https://api.orcarouter.ai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${ORCA_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "qwen/qwen3.8-27b-free",
+          messages: [
+            {
+              role: "system",
+              content: "Você é um professor paciente, inclusivo e claro. Explica para crianças e pessoas neurodivergentes."
+            },
+            {
+              role: "user",
+              content: prompt
+            }
+          ],
+          temperature: 0.7,
+          max_tokens: 900
+        })
+      });
 
-      const resposta = await fetch(url);
-      if (!resposta.ok) throw new Error('Erro ao gerar texto');
+      if (!resposta.ok) {
+        const erroTexto = await resposta.text();
+        console.error("Erro OrcaRouter:", erroTexto);
+        throw new Error("Erro ao gerar texto com Qwen");
+      }
 
-      let texto = await resposta.text();
-      texto = texto.trim();
+      const data = await resposta.json();
+      let texto = (data.choices?.[0]?.message?.content || "").trim();
+
+      // Remove possíveis blocos de thinking se aparecerem
+      texto = texto.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
 
       const paragrafos = texto
         .split(/\n+/)
         .map(p => p.trim())
         .filter(p => p.length > 0)
         .map(p => `<p>${p}</p>`)
-        .join('');
+        .join("");
 
       return paragrafos || `<p>${texto}</p>`;
     }
 
-    // Prompt para a imagem
+    // Prompt para a imagem (Pollinations)
     function criarPromptImagem(tema, materia) {
       return `Educational illustration for children and neurodivergent students about "${tema}" in the subject of ${materia}. Simple, clear, colorful, friendly, high contrast, easy to understand, no text in the image, cartoon style, clean background, suitable for autism spectrum and learning support`;
     }
