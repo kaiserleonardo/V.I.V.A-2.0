@@ -645,11 +645,8 @@
       materiaAtual = null;
     }
 
-    // ========== ORCA ROUTER ==========
-    const ORCA_API_KEY = "sk-orca-Mfi9iwG3DVSAYmWv2eFvJftZK9GZIDaizPOm4WfkrbV";
-    const ORCA_BASE = "https://api.orcarouter.ai/v1";
-    const MODELO_TEXTO = "google/gemini-2.5-flash";
-    const MODELO_IMAGEM = "openai/gpt-image-1";
+    // ========== POLLINATIONS ==========
+    const POLLINATIONS_KEY = "sk_6ZnqJ20UEgg1qCAEsArGEJ272tsrQHY7";
 
     async function gerarExplicacao() {
       var input = document.getElementById('topicInput');
@@ -680,36 +677,31 @@
       var mat = materias[materiaAtual];
 
       try {
-        // 1. Texto
+        // 1. Texto com Pollinations
         var texto = await gerarTexto(tema, mat.nome);
         explanation.innerHTML = texto;
 
-        // 2. Imagem
+        // 2. Imagem com Pollinations (GPT Image)
         var promptImg = 'Educational illustration for children and neurodivergent students about "' + tema + '" in the subject of ' + mat.nome + '. Simple, clear, colorful, friendly, high contrast, easy to understand, no text in the image, cartoon style, clean background, suitable for autism spectrum and learning support';
-        var imgUrl = await gerarImagem(promptImg);
+        var imageUrl = 'https://gen.pollinations.ai/image/' + encodeURIComponent(promptImg) + '?model=gptimage&width=512&height=512&nologo=true&key=' + POLLINATIONS_KEY;
 
-        if (imgUrl) {
-          aiImage.onload = function() {
-            placeholder.style.display = 'none';
-            aiImage.style.display = 'block';
-          };
-          aiImage.onerror = function() {
-            document.getElementById('imageEmoji').textContent = '🎨';
-            document.getElementById('imageDesc').textContent = 'Não foi possível carregar a imagem.';
-          };
-          aiImage.src = imgUrl;
-          aiImage.alt = 'Ilustração sobre: ' + tema;
-        } else {
+        aiImage.onload = function() {
+          placeholder.style.display = 'none';
+          aiImage.style.display = 'block';
+        };
+        aiImage.onerror = function() {
           document.getElementById('imageEmoji').textContent = '🎨';
-          document.getElementById('imageDesc').textContent = 'Não foi possível gerar a imagem agora.';
-        }
+          document.getElementById('imageDesc').textContent = 'Não foi possível gerar a imagem agora. Tente novamente.';
+        };
+        aiImage.src = imageUrl;
+        aiImage.alt = 'Ilustração sobre: ' + tema;
 
         loading.classList.remove('visible');
         result.classList.add('visible');
         result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } catch (err) {
         console.error(err);
-        explanation.innerHTML = '<p>Não foi possível gerar a explicação neste momento.</p><p>Verifique a internet e tente novamente.</p><p style="font-size:0.9rem;opacity:0.8">' + (err.message || '') + '</p>';
+        explanation.innerHTML = '<p>Não foi possível gerar a explicação neste momento.</p><p>Verifique a internet e tente novamente.</p>';
         loading.classList.remove('visible');
         result.classList.add('visible');
       }
@@ -717,66 +709,19 @@
     }
 
     async function gerarTexto(tema, materia) {
-      var systemPrompt = 'Você é um professor paciente e didático. Explique de forma muito simples e clara, em português do Brasil. Use frases curtas e palavras fáceis. Linguagem adequada para crianças e pessoas com autismo. Seja objetivo, use exemplos do dia a dia. Não invente informações. Responda APENAS com a explicação, sem introduções.';
+      var prompt = 'Explique de forma muito simples e clara, em português do Brasil, o seguinte tema da matéria de ' + materia + ': "' + tema + '". Use frases curtas e palavras fáceis. Linguagem adequada para crianças e pessoas com autismo. Seja objetivo e use exemplos do dia a dia. Não invente informações. Responda apenas com a explicação, sem introduções.';
 
-      var res = await fetch(ORCA_BASE + '/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + ORCA_API_KEY,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          model: MODELO_TEXTO,
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: 'Explique o seguinte tema da matéria de ' + materia + ': "' + tema + '"' }
-          ],
-          temperature: 0.5,
-          max_tokens: 600
-        })
-      });
+      var url = 'https://gen.pollinations.ai/text/' + encodeURIComponent(prompt) + '?key=' + POLLINATIONS_KEY;
+      var res = await fetch(url);
+      if (!res.ok) throw new Error('Erro ao gerar texto');
 
-      if (!res.ok) {
-        var t = await res.text();
-        throw new Error('Erro texto (' + res.status + '): ' + t.slice(0, 100));
-      }
-
-      var data = await res.json();
-      var texto = (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || '';
+      var texto = await res.text();
       texto = texto.trim();
 
       return texto.split(/\n+/).map(function(p) {
         p = p.trim();
         return p ? '<p>' + p + '</p>' : '';
       }).join('') || '<p>' + texto + '</p>';
-    }
-
-    async function gerarImagem(prompt) {
-      var res = await fetch(ORCA_BASE + '/images/generations', {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer ' + ORCA_API_KEY,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          model: MODELO_IMAGEM,
-          prompt: prompt,
-          size: '1024x1024',
-          n: 1
-        })
-      });
-
-      if (!res.ok) {
-        console.error('Erro imagem:', await res.text());
-        return null;
-      }
-
-      var data = await res.json();
-      var item = data.data && data.data[0];
-      if (!item) return null;
-      if (item.url) return item.url;
-      if (item.b64_json) return 'data:image/png;base64,' + item.b64_json;
-      return null;
     }
 
     document.getElementById('topicInput').addEventListener('keydown', function(e) {
