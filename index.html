@@ -1,732 +1,1444 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>V.I.V.A – Visualização Ilustrada para Valorização da Aprendizagem</title>
-  <meta name="description" content="Plataforma educativa inclusiva com foco em acessibilidade e neurodiversidade." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #FFFDF5;
-      --bg-card: #FFFFFF;
-      --text: #1A1A1A;
-      --text-soft: #4A4A4A;
-      --accent: #F5C518;
-      --accent-hover: #E0B000;
-      --accent-soft: #FFF3C4;
-      --border: #F0E6C0;
-      --shadow: 0 4px 20px rgba(245, 197, 24, 0.15);
-      --shadow-hover: 0 8px 30px rgba(245, 197, 24, 0.25);
-      --header-bg: #FFFFFF;
-    }
-    [data-theme="dark"] {
-      --bg: #0B0F1A;
-      --bg-card: #151B2B;
-      --text: #F0F4FF;
-      --text-soft: #A8B5D1;
-      --accent: #5BA3F5;
-      --accent-hover: #3D8BE0;
-      --accent-soft: #1A2A45;
-      --border: #2A3650;
-      --shadow: 0 4px 20px rgba(91, 163, 245, 0.12);
-      --shadow-hover: 0 8px 30px rgba(91, 163, 245, 0.22);
-      --header-bg: #0F1525;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Nunito', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      transition: background 0.3s ease, color 0.3s ease;
-      min-height: 100vh;
-    }
-    header {
-      background: var(--header-bg);
-      border-bottom: 2px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      text-decoration: none;
-      color: var(--text);
-    }
-    .logo-svg {
-      width: 52px;
-      height: 52px;
-      flex-shrink: 0;
-      transition: transform 0.25s ease;
-    }
-    .logo:hover .logo-svg { transform: scale(1.08); }
-    .logo-svg .logo-fill {
-      fill: var(--accent);
-      transition: fill 0.3s ease;
-    }
-    .logo-text { display: flex; flex-direction: column; }
-    .logo-text strong {
-      font-size: 1.45rem;
-      font-weight: 800;
-      letter-spacing: 0.03em;
-      color: var(--accent);
-      transition: color 0.3s ease;
-    }
-    .logo-text span {
-      font-size: 0.72rem;
-      color: var(--text-soft);
-      font-weight: 600;
-      line-height: 1.2;
-    }
-    .theme-btn {
-      background: var(--accent-soft);
-      border: 2px solid var(--border);
-      color: var(--text);
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-size: 1.4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s ease;
-    }
-    .theme-btn:hover {
-      background: var(--accent);
-      color: #1A1A1A;
-      transform: scale(1.08);
-      box-shadow: var(--shadow);
-    }
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem 4rem;
-    }
-    .hero {
-      text-align: center;
-      margin-bottom: 3rem;
-      padding: 2rem 1rem;
-      background: var(--bg-card);
-      border-radius: 24px;
-      border: 2px solid var(--border);
-      box-shadow: var(--shadow);
-    }
-    .hero h1 {
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
-      font-weight: 800;
-      margin-bottom: 0.75rem;
-      line-height: 1.2;
-    }
-    .hero h1 span { color: var(--accent); }
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--text-soft);
-      max-width: 640px;
-      margin: 0 auto 1.5rem;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--accent-soft);
-      color: var(--text);
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      border: 1px solid var(--border);
-      margin-bottom: 1rem;
-    }
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 800;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .subjects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 3rem;
-    }
-    .subject-card {
-      background: var(--bg-card);
-      border: 2px solid var(--border);
-      border-radius: 20px;
-      padding: 1.75rem 1.5rem;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      text-align: center;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .subject-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 5px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transition: transform 0.25s ease;
-    }
-    .subject-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--accent);
-    }
-    .subject-card:hover::before { transform: scaleX(1); }
-    .subject-icon {
-      font-size: 2.8rem;
-      margin-bottom: 0.75rem;
-      display: block;
-    }
-    .subject-card h3 {
-      font-size: 1.25rem;
-      font-weight: 800;
-      margin-bottom: 0.35rem;
-    }
-    .subject-card p {
-      font-size: 0.95rem;
-      color: var(--text-soft);
-    }
-    .learning-panel {
-      display: none;
-      background: var(--bg-card);
-      border: 2px solid var(--border);
-      border-radius: 24px;
-      padding: 2rem;
-      box-shadow: var(--shadow);
-      margin-bottom: 2rem;
-      animation: fadeIn 0.35s ease;
-    }
-    .learning-panel.visible { display: block; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .panel-header h2 {
-      font-size: 1.5rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .back-btn {
-      background: transparent;
-      border: 2px solid var(--border);
-      color: var(--text);
-      padding: 0.5rem 1rem;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
-    }
-    .back-btn:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #1A1A1A;
-      transform: scale(1.05);
-    }
-    .input-group { margin-bottom: 1.5rem; }
-    .input-group label {
-      display: block;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      font-size: 1.05rem;
-    }
-    .input-group input {
-      width: 100%;
-      padding: 1rem 1.25rem;
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      font-size: 1.1rem;
-      font-family: inherit;
-      background: var(--bg);
-      color: var(--text);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .input-group input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-soft);
-    }
-    .input-group input::placeholder {
-      color: var(--text-soft);
-      opacity: 0.7;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #1A1A1A;
-      border: none;
-      padding: 1rem 1.75rem;
-      border-radius: 14px;
-      font-size: 1.1rem;
-      font-weight: 800;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      transition: all 0.2s ease;
-      box-shadow: var(--shadow);
-    }
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: var(--shadow-hover);
-    }
-    .btn-primary:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-    .result-area {
-      display: none;
-      margin-top: 2rem;
-      animation: fadeIn 0.4s ease;
-    }
-    .result-area.visible { display: block; }
-    .result-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    @media (max-width: 768px) {
-      .result-grid { grid-template-columns: 1fr; }
-    }
-    .explanation-box, .image-box {
-      background: var(--bg);
-      border: 2px solid var(--border);
-      border-radius: 18px;
-      padding: 1.5rem;
-    }
-    .explanation-box h3, .image-box h3 {
-      font-size: 1.15rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .explanation-content {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: var(--text);
-    }
-    .explanation-content p { margin-bottom: 1rem; }
-    .explanation-content strong { color: var(--accent); }
-    .image-placeholder {
-      width: 100%;
-      aspect-ratio: 1/1;
-      background: var(--accent-soft);
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      border: 2px solid var(--border);
-      text-align: center;
-      padding: 0;
-      position: relative;
-      overflow: hidden;
-    }
-    .image-placeholder .ai-badge {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: var(--accent);
-      color: #1A1A1A;
-      font-size: 0.75rem;
-      font-weight: 800;
-      padding: 0.3rem 0.7rem;
-      border-radius: 8px;
-      z-index: 5;
-    }
-    .image-placeholder img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      display: block;
-    }
-    .image-placeholder .placeholder-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      padding: 1.5rem;
-      width: 100%;
-      height: 100%;
-    }
-    .image-placeholder .emoji { font-size: 4rem; }
-    .image-placeholder p {
-      font-size: 0.95rem;
-      color: var(--text-soft);
-      max-width: 220px;
-    }
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 2rem;
-    }
-    .loading.visible { display: block; }
-    .spinner {
-      width: 48px;
-      height: 48px;
-      border: 4px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto 1rem;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    footer {
-      text-align: center;
-      padding: 2rem 1.5rem;
-      border-top: 2px solid var(--border);
-      color: var(--text-soft);
-      font-size: 0.95rem;
-    }
-    footer strong { color: var(--text); }
-    .tips {
-      background: var(--accent-soft);
-      border: 2px solid var(--border);
-      border-radius: 18px;
-      padding: 1.25rem 1.5rem;
-      margin-top: 2rem;
-      font-size: 0.95rem;
-    }
-    .tips strong { display: block; margin-bottom: 0.35rem; }
-    .examples {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-    }
-    .example-chip {
-      background: var(--bg);
-      border: 1.5px solid var(--border);
-      color: var(--text);
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .example-chip:hover {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #1A1A1A;
-      transform: scale(1.05);
-    }
-    button:focus-visible, input:focus-visible, .subject-card:focus-visible {
-      outline: 3px solid var(--accent);
-      outline-offset: 3px;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>V.I.V.A – Visualização Ilustrada para Valorização da Aprendizagem</title>
+<meta name="description" content="Plataforma educativa inclusiva com foco em acessibilidade e neurodiversidade." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg: #FFFDF5;
+  --bg-card: #FFFFFF;
+  --text: #1A1A1A;
+  --text-soft: #4A4A4A;
+  --accent: #F5C518;
+  --accent-hover: #E0B000;
+  --accent-soft: #FFF3C4;
+  --border: #F0E6C0;
+  --shadow: 0 4px 20px rgba(245, 197, 24, 0.15);
+  --shadow-hover: 0 8px 30px rgba(245, 197, 24, 0.25);
+  --header-bg: #FFFFFF;
+  --sidebar-w: 264px;
+}
+[data-theme="dark"] {
+  --bg: #0B0F1A;
+  --bg-card: #151B2B;
+  --text: #F0F4FF;
+  --text-soft: #A8B5D1;
+  --accent: #5BA3F5;
+  --accent-hover: #3D8BE0;
+  --accent-soft: #1A2A45;
+  --border: #2A3650;
+  --shadow: 0 4px 20px rgba(91, 163, 245, 0.12);
+  --shadow-hover: 0 8px 30px rgba(91, 163, 245, 0.22);
+  --header-bg: #0F1525;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Nunito', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+}
+a { color: inherit; }
+
+/* ===== App shell (sidebar + content) ===== */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--header-bg);
+  border-right: 2px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 200;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text);
+  padding: 0.25rem 0.25rem 1.25rem;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 1.25rem;
+}
+.logo-svg { width: 44px; height: 44px; flex-shrink: 0; }
+.logo-svg .logo-fill { fill: var(--accent); transition: fill 0.3s ease; }
+.sidebar-logo .logo-text { display: flex; flex-direction: column; }
+.sidebar-logo strong { font-size: 1.25rem; font-weight: 800; letter-spacing: 0.02em; color: var(--accent); }
+.sidebar-logo span { font-size: 0.68rem; color: var(--text-soft); font-weight: 600; line-height: 1.2; }
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  background: transparent;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+.nav-item:hover { background: var(--accent-soft); }
+.nav-item.active {
+  background: var(--accent);
+  color: #1A1A1A;
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+}
+.nav-icon { font-size: 1.3rem; line-height: 1; }
+
+.sidebar-footer {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--border);
+}
+
+.theme-btn {
+  background: var(--accent-soft);
+  border: 2px solid var(--border);
+  color: var(--text);
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  transition: all 0.2s ease;
+}
+.theme-btn:hover {
+  background: var(--accent);
+  color: #1A1A1A;
+  box-shadow: var(--shadow);
+}
+
+/* Sidebar compacta (telas estreitas) — continua fixa e visível, só fica mais fina */
+@media (max-width: 900px) {
+  .sidebar {
+    width: 84px;
+    padding: 1rem 0.5rem;
+  }
+  .sidebar-logo { justify-content: center; padding-bottom: 1rem; }
+  .sidebar-logo .logo-text { display: none; }
+  .nav-item { justify-content: center; padding: 0.75rem 0.4rem; }
+  .nav-item .nav-label { display: none; }
+  .theme-btn .theme-label { display: none; }
+}
+
+@media (max-width: 520px) {
+  .sidebar { width: 68px; }
+  .logo-svg { width: 36px; height: 36px; }
+}
+
+/* ===== Main content / views ===== */
+.main-content { flex: 1; min-width: 0; }
+
+.view { display: none; }
+.view.active { display: block; animation: fadeIn 0.35s ease; }
+
+.view-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero (Início) */
+.hero {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding: 2.5rem 1.5rem;
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+.hero h1 span { color: var(--accent); }
+.hero p {
+  font-size: 1.15rem;
+  color: var(--text-soft);
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--accent-soft);
+  color: var(--text);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+.cta-btn {
+  background: var(--accent);
+  color: #1A1A1A;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+  font-family: inherit;
+}
+.cta-btn:hover { background: var(--accent-hover); transform: translateY(-3px) scale(1.03); box-shadow: var(--shadow-hover); }
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+.step-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.step-card .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #1A1A1A;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+.step-card h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.35rem; }
+.step-card p { font-size: 0.92rem; color: var(--text-soft); }
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Subjects grid (Aprender) */
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+.subject-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 1.75rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.subject-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+}
+.subject-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+.subject-card:hover::before { transform: scaleX(1); }
+.subject-icon { font-size: 2.8rem; margin-bottom: 0.75rem; display: block; }
+.subject-card h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 0.35rem; }
+.subject-card p { font-size: 0.95rem; color: var(--text-soft); }
+.subject-card.custom { position: relative; }
+.subject-remove {
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.subject-remove:hover { background: #FFE2E0; color: #B3261E; }
+
+.add-subject-card {
+  background: transparent;
+  border: 2.5px dashed var(--border);
+  border-radius: 20px;
+  padding: 1.75rem 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--text-soft);
+  transition: all 0.25s ease;
+  min-height: 148px;
+}
+.add-subject-card:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.add-subject-card .subject-icon { font-size: 2.2rem; margin: 0; }
+.add-subject-card h3 { font-size: 1.05rem; font-weight: 800; }
+
+.add-subject-form {
+  display: none;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+}
+.add-subject-form.visible { display: block; animation: fadeIn 0.3s ease; }
+.add-subject-form h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; }
+.add-subject-form .form-row { display: flex; gap: 1rem; }
+.add-subject-form .form-actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; flex-wrap: wrap; }
+
+/* Histórico */
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+.history-header .section-title { margin-bottom: 0; }
+.history-item {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.history-item:hover { border-color: var(--accent); box-shadow: var(--shadow); transform: translateY(-2px); }
+.history-item .history-icon { font-size: 1.8rem; flex-shrink: 0; }
+.history-item .history-info { flex: 1; min-width: 0; }
+.history-item .history-tema { font-weight: 800; font-size: 1.05rem; }
+.history-item .history-meta { font-size: 0.85rem; color: var(--text-soft); margin-top: 0.15rem; }
+.history-item .history-delete {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text-soft);
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 0.95rem;
+}
+.history-item .history-delete:hover { background: #FFE2E0; color: #B3261E; border-color: #FFE2E0; }
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-soft);
+  background: var(--bg-card);
+  border: 2px dashed var(--border);
+  border-radius: 20px;
+}
+.empty-state .empty-icon { font-size: 2.8rem; display: block; margin-bottom: 0.75rem; }
+
+.learning-panel {
+  display: none;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+  animation: fadeIn 0.35s ease;
+}
+.learning-panel.visible { display: block; }
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.panel-header h2 { font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 0.5rem; }
+.back-btn {
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.back-btn:hover { background: var(--accent); border-color: var(--accent); color: #1A1A1A; transform: scale(1.05); }
+
+.input-group { margin-bottom: 1.5rem; }
+.input-group label { display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 1.05rem; }
+.input-group input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.input-group input::placeholder { color: var(--text-soft); opacity: 0.7; }
+
+.btn-primary {
+  background: var(--accent);
+  color: #1A1A1A;
+  border: none;
+  padding: 1rem 1.75rem;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow);
+  font-family: inherit;
+}
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px) scale(1.03); box-shadow: var(--shadow-hover); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.result-area { display: none; margin-top: 2rem; animation: fadeIn 0.4s ease; }
+.result-area.visible { display: block; }
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+@media (max-width: 768px) { .result-grid { grid-template-columns: 1fr; } }
+
+.explanation-box, .image-box {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 1.5rem;
+}
+.explanation-box h3, .image-box h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.explanation-content { font-size: 1.1rem; line-height: 1.7; color: var(--text); }
+.explanation-content p { margin-bottom: 1rem; }
+.explanation-content strong { color: var(--accent); }
+
+.image-placeholder {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: var(--accent-soft);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  border: 2px solid var(--border);
+  text-align: center;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.image-placeholder .ai-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--accent);
+  color: #1A1A1A;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.3rem 0.7rem;
+  border-radius: 8px;
+  z-index: 5;
+}
+.image-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block; }
+.image-placeholder .placeholder-content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem; width: 100%; height: 100%; }
+.image-placeholder .emoji { font-size: 4rem; }
+.image-placeholder p { font-size: 0.95rem; color: var(--text-soft); max-width: 220px; }
+
+.loading { display: none; text-align: center; padding: 2rem; }
+.loading.visible { display: block; }
+.spinner {
+  width: 48px; height: 48px;
+  border: 4px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.tips {
+  background: var(--accent-soft);
+  border: 2px solid var(--border);
+  border-radius: 18px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+}
+.tips strong { display: block; margin-bottom: 0.35rem; }
+.examples { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.example-chip {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.example-chip:hover { background: var(--accent); border-color: var(--accent); color: #1A1A1A; transform: scale(1.05); }
+
+/* Sobre view */
+.about-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.about-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.6rem; }
+.about-card p, .about-card li { color: var(--text-soft); font-size: 1rem; }
+.about-card ul { padding-left: 1.25rem; margin-top: 0.5rem; }
+.about-card li { margin-bottom: 0.35rem; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.tech-tag {
+  background: var(--accent-soft);
+  border: 1.5px solid var(--border);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Login view */
+.login-wrap { display: flex; justify-content: center; padding-top: 1.5rem; }
+.login-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: 24px;
+  padding: 2.25rem;
+  box-shadow: var(--shadow);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+.login-card h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.4rem; }
+.login-card .login-sub { color: var(--text-soft); font-size: 0.95rem; margin-bottom: 1.5rem; }
+.login-card form { text-align: left; }
+
+.auth-tabs {
+  display: flex;
+  gap: 0.4rem;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 0.3rem;
+  margin-bottom: 1.5rem;
+}
+.auth-tab {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-soft);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.6rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.auth-tab.active { background: var(--accent); color: #1A1A1A; box-shadow: var(--shadow); }
+
+.auth-form { display: none; }
+.auth-form.active { display: block; animation: fadeIn 0.3s ease; }
+
+.auth-msg {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 0.7rem 0.9rem;
+  display: none;
+}
+.auth-msg.visible { display: block; }
+.auth-msg.error { background: #FFE2E0; color: #B3261E; }
+[data-theme="dark"] .auth-msg.error { background: #3A1A1A; color: #FF8A80; }
+.auth-msg.success { background: var(--accent-soft); color: var(--text); }
+
+.account-avatar {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin: 0 auto 1rem;
+}
+.login-note {
+  margin-top: 1.25rem;
+  background: var(--accent-soft);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text);
+  display: none;
+}
+.login-note.visible { display: block; animation: fadeIn 0.3s ease; }
+
+footer {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border-top: 2px solid var(--border);
+  color: var(--text-soft);
+  font-size: 0.95rem;
+}
+footer strong { color: var(--text); }
+
+button:focus-visible, input:focus-visible, .subject-card:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="header-inner">
-      <a href="#" class="logo" onclick="voltarInicio(); return false;">
-        <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect class="logo-fill" x="2" y="2" width="60" height="60" rx="16"/>
-          <path fill="var(--bg-card)" d="M14 42V20c0-2.2 2.8-3.2 5-1.8L32 26l13-7.8c2.2-1.4 5-.4 5 1.8v22c0 2.2-2.8 3.2-5 1.8L32 36l-13 7.8c-2.2 1.4-5 .4-5-1.8z"/>
-          <circle cx="39" cy="25" r="3.2" fill="var(--bg-card)"/>
-          <path fill="var(--bg-card)" d="M20 38l7-9 5 5 6-8 8 12H20z" opacity="0.95"/>
-        </svg>
-        <div class="logo-text">
-          <strong>V.I.V.A</strong>
-          <span>Visualização Ilustrada</span>
-        </div>
-      </a>
-      <button class="theme-btn" id="themeBtn" title="Trocar tema">🌙</button>
-    </div>
-  </header>
 
-  <main>
-    <section class="hero" id="hero">
-      <div class="badge">Inclusão • Aprendizagem Visual • Tecnologia Acessível</div>
-      <h1>Aprender fica mais fácil<br>com <span>imagens e explicações claras</span></h1>
-      <p>
-        O <strong>V.I.V.A</strong> (Visualização Ilustrada para a Valorização da Aprendizagem) 
-        é uma plataforma educativa desenvolvida para todos os públicos, 
-        com especial atenção às pessoas com Transtorno do Espectro Autista (TEA) 
-        e Transtorno do Desenvolvimento Global, utilizando recursos visuais 
-        e linguagem acessível para facilitar a compreensão dos conteúdos escolares.
-      </p>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <a href="#" class="sidebar-logo" onclick="showView('inicio'); return false;">
+      <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect class="logo-fill" x="2" y="2" width="60" height="60" rx="16"/>
+        <path fill="var(--bg-card)" d="M14 42V20c0-2.2 2.8-3.2 5-1.8L32 26l13-7.8c2.2-1.4 5-.4 5 1.8v22c0 2.2-2.8 3.2-5 1.8L32 36l-13 7.8c-2.2 1.4-5 .4-5-1.8z"/>
+        <circle cx="39" cy="25" r="3.2" fill="var(--bg-card)"/>
+        <path fill="var(--bg-card)" d="M20 38l7-9 5 5 6-8 8 12H20z" opacity="0.95"/>
+      </svg>
+      <div class="logo-text">
+        <strong>V.I.V.A</strong>
+        <span>Visualização Ilustrada</span>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav" aria-label="Navegação principal">
+      <button class="nav-item active" data-view="inicio" onclick="showView('inicio')">
+        <span class="nav-icon">🏠</span><span class="nav-label">Início</span>
+      </button>
+      <button class="nav-item" data-view="app" onclick="showView('app')">
+        <span class="nav-icon">📚</span><span class="nav-label">Aprender</span>
+      </button>
+      <button class="nav-item" data-view="historico" onclick="showView('historico')">
+        <span class="nav-icon">📜</span><span class="nav-label">Histórico</span>
+      </button>
+      <button class="nav-item" data-view="sobre" onclick="showView('sobre')">
+        <span class="nav-icon">ℹ️</span><span class="nav-label">Sobre</span>
+      </button>
+      <button class="nav-item" data-view="login" onclick="showView('login')">
+        <span class="nav-icon">👤</span><span class="nav-label">Entrar</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="theme-btn" id="themeBtn"><span class="theme-icon">🌙</span> <span class="theme-label">Tema escuro</span></button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+
+    <!-- ===== VIEW: INÍCIO ===== -->
+    <section class="view active" id="view-inicio">
+      <div class="view-inner">
+        <section class="hero">
+          <div class="badge">Inclusão • Aprendizagem Visual • Tecnologia Acessível</div>
+          <h1>Aprender fica mais fácil<br>com <span>imagens e explicações claras</span></h1>
+          <p>
+            O <strong>V.I.V.A</strong> (Visualização Ilustrada para a Valorização da Aprendizagem)
+            é uma plataforma educativa desenvolvida para todos os públicos,
+            com especial atenção às pessoas com Transtorno do Espectro Autista (TEA)
+            e Transtorno do Desenvolvimento Global, utilizando recursos visuais
+            e linguagem acessível para facilitar a compreensão dos conteúdos escolares.
+          </p>
+          <button class="cta-btn" onclick="showView('app')">✨ Começar a aprender</button>
+        </section>
+
+        <h2 class="section-title">🚀 Como funciona</h2>
+        <div class="steps-grid">
+          <div class="step-card">
+            <span class="step-num">1</span>
+            <h3>Escolha uma matéria</h3>
+            <p>Português, Matemática, História ou Geografia.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">2</span>
+            <h3>Digite o que quer aprender</h3>
+            <p>Ou escolha um dos exemplos prontos.</p>
+          </div>
+          <div class="step-card">
+            <span class="step-num">3</span>
+            <h3>Receba explicação e imagem</h3>
+            <p>Um texto simples e uma ilustração geradas por IA.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <h2 class="section-title" id="subjectsTitle">📚 Escolha a matéria</h2>
-    <div class="subjects-grid" id="subjectsGrid">
-      <div class="subject-card" tabindex="0" data-subject="portugues">
-        <span class="subject-icon">📖</span>
-        <h3>Português</h3>
-        <p>Letras, palavras, textos e gramática</p>
-      </div>
-      <div class="subject-card" tabindex="0" data-subject="matematica">
-        <span class="subject-icon">🔢</span>
-        <h3>Matemática</h3>
-        <p>Números, contas e raciocínio</p>
-      </div>
-      <div class="subject-card" tabindex="0" data-subject="historia">
-        <span class="subject-icon">🏛️</span>
-        <h3>História</h3>
-        <p>Eventos, pessoas e o passado</p>
-      </div>
-      <div class="subject-card" tabindex="0" data-subject="geografia">
-        <span class="subject-icon">🌍</span>
-        <h3>Geografia</h3>
-        <p>Mapas, países e o planeta</p>
-      </div>
-    </div>
+    <!-- ===== VIEW: APRENDER (app original) ===== -->
+    <section class="view" id="view-app">
+      <div class="view-inner">
+        <h2 class="section-title" id="subjectsTitle">📚 Escolha a matéria</h2>
+        <div class="subjects-grid" id="subjectsGrid"></div>
 
-    <section class="learning-panel" id="learningPanel">
-      <div class="panel-header">
-        <h2 id="panelTitle">📖 Português</h2>
-        <button class="back-btn" onclick="voltarInicio()">← Voltar às matérias</button>
-      </div>
-      <div class="input-group">
-        <label for="topicInput">O que você quer aprender hoje?</label>
-        <input type="text" id="topicInput" placeholder="Ex: O que é substantivo? ou Como fazer conta de dividir?" autocomplete="off" />
-        <div class="examples" id="examplesContainer"></div>
-      </div>
-      <button class="btn-primary" id="explainBtn" onclick="gerarExplicacao()">✨ Explicar e Ilustrar</button>
-      <div class="loading" id="loading">
-        <div class="spinner"></div>
-        <p>Gerando explicação e imagem com Inteligência Artificial...</p>
-        <p style="font-size:0.9rem;color:var(--text-soft);margin-top:0.5rem">Isso pode levar alguns segundos</p>
-      </div>
-      <div class="result-area" id="resultArea">
-        <div class="result-grid">
-          <div class="explanation-box">
-            <h3>📝 Explicação simples</h3>
-            <div class="explanation-content" id="explanationContent"></div>
-          </div>
-          <div class="image-box">
-            <h3>🖼️ Imagem ilustrativa (IA)</h3>
-            <div class="image-placeholder" id="imagePlaceholder">
-              <span class="ai-badge">Gerada por IA</span>
-              <div class="placeholder-content" id="placeholderContent">
-                <span class="emoji" id="imageEmoji">🎨</span>
-                <p id="imageDesc">A imagem será gerada pela IA aqui.</p>
-              </div>
-              <img id="aiImage" alt="Ilustração gerada por IA" style="display:none" />
+        <div class="add-subject-form" id="addSubjectForm">
+          <h3>✨ Nova matéria</h3>
+          <div class="form-row">
+            <div class="input-group" style="max-width:90px;">
+              <label for="novaMateriaIcon">Ícone</label>
+              <input type="text" id="novaMateriaIcon" maxlength="4" placeholder="🎨" value="🎨" />
+            </div>
+            <div class="input-group" style="flex:1;">
+              <label for="novaMateriaNome">Nome da matéria</label>
+              <input type="text" id="novaMateriaNome" placeholder="Ex: Ciências, Inglês, Artes..." autocomplete="off" />
             </div>
           </div>
+          <div class="form-actions">
+            <button class="btn-primary" onclick="criarMateria()">Adicionar matéria</button>
+            <button class="back-btn" onclick="fecharFormNovaMateria()">Cancelar</button>
+          </div>
+          <div class="auth-msg" id="novaMateriaMsg"></div>
         </div>
-      </div>
-      <div class="tips">
-        <strong>💡 Dica:</strong>
-        Use frases curtas e palavras simples. Se quiser, peça para o adulto te ajudar a digitar.
+
+        <section class="learning-panel" id="learningPanel">
+          <div class="panel-header">
+            <h2 id="panelTitle">📖 Português</h2>
+            <button class="back-btn" onclick="voltarMaterias()">← Voltar às matérias</button>
+          </div>
+
+          <div class="input-group">
+            <label for="topicInput">O que você quer aprender hoje?</label>
+            <input type="text" id="topicInput" placeholder="Ex: O que é substantivo? ou Como fazer conta de dividir?" autocomplete="off" />
+            <div class="examples" id="examplesContainer"></div>
+          </div>
+
+          <button class="btn-primary" id="explainBtn" onclick="gerarExplicacao()">✨ Explicar e Ilustrar</button>
+
+          <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Gerando explicação e imagem com Inteligência Artificial...</p>
+            <p style="font-size:0.9rem;color:var(--text-soft);margin-top:0.5rem">Isso pode levar alguns segundos</p>
+          </div>
+
+          <div class="result-area" id="resultArea">
+            <div class="result-grid">
+              <div class="explanation-box">
+                <h3>📝 Explicação simples</h3>
+                <div class="explanation-content" id="explanationContent"></div>
+              </div>
+              <div class="image-box">
+                <h3>🖼️ Imagem ilustrativa (IA)</h3>
+                <div class="image-placeholder" id="imagePlaceholder">
+                  <span class="ai-badge">Gerada por IA</span>
+                  <div class="placeholder-content" id="placeholderContent">
+                    <span class="emoji" id="imageEmoji">🎨</span>
+                    <p id="imageDesc">A imagem será gerada pela IA aqui.</p>
+                  </div>
+                  <img id="aiImage" alt="Ilustração gerada por IA" style="display:none" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="tips">
+            <strong>💡 Dica:</strong>
+            Use frases curtas e palavras simples. Se quiser, peça para o adulto te ajudar a digitar.
+          </div>
+        </section>
       </div>
     </section>
-  </main>
 
-  <footer>
-    <p>
-      <strong>V.I.V.A</strong> — Visualização Ilustrada para a Valorização da Aprendizagem<br>
-      Plataforma educativa inclusiva • Foco em acessibilidade e neurodiversidade
-    </p>
-  </footer>
+    <!-- ===== VIEW: HISTÓRICO ===== -->
+    <section class="view" id="view-historico">
+      <div class="view-inner">
+        <div class="history-header">
+          <h2 class="section-title">📜 Histórico de perguntas</h2>
+          <button class="back-btn" id="limparHistoricoBtn" onclick="limparHistorico()">🗑️ Limpar histórico</button>
+        </div>
+        <p class="login-sub" id="historicoScopeMsg"></p>
+        <div id="historyList"></div>
+      </div>
+    </section>
 
-  <script>
-    const materias = {
-      portugues: {
-        nome: "Português",
-        icon: "📖",
-        exemplos: ["O que é substantivo?", "Diferença entre verbo e adjetivo", "Como usar a vírgula", "O que é um parágrafo"]
-      },
-      matematica: {
-        nome: "Matemática",
-        icon: "🔢",
-        exemplos: ["Como fazer conta de somar", "O que é multiplicação", "Como fazer divisão", "O que são frações"]
-      },
-      historia: {
-        nome: "História",
-        icon: "🏛️",
-        exemplos: ["Quem descobriu o Brasil", "O que foi a Independência", "Quem foi Dom Pedro I", "O que é a Pré-História"]
-      },
-      geografia: {
-        nome: "Geografia",
-        icon: "🌍",
-        exemplos: ["O que são continentes", "Quais são os oceanos", "O que é o equador", "Capitais do Brasil"]
+    <!-- ===== VIEW: SOBRE ===== -->
+    <section class="view" id="view-sobre">
+      <div class="view-inner">
+        <h2 class="section-title">ℹ️ Sobre o V.I.V.A</h2>
+
+        <div class="about-card">
+          <h3>Nossa missão</h3>
+          <p>
+            O V.I.V.A (Visualização Ilustrada para a Valorização da Aprendizagem) é uma plataforma
+            educativa pensada para todos os públicos, com atenção especial a pessoas com
+            Transtorno do Espectro Autista (TEA) e Transtorno do Desenvolvimento Global.
+            A ideia é usar imagens e uma linguagem simples para tornar o conteúdo escolar
+            mais fácil de entender.
+          </p>
+        </div>
+
+        <div class="about-card">
+          <h3>Objetivo</h3>
+          <p>Ajudar no aprendizado das matérias básicas (Português, Matemática, História e Geografia) através de:</p>
+          <ul>
+            <li>Explicações em linguagem simples e direta, geradas por Inteligência Artificial</li>
+            <li>Ilustrações geradas por IA</li>
+            <li>Interface intuitiva, com alto contraste e botões interativos</li>
+            <li>Dois modos de visualização (claro e escuro)</li>
+          </ul>
+        </div>
+
+        <div class="about-card">
+          <h3>Tecnologias</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">HTML5</span>
+            <span class="tech-tag">CSS3</span>
+            <span class="tech-tag">JavaScript puro</span>
+            <span class="tech-tag">Pollinations.ai</span>
+            <span class="tech-tag">100% responsivo</span>
+          </div>
+        </div>
+
+        <div class="about-card">
+          <h3>Projeto</h3>
+          <p>Desenvolvido para a FECCI 2026.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VIEW: LOGIN / CONTA ===== -->
+    <section class="view" id="view-login">
+      <div class="view-inner">
+        <div class="login-wrap">
+
+          <div class="login-card" id="authForms">
+            <div class="auth-tabs">
+              <button type="button" class="auth-tab active" id="tabLogin" onclick="mostrarAbaAuth('login')">Entrar</button>
+              <button type="button" class="auth-tab" id="tabCadastro" onclick="mostrarAbaAuth('cadastro')">Criar conta</button>
+            </div>
+
+            <!-- Entrar -->
+            <form id="loginForm" class="auth-form active">
+              <p class="login-sub">Acesse sua conta no V.I.V.A</p>
+              <div class="input-group">
+                <label for="loginEmail">E-mail</label>
+                <input type="email" id="loginEmail" placeholder="seu@email.com" autocomplete="off" required />
+              </div>
+              <div class="input-group">
+                <label for="loginSenha">Senha</label>
+                <input type="password" id="loginSenha" placeholder="••••••••" autocomplete="off" required />
+              </div>
+              <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Entrar</button>
+              <div class="auth-msg" id="loginMsg"></div>
+            </form>
+
+            <!-- Criar conta -->
+            <form id="cadastroForm" class="auth-form">
+              <p class="login-sub">Crie sua conta no V.I.V.A</p>
+              <div class="input-group">
+                <label for="cadNome">Nome</label>
+                <input type="text" id="cadNome" placeholder="Seu nome" autocomplete="off" required />
+              </div>
+              <div class="input-group">
+                <label for="cadEmail">E-mail</label>
+                <input type="email" id="cadEmail" placeholder="seu@email.com" autocomplete="off" required />
+              </div>
+              <div class="input-group">
+                <label for="cadSenha">Senha</label>
+                <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres" autocomplete="off" required />
+              </div>
+              <div class="input-group">
+                <label for="cadSenha2">Confirmar senha</label>
+                <input type="password" id="cadSenha2" placeholder="Repita a senha" autocomplete="off" required />
+              </div>
+              <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Criar conta</button>
+              <div class="auth-msg" id="cadastroMsg"></div>
+            </form>
+
+            <div class="login-note visible">
+              🔒 Sua conta é salva apenas neste navegador (não existe um servidor por trás) — não use uma senha que você usa em outros lugares.
+            </div>
+          </div>
+
+          <div class="login-card" id="accountInfo" style="display:none;">
+            <div class="account-avatar" id="accountAvatar">😊</div>
+            <h2 id="accountName">—</h2>
+            <p class="login-sub" id="accountEmail">—</p>
+            <button type="button" class="back-btn" style="width:100%; justify-content:center;" onclick="fazerLogout()">🚪 Sair da conta</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <p>
+    <strong>V.I.V.A</strong> — Visualização Ilustrada para a Valorização da Aprendizagem<br>
+    Plataforma educativa inclusiva • Foco em acessibilidade e neurodiversidade
+  </p>
+</footer>
+
+<script>
+const materiasDefault = {
+  portugues: {
+    nome: "Português",
+    icon: "📖",
+    desc: "Letras, palavras, textos e gramática",
+    exemplos: ["O que é substantivo?", "Diferença entre verbo e adjetivo", "Como usar a vírgula", "O que é um parágrafo"],
+    custom: false
+  },
+  matematica: {
+    nome: "Matemática",
+    icon: "🔢",
+    desc: "Números, contas e raciocínio",
+    exemplos: ["Como fazer conta de somar", "O que é multiplicação", "Como fazer divisão", "O que são frações"],
+    custom: false
+  },
+  historia: {
+    nome: "História",
+    icon: "🏛️",
+    desc: "Eventos, pessoas e o passado",
+    exemplos: ["Quem descobriu o Brasil", "O que foi a Independência", "Quem foi Dom Pedro I", "O que é a Pré-História"],
+    custom: false
+  },
+  geografia: {
+    nome: "Geografia",
+    icon: "🌍",
+    desc: "Mapas, países e o planeta",
+    exemplos: ["O que são continentes", "Quais são os oceanos", "O que é o equador", "Capitais do Brasil"],
+    custom: false
+  }
+};
+
+const MATERIAS_CUSTOM_KEY = 'viva-materias-custom';
+
+function getMateriasCustom() {
+  try { return JSON.parse(localStorage.getItem(MATERIAS_CUSTOM_KEY)) || {}; }
+  catch (e) { return {}; }
+}
+function saveMateriasCustom(obj) { localStorage.setItem(MATERIAS_CUSTOM_KEY, JSON.stringify(obj)); }
+function getMaterias() { return Object.assign({}, materiasDefault, getMateriasCustom()); }
+
+let materiaAtual = null;
+
+// ===== Tema =====
+const themeBtn = document.getElementById('themeBtn');
+const themeIcon = themeBtn.querySelector('.theme-icon');
+const themeLabel = themeBtn.querySelector('.theme-label');
+const html = document.documentElement;
+
+function updateThemeBtnLabel() {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  themeIcon.textContent = isDark ? '☀️' : '🌙';
+  themeLabel.textContent = isDark ? 'Tema claro' : 'Tema escuro';
+}
+if (localStorage.getItem('viva-theme') === 'dark') {
+  html.setAttribute('data-theme', 'dark');
+}
+updateThemeBtnLabel();
+
+themeBtn.addEventListener('click', () => {
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('viva-theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('viva-theme', 'dark');
+  }
+  updateThemeBtnLabel();
+});
+
+// ===== Navegação (sidebar / views) =====
+function showView(view) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + view).classList.add('active');
+
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navBtn = document.querySelector('.nav-item[data-view="' + view + '"]');
+  if (navBtn) navBtn.classList.add('active');
+
+  if (view === 'historico') renderHistorico();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ===== Matérias (padrão + criadas pelo usuário) =====
+function renderSubjectsGrid() {
+  const materias = getMaterias();
+  const grid = document.getElementById('subjectsGrid');
+  let html2 = '';
+
+  Object.keys(materias).forEach(function(chave) {
+    const mat = materias[chave];
+    html2 += '<div class="subject-card' + (mat.custom ? ' custom' : '') + '" tabindex="0" data-subject="' + chave + '">' +
+      (mat.custom ? '<button class="subject-remove" title="Remover matéria" onclick="excluirMateria(event,\'' + chave + '\')">✕</button>' : '') +
+      '<span class="subject-icon">' + mat.icon + '</span>' +
+      '<h3>' + mat.nome + '</h3>' +
+      '<p>' + (mat.desc || 'Matéria criada por você') + '</p>' +
+      '</div>';
+  });
+
+  html2 += '<div class="add-subject-card" tabindex="0" onclick="abrirFormNovaMateria()">' +
+    '<span class="subject-icon">➕</span><h3>Nova matéria</h3></div>';
+
+  grid.innerHTML = html2;
+
+  document.querySelectorAll('.subject-card').forEach(function(card) {
+    card.addEventListener('click', function() { selecionarMateria(card.dataset.subject); });
+    card.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        selecionarMateria(card.dataset.subject);
       }
+    });
+  });
+}
+
+function abrirFormNovaMateria() {
+  document.getElementById('addSubjectForm').classList.add('visible');
+  document.getElementById('novaMateriaMsg').className = 'auth-msg';
+  document.getElementById('novaMateriaNome').focus();
+}
+function fecharFormNovaMateria() {
+  document.getElementById('addSubjectForm').classList.remove('visible');
+  document.getElementById('novaMateriaNome').value = '';
+  document.getElementById('novaMateriaIcon').value = '🎨';
+}
+
+function criarMateria() {
+  const nome = document.getElementById('novaMateriaNome').value.trim();
+  const icon = document.getElementById('novaMateriaIcon').value.trim() || '🎨';
+
+  if (!nome) {
+    mostrarMsg('novaMateriaMsg', 'Digite o nome da matéria.', 'error');
+    return;
+  }
+
+  const chave = 'custom_' + nome.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') + '_' + Date.now();
+  const custom = getMateriasCustom();
+  custom[chave] = { nome: nome, icon: icon, desc: 'Matéria criada por você', exemplos: [], custom: true };
+  saveMateriasCustom(custom);
+
+  fecharFormNovaMateria();
+  renderSubjectsGrid();
+}
+
+function excluirMateria(event, chave) {
+  event.stopPropagation();
+  if (!confirm('Remover esta matéria?')) return;
+  const custom = getMateriasCustom();
+  delete custom[chave];
+  saveMateriasCustom(custom);
+  renderSubjectsGrid();
+}
+
+function selecionarMateria(chave) {
+  materiaAtual = chave;
+  const mat = getMaterias()[chave];
+  if (!mat) return;
+  document.getElementById('panelTitle').innerHTML = mat.icon + ' ' + mat.nome;
+  document.getElementById('learningPanel').classList.add('visible');
+  document.getElementById('subjectsGrid').style.display = 'none';
+  document.getElementById('subjectsTitle').style.display = 'none';
+  document.getElementById('addSubjectForm').classList.remove('visible');
+  document.getElementById('resultArea').classList.remove('visible');
+  document.getElementById('loading').classList.remove('visible');
+  document.getElementById('topicInput').value = '';
+  document.getElementById('examplesContainer').innerHTML = (mat.exemplos || []).map(function(ex) {
+    return '<button class="example-chip" onclick="usarExemplo(\'' + ex.replace(/'/g, "\\'") + '\')">' + ex + '</button>';
+  }).join('');
+  setTimeout(function() { document.getElementById('topicInput').focus(); }, 100);
+}
+
+function usarExemplo(texto) {
+  document.getElementById('topicInput').value = texto;
+  document.getElementById('topicInput').focus();
+}
+
+function voltarMaterias() {
+  document.getElementById('learningPanel').classList.remove('visible');
+  document.getElementById('subjectsGrid').style.display = 'grid';
+  document.getElementById('subjectsTitle').style.display = 'flex';
+  materiaAtual = null;
+}
+
+renderSubjectsGrid();
+
+// ===== Login / Conta (salvo no localStorage do navegador) =====
+const USERS_KEY = 'viva-users';
+const SESSION_KEY = 'viva-session';
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem(USERS_KEY)) || []; }
+  catch (e) { return []; }
+}
+function saveUsers(users) { localStorage.setItem(USERS_KEY, JSON.stringify(users)); }
+function getSessionEmail() { return localStorage.getItem(SESSION_KEY); }
+function setSessionEmail(email) { localStorage.setItem(SESSION_KEY, email); }
+function clearSession() { localStorage.removeItem(SESSION_KEY); }
+
+function mostrarAbaAuth(aba) {
+  document.getElementById('tabLogin').classList.toggle('active', aba === 'login');
+  document.getElementById('tabCadastro').classList.toggle('active', aba === 'cadastro');
+  document.getElementById('loginForm').classList.toggle('active', aba === 'login');
+  document.getElementById('cadastroForm').classList.toggle('active', aba === 'cadastro');
+}
+
+function mostrarMsg(id, texto, tipo) {
+  var el = document.getElementById(id);
+  el.textContent = texto;
+  el.className = 'auth-msg visible ' + tipo;
+}
+
+function atualizarEstadoConta() {
+  var email = getSessionEmail();
+  var authForms = document.getElementById('authForms');
+  var accountInfo = document.getElementById('accountInfo');
+  var navLabel = document.querySelector('.nav-item[data-view="login"] .nav-label');
+  var navIcon = document.querySelector('.nav-item[data-view="login"] .nav-icon');
+
+  if (email) {
+    var user = getUsers().find(function(u) { return u.email === email; });
+    authForms.style.display = 'none';
+    accountInfo.style.display = 'block';
+    document.getElementById('accountName').textContent = user ? ('Olá, ' + user.nome + '! 👋') : 'Olá! 👋';
+    document.getElementById('accountEmail').textContent = email;
+    if (navLabel) navLabel.textContent = 'Minha conta';
+    if (navIcon) navIcon.textContent = '✅';
+  } else {
+    authForms.style.display = 'block';
+    accountInfo.style.display = 'none';
+    if (navLabel) navLabel.textContent = 'Entrar';
+    if (navIcon) navIcon.textContent = '👤';
+  }
+}
+
+document.getElementById('cadastroForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var nome = document.getElementById('cadNome').value.trim();
+  var email = document.getElementById('cadEmail').value.trim().toLowerCase();
+  var senha = document.getElementById('cadSenha').value;
+  var senha2 = document.getElementById('cadSenha2').value;
+
+  if (!nome || !email || !senha) {
+    mostrarMsg('cadastroMsg', 'Preencha todos os campos.', 'error');
+    return;
+  }
+  if (senha.length < 6) {
+    mostrarMsg('cadastroMsg', 'A senha precisa ter pelo menos 6 caracteres.', 'error');
+    return;
+  }
+  if (senha !== senha2) {
+    mostrarMsg('cadastroMsg', 'As senhas não são iguais.', 'error');
+    return;
+  }
+
+  var users = getUsers();
+  if (users.some(function(u) { return u.email === email; })) {
+    mostrarMsg('cadastroMsg', 'Já existe uma conta com esse e-mail. Tente entrar.', 'error');
+    return;
+  }
+
+  users.push({ nome: nome, email: email, senha: senha });
+  saveUsers(users);
+  setSessionEmail(email);
+  mostrarMsg('cadastroMsg', 'Conta criada com sucesso!', 'success');
+  atualizarEstadoConta();
+});
+
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  var senha = document.getElementById('loginSenha').value;
+
+  var user = getUsers().find(function(u) { return u.email === email && u.senha === senha; });
+  if (!user) {
+    mostrarMsg('loginMsg', 'E-mail ou senha incorretos.', 'error');
+    return;
+  }
+
+  setSessionEmail(email);
+  mostrarMsg('loginMsg', 'Login realizado com sucesso!', 'success');
+  atualizarEstadoConta();
+});
+
+function fazerLogout() {
+  clearSession();
+  document.getElementById('loginForm').reset();
+  document.getElementById('cadastroForm').reset();
+  document.getElementById('loginMsg').className = 'auth-msg';
+  document.getElementById('cadastroMsg').className = 'auth-msg';
+  atualizarEstadoConta();
+  renderHistorico();
+}
+
+atualizarEstadoConta();
+
+// ===== Histórico de perguntas (salvo no localStorage do navegador) =====
+const HISTORICO_PREFIX = 'viva-historico-';
+
+function historicoKey() {
+  return HISTORICO_PREFIX + (getSessionEmail() || 'visitante');
+}
+function getHistorico() {
+  try { return JSON.parse(localStorage.getItem(historicoKey())) || []; }
+  catch (e) { return []; }
+}
+function saveHistorico(lista) {
+  localStorage.setItem(historicoKey(), JSON.stringify(lista));
+}
+
+function salvarNoHistorico(item) {
+  var lista = getHistorico();
+  lista.unshift(item);
+  if (lista.length > 50) lista = lista.slice(0, 50);
+  saveHistorico(lista);
+  if (document.getElementById('view-historico').classList.contains('active')) renderHistorico();
+}
+
+function formatarDataHistorico(iso) {
+  try {
+    var d = new Date(iso);
+    return d.toLocaleDateString('pt-BR') + ' às ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  } catch (e) { return ''; }
+}
+
+function renderHistorico() {
+  var lista = getHistorico();
+  var container = document.getElementById('historyList');
+  var scopeMsg = document.getElementById('historicoScopeMsg');
+  var email = getSessionEmail();
+
+  scopeMsg.textContent = email
+    ? 'Perguntas salvas na sua conta (' + email + ').'
+    : 'Você não está logado — este histórico fica salvo só neste navegador, como visitante.';
+
+  if (!lista.length) {
+    container.innerHTML = '<div class="empty-state"><span class="empty-icon">📭</span>' +
+      '<p>Nenhuma pergunta salva ainda.<br>As perguntas que você fizer em "Aprender" aparecem aqui.</p></div>';
+    return;
+  }
+
+  container.innerHTML = lista.map(function(item, i) {
+    return '<div class="history-item" onclick="reabrirHistorico(' + i + ')">' +
+      '<span class="history-icon">' + item.materiaIcon + '</span>' +
+      '<div class="history-info">' +
+        '<div class="history-tema">' + item.tema + '</div>' +
+        '<div class="history-meta">' + item.materiaNome + ' • ' + formatarDataHistorico(item.data) + '</div>' +
+      '</div>' +
+      '<button class="history-delete" title="Remover" onclick="excluirHistoricoItem(event,' + i + ')">✕</button>' +
+    '</div>';
+  }).join('');
+}
+
+function reabrirHistorico(i) {
+  var item = getHistorico()[i];
+  if (!item) return;
+
+  showView('app');
+  selecionarMateria(item.materiaChave);
+
+  document.getElementById('topicInput').value = item.tema;
+  document.getElementById('explanationContent').innerHTML = item.texto;
+
+  var aiImage = document.getElementById('aiImage');
+  var placeholder = document.getElementById('placeholderContent');
+  aiImage.src = item.imageUrl;
+  aiImage.alt = 'Ilustração sobre: ' + item.tema;
+  aiImage.style.display = 'block';
+  placeholder.style.display = 'none';
+
+  document.getElementById('resultArea').classList.add('visible');
+  setTimeout(function() {
+    document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 150);
+}
+
+function excluirHistoricoItem(event, i) {
+  event.stopPropagation();
+  var lista = getHistorico();
+  lista.splice(i, 1);
+  saveHistorico(lista);
+  renderHistorico();
+}
+
+function limparHistorico() {
+  if (!confirm('Apagar todo o histórico de perguntas?')) return;
+  saveHistorico([]);
+  renderHistorico();
+}
+
+// ========== POLLINATIONS ==========
+const POLLINATIONS_KEY = "sk_6ZnqJ20UEgg1qCAEsArGEJ272tsrQHY7";
+
+async function gerarExplicacao() {
+  var input = document.getElementById('topicInput');
+  var tema = input.value.trim();
+  if (!tema) {
+    input.focus();
+    input.style.borderColor = '#e53935';
+    setTimeout(function() { input.style.borderColor = ''; }, 1500);
+    return;
+  }
+
+  var btn = document.getElementById('explainBtn');
+  var loading = document.getElementById('loading');
+  var result = document.getElementById('resultArea');
+  var aiImage = document.getElementById('aiImage');
+  var placeholder = document.getElementById('placeholderContent');
+  var explanation = document.getElementById('explanationContent');
+
+  btn.disabled = true;
+  result.classList.remove('visible');
+  loading.classList.add('visible');
+  aiImage.style.display = 'none';
+  aiImage.src = '';
+  placeholder.style.display = 'flex';
+  document.getElementById('imageEmoji').textContent = '⏳';
+  document.getElementById('imageDesc').textContent = 'Gerando imagem com Inteligência Artificial...';
+
+  var mat = getMaterias()[materiaAtual];
+
+  try {
+    var texto = await gerarTexto(tema, mat.nome);
+    explanation.innerHTML = texto;
+
+    var promptImg = 'Educational illustration for children and neurodivergent students about "' + tema + '" in the subject of ' + mat.nome + '. Simple, clear, colorful, friendly, high contrast, easy to understand, no text in the image, cartoon style, clean background, suitable for autism spectrum and learning support';
+    var imageUrl = 'https://gen.pollinations.ai/image/' + encodeURIComponent(promptImg) + '?model=gptimage&width=512&height=512&nologo=true&key=' + POLLINATIONS_KEY;
+
+    aiImage.onload = function() {
+      placeholder.style.display = 'none';
+      aiImage.style.display = 'block';
     };
+    aiImage.onerror = function() {
+      document.getElementById('imageEmoji').textContent = '🎨';
+      document.getElementById('imageDesc').textContent = 'Não foi possível gerar a imagem agora. Tente novamente.';
+    };
+    aiImage.src = imageUrl;
+    aiImage.alt = 'Ilustração sobre: ' + tema;
 
-    let materiaAtual = null;
+    loading.classList.remove('visible');
+    result.classList.add('visible');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    // Tema
-    const themeBtn = document.getElementById('themeBtn');
-    const html = document.documentElement;
-    if (localStorage.getItem('viva-theme') === 'dark') {
-      html.setAttribute('data-theme', 'dark');
-      themeBtn.textContent = '☀️';
-    }
-    themeBtn.addEventListener('click', () => {
-      if (html.getAttribute('data-theme') === 'dark') {
-        html.removeAttribute('data-theme');
-        themeBtn.textContent = '🌙';
-        localStorage.setItem('viva-theme', 'light');
-      } else {
-        html.setAttribute('data-theme', 'dark');
-        themeBtn.textContent = '☀️';
-        localStorage.setItem('viva-theme', 'dark');
-      }
+    salvarNoHistorico({
+      materiaChave: materiaAtual,
+      materiaNome: mat.nome,
+      materiaIcon: mat.icon,
+      tema: tema,
+      texto: texto,
+      imageUrl: imageUrl,
+      data: new Date().toISOString()
     });
+  } catch (err) {
+    console.error(err);
+    explanation.innerHTML = '<p>Não foi possível gerar a explicação neste momento.</p><p>Verifique a internet e tente novamente.</p>';
+    loading.classList.remove('visible');
+    result.classList.add('visible');
+  }
 
-    // Clique nas matérias
-    document.querySelectorAll('.subject-card').forEach(card => {
-      card.addEventListener('click', () => selecionarMateria(card.dataset.subject));
-      card.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          selecionarMateria(card.dataset.subject);
-        }
-      });
-    });
+  btn.disabled = false;
+}
 
-    function selecionarMateria(chave) {
-      materiaAtual = chave;
-      const mat = materias[chave];
-      document.getElementById('panelTitle').innerHTML = mat.icon + ' ' + mat.nome;
-      document.getElementById('learningPanel').classList.add('visible');
-      document.getElementById('subjectsGrid').style.display = 'none';
-      document.getElementById('subjectsTitle').style.display = 'none';
-      document.getElementById('hero').style.display = 'none';
-      document.getElementById('resultArea').classList.remove('visible');
-      document.getElementById('loading').classList.remove('visible');
-      document.getElementById('topicInput').value = '';
-      document.getElementById('examplesContainer').innerHTML = mat.exemplos.map(function(ex) {
-        return '<button class="example-chip" onclick="usarExemplo(\'' + ex.replace(/'/g, "\\'") + '\')">' + ex + '</button>';
-      }).join('');
-      setTimeout(function() { document.getElementById('topicInput').focus(); }, 100);
-    }
+async function gerarTexto(tema, materia) {
+  var prompt = 'Explique de forma muito simples e clara, em português do Brasil, o seguinte tema da matéria de ' + materia + ': "' + tema + '". Use frases curtas e palavras fáceis. Linguagem adequada para crianças e pessoas com autismo. Seja objetivo e use exemplos do dia a dia. Não invente informações. Responda apenas com a explicação, sem introduções.';
+  var url = 'https://gen.pollinations.ai/text/' + encodeURIComponent(prompt) + '?key=' + POLLINATIONS_KEY;
+  var res = await fetch(url);
+  if (!res.ok) throw new Error('Erro ao gerar texto');
+  var texto = await res.text();
+  texto = texto.trim();
+  return texto.split(/\n+/).map(function(p) {
+    p = p.trim();
+    return p ? '<p>' + p + '</p>' : '';
+  }).join('') || '<p>' + texto + '</p>';
+}
 
-    function usarExemplo(texto) {
-      document.getElementById('topicInput').value = texto;
-      document.getElementById('topicInput').focus();
-    }
-
-    function voltarInicio() {
-      document.getElementById('learningPanel').classList.remove('visible');
-      document.getElementById('subjectsGrid').style.display = 'grid';
-      document.getElementById('subjectsTitle').style.display = 'flex';
-      document.getElementById('hero').style.display = 'block';
-      materiaAtual = null;
-    }
-
-    // ========== POLLINATIONS ==========
-    const POLLINATIONS_KEY = "sk_6ZnqJ20UEgg1qCAEsArGEJ272tsrQHY7";
-
-    async function gerarExplicacao() {
-      var input = document.getElementById('topicInput');
-      var tema = input.value.trim();
-      if (!tema) {
-        input.focus();
-        input.style.borderColor = '#e53935';
-        setTimeout(function() { input.style.borderColor = ''; }, 1500);
-        return;
-      }
-
-      var btn = document.getElementById('explainBtn');
-      var loading = document.getElementById('loading');
-      var result = document.getElementById('resultArea');
-      var aiImage = document.getElementById('aiImage');
-      var placeholder = document.getElementById('placeholderContent');
-      var explanation = document.getElementById('explanationContent');
-
-      btn.disabled = true;
-      result.classList.remove('visible');
-      loading.classList.add('visible');
-      aiImage.style.display = 'none';
-      aiImage.src = '';
-      placeholder.style.display = 'flex';
-      document.getElementById('imageEmoji').textContent = '⏳';
-      document.getElementById('imageDesc').textContent = 'Gerando imagem com Inteligência Artificial...';
-
-      var mat = materias[materiaAtual];
-
-      try {
-        // 1. Texto com Pollinations
-        var texto = await gerarTexto(tema, mat.nome);
-        explanation.innerHTML = texto;
-
-        // 2. Imagem com Pollinations (GPT Image)
-        var promptImg = 'Educational illustration for children and neurodivergent students about "' + tema + '" in the subject of ' + mat.nome + '. Simple, clear, colorful, friendly, high contrast, easy to understand, no text in the image, cartoon style, clean background, suitable for autism spectrum and learning support';
-        var imageUrl = 'https://gen.pollinations.ai/image/' + encodeURIComponent(promptImg) + '?model=gptimage&width=512&height=512&nologo=true&key=' + POLLINATIONS_KEY;
-
-        aiImage.onload = function() {
-          placeholder.style.display = 'none';
-          aiImage.style.display = 'block';
-        };
-        aiImage.onerror = function() {
-          document.getElementById('imageEmoji').textContent = '🎨';
-          document.getElementById('imageDesc').textContent = 'Não foi possível gerar a imagem agora. Tente novamente.';
-        };
-        aiImage.src = imageUrl;
-        aiImage.alt = 'Ilustração sobre: ' + tema;
-
-        loading.classList.remove('visible');
-        result.classList.add('visible');
-        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      } catch (err) {
-        console.error(err);
-        explanation.innerHTML = '<p>Não foi possível gerar a explicação neste momento.</p><p>Verifique a internet e tente novamente.</p>';
-        loading.classList.remove('visible');
-        result.classList.add('visible');
-      }
-      btn.disabled = false;
-    }
-
-    async function gerarTexto(tema, materia) {
-      var prompt = 'Explique de forma muito simples e clara, em português do Brasil, o seguinte tema da matéria de ' + materia + ': "' + tema + '". Use frases curtas e palavras fáceis. Linguagem adequada para crianças e pessoas com autismo. Seja objetivo e use exemplos do dia a dia. Não invente informações. Responda apenas com a explicação, sem introduções.';
-
-      var url = 'https://gen.pollinations.ai/text/' + encodeURIComponent(prompt) + '?key=' + POLLINATIONS_KEY;
-      var res = await fetch(url);
-      if (!res.ok) throw new Error('Erro ao gerar texto');
-
-      var texto = await res.text();
-      texto = texto.trim();
-
-      return texto.split(/\n+/).map(function(p) {
-        p = p.trim();
-        return p ? '<p>' + p + '</p>' : '';
-      }).join('') || '<p>' + texto + '</p>';
-    }
-
-    document.getElementById('topicInput').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') gerarExplicacao();
-    });
-  </script>
+document.getElementById('topicInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') gerarExplicacao();
+});
+</script>
 </body>
 </html>
