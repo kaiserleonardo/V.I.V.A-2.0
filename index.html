@@ -7,43 +7,56 @@
 <meta name="description" content="Plataforma educativa inclusiva com foco em acessibilidade e neurodiversidade." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
 :root {
-  --bg: #FFFDF5;
-  --bg-card: #FFFFFF;
-  --text: #1A1A1A;
-  --text-soft: #4A4A4A;
-  --accent: #F5C518;
-  --accent-hover: #E0B000;
-  --accent-soft: #FFF3C4;
-  --border: #F0E6C0;
-  --shadow: 0 4px 20px rgba(245, 197, 24, 0.15);
-  --shadow-hover: 0 8px 30px rgba(245, 197, 24, 0.25);
-  --header-bg: #FFFFFF;
+  --bg: #0A0E1A;
+  --bg-card: #121729;
+  --bg-card-2: #171E33;
+  --text: #EDF1FB;
+  --text-soft: #8B93A8;
+  --accent: #6C7CFB;
+  --accent-2: #8B5CF6;
+  --accent-hover: #5566E0;
+  --accent-soft: #1B2242;
+  --border: #232B44;
+  --shadow: 0 4px 24px rgba(108, 124, 251, 0.16);
+  --shadow-hover: 0 12px 40px rgba(139, 92, 246, 0.26);
+  --header-bg: #0E1322;
+  --gradient: linear-gradient(135deg, #6C7CFB 0%, #8B5CF6 55%, #22D3EE 100%);
+  --on-accent: #FFFFFF;
   --sidebar-w: 264px;
 }
-[data-theme="dark"] {
-  --bg: #0B0F1A;
-  --bg-card: #151B2B;
-  --text: #F0F4FF;
-  --text-soft: #A8B5D1;
-  --accent: #5BA3F5;
-  --accent-hover: #3D8BE0;
-  --accent-soft: #1A2A45;
-  --border: #2A3650;
-  --shadow: 0 4px 20px rgba(91, 163, 245, 0.12);
-  --shadow-hover: 0 8px 30px rgba(91, 163, 245, 0.22);
-  --header-bg: #0F1525;
+[data-theme="light"] {
+  --bg: #F5F7FC;
+  --bg-card: #FFFFFF;
+  --bg-card-2: #EEF1FA;
+  --text: #12172A;
+  --text-soft: #5C6478;
+  --accent: #4F46E5;
+  --accent-2: #8B5CF6;
+  --accent-hover: #4338CA;
+  --accent-soft: #ECEEFC;
+  --border: #E1E5F2;
+  --shadow: 0 4px 20px rgba(79, 70, 229, 0.10);
+  --shadow-hover: 0 10px 32px rgba(139, 92, 246, 0.16);
+  --header-bg: #FFFFFF;
+  --gradient: linear-gradient(135deg, #4F46E5 0%, #8B5CF6 55%, #22D3EE 100%);
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
-  font-family: 'Nunito', system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   transition: background 0.3s ease, color 0.3s ease;
   min-height: 100vh;
+}
+h1, h2, h3, .cta-btn, .btn-primary, .step-card .step-num {
+  font-family: 'Space Grotesk', 'Manrope', system-ui, sans-serif;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 a { color: inherit; }
 
@@ -79,9 +92,7 @@ a { color: inherit; }
   margin-bottom: 1.25rem;
 }
 .logo-svg { width: 54px; height: 54px; flex-shrink: 0; }
-.logo-svg .logo-fill { fill: var(--accent); transition: fill 0.3s ease; }
 .sidebar-logo .logo-text { display: flex; flex-direction: column; }
-.sidebar-logo strong { font-size: 1.25rem; font-weight: 800; letter-spacing: 0.02em; color: var(--accent); }
 .sidebar-logo span { font-size: 0.68rem; color: var(--text-soft); font-weight: 600; line-height: 1.2; }
 
 .sidebar-nav {
@@ -110,9 +121,9 @@ a { color: inherit; }
 }
 .nav-item:hover { background: var(--accent-soft); }
 .nav-item.active {
-  background: var(--accent);
-  color: #1A1A1A;
-  border-color: var(--accent);
+  background: var(--gradient);
+  color: var(--on-accent);
+  border-color: transparent;
   box-shadow: var(--shadow);
 }
 .nav-icon { font-size: 1.3rem; line-height: 1; }
@@ -140,8 +151,8 @@ a { color: inherit; }
   transition: all 0.2s ease;
 }
 .theme-btn:hover {
-  background: var(--accent);
-  color: #1A1A1A;
+  background: var(--gradient);
+  color: var(--on-accent);
   box-shadow: var(--shadow);
 }
 
@@ -182,6 +193,8 @@ a { color: inherit; }
 
 /* Hero (Início) */
 .hero {
+  position: relative;
+  overflow: hidden;
   text-align: center;
   margin-bottom: 2.5rem;
   padding: 2.5rem 1.5rem;
@@ -190,13 +203,27 @@ a { color: inherit; }
   border: 2px solid var(--border);
   box-shadow: var(--shadow);
 }
+.hero-graphic {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 1; }
 .hero h1 {
   font-size: clamp(1.8rem, 5vw, 2.6rem);
-  font-weight: 800;
+  font-weight: 700;
   margin-bottom: 0.75rem;
   line-height: 1.2;
 }
-.hero h1 span { color: var(--accent); }
+.hero h1 span {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 .hero p {
   font-size: 1.15rem;
   color: var(--text-soft);
@@ -217,22 +244,22 @@ a { color: inherit; }
   margin-bottom: 1rem;
 }
 .cta-btn {
-  background: var(--accent);
-  color: #1A1A1A;
+  background: var(--gradient);
+  color: var(--on-accent);
   border: none;
   padding: 1rem 2rem;
   border-radius: 14px;
   font-size: 1.1rem;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: var(--shadow);
   font-family: inherit;
 }
-.cta-btn:hover { background: var(--accent-hover); transform: translateY(-3px) scale(1.03); box-shadow: var(--shadow-hover); }
+.cta-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: var(--shadow-hover); }
 
 .steps-grid {
   display: grid;
@@ -253,9 +280,9 @@ a { color: inherit; }
   justify-content: center;
   width: 36px; height: 36px;
   border-radius: 50%;
-  background: var(--accent);
-  color: #1A1A1A;
-  font-weight: 800;
+  background: var(--gradient);
+  color: var(--on-accent);
+  font-weight: 700;
   margin-bottom: 0.75rem;
 }
 .step-card h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.35rem; }
@@ -294,7 +321,7 @@ a { color: inherit; }
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 5px;
-  background: var(--accent);
+  background: var(--gradient);
   transform: scaleX(0);
   transition: transform 0.25s ease;
 }
@@ -436,7 +463,7 @@ a { color: inherit; }
   transition: all 0.2s ease;
   font-family: inherit;
 }
-.back-btn:hover { background: var(--accent); border-color: var(--accent); color: #1A1A1A; transform: scale(1.05); }
+.back-btn:hover { background: var(--accent); border-color: var(--accent); color: #FFFFFF; transform: scale(1.05); }
 
 .input-group { margin-bottom: 1.5rem; }
 .input-group label { display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 1.05rem; }
@@ -455,22 +482,22 @@ a { color: inherit; }
 .input-group input::placeholder { color: var(--text-soft); opacity: 0.7; }
 
 .btn-primary {
-  background: var(--accent);
-  color: #1A1A1A;
+  background: var(--gradient);
+  color: var(--on-accent);
   border: none;
   padding: 1rem 1.75rem;
   border-radius: 14px;
   font-size: 1.1rem;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: var(--shadow);
   font-family: inherit;
 }
-.btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px) scale(1.03); box-shadow: var(--shadow-hover); }
+.btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: var(--shadow-hover); }
 .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
 .result-area { display: none; margin-top: 2rem; animation: fadeIn 0.4s ease; }
@@ -510,7 +537,7 @@ a { color: inherit; }
   top: 12px;
   right: 12px;
   background: var(--accent);
-  color: #1A1A1A;
+  color: #FFFFFF;
   font-size: 0.75rem;
   font-weight: 800;
   padding: 0.3rem 0.7rem;
@@ -556,7 +583,7 @@ a { color: inherit; }
   transition: all 0.2s ease;
   font-family: inherit;
 }
-.example-chip:hover { background: var(--accent); border-color: var(--accent); color: #1A1A1A; transform: scale(1.05); }
+.example-chip:hover { background: var(--accent); border-color: var(--accent); color: #FFFFFF; transform: scale(1.05); }
 
 /* Sobre view */
 .about-card {
@@ -620,7 +647,7 @@ a { color: inherit; }
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.auth-tab.active { background: var(--accent); color: #1A1A1A; box-shadow: var(--shadow); }
+.auth-tab.active { background: var(--gradient); color: var(--on-accent); box-shadow: var(--shadow); }
 
 .auth-form { display: none; }
 .auth-form.active { display: block; animation: fadeIn 0.3s ease; }
@@ -634,8 +661,8 @@ a { color: inherit; }
   display: none;
 }
 .auth-msg.visible { display: block; }
-.auth-msg.error { background: #FFE2E0; color: #B3261E; }
-[data-theme="dark"] .auth-msg.error { background: #3A1A1A; color: #FF8A80; }
+.auth-msg.error { background: #3A1A2E; color: #FF8FA3; }
+[data-theme="light"] .auth-msg.error { background: #FFE2E0; color: #B3261E; }
 .auth-msg.success { background: var(--accent-soft); color: var(--text); }
 
 .account-avatar {
@@ -682,7 +709,13 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
   <aside class="sidebar" id="sidebar">
     <a href="#" class="sidebar-logo" onclick="showView('inicio'); return false;">
       <svg class="logo-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect class="logo-fill" x="2" y="2" width="60" height="60" rx="16"/>
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" style="stop-color:var(--accent)"/>
+            <stop offset="100%" style="stop-color:var(--accent-2)"/>
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#logoGrad)"/>
         <polygon points="14,8 31,12 31,32 14,28" fill="var(--bg-card)"/>
         <polygon points="50,8 33,12 33,32 50,28" fill="var(--bg-card)"/>
         <rect x="17" y="15" width="10" height="2.2" rx="1.1" fill="var(--text)"/>
@@ -691,7 +724,7 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
         <circle cx="42.5" cy="16.5" r="2.4" fill="var(--text)"/>
         <path d="M36 29 L41 20.5 L44.3 25 L48 29 Z" fill="var(--text)"/>
         <rect x="6" y="40" width="52" height="16" rx="8" fill="var(--bg-card)"/>
-        <text x="32" y="51.5" text-anchor="middle" font-family="Nunito, sans-serif" font-weight="800" font-size="9.5" letter-spacing="0.4" fill="var(--text)">V.I.V.A</text>
+        <text x="32" y="51.5" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="700" font-size="9.5" letter-spacing="0.4" fill="var(--text)">V.I.V.A</text>
       </svg>
       <div class="logo-text">
         <span>Visualização Ilustrada para Valorização da Aprendizagem</span>
@@ -727,16 +760,47 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
     <section class="view active" id="view-inicio">
       <div class="view-inner">
         <section class="hero">
-          <div class="badge">Inclusão • Aprendizagem Visual • Tecnologia Acessível</div>
-          <h1>Aprender fica mais fácil<br>com <span>imagens e explicações claras</span></h1>
-          <p>
-            O <strong>V.I.V.A</strong> (Visualização Ilustrada para a Valorização da Aprendizagem)
-            é uma plataforma educativa desenvolvida para todos os públicos,
-            com especial atenção às pessoas com Transtorno do Espectro Autista (TEA)
-            e Transtorno do Desenvolvimento Global, utilizando recursos visuais
-            e linguagem acessível para facilitar a compreensão dos conteúdos escolares.
-          </p>
-          <button class="cta-btn" onclick="showView('app')">✨ Começar a aprender</button>
+          <svg class="hero-graphic" viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="heroLine" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" style="stop-color:var(--accent)"/>
+                <stop offset="100%" style="stop-color:var(--accent-2)"/>
+              </linearGradient>
+              <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" style="stop-color:var(--accent-2);stop-opacity:0.35"/>
+                <stop offset="100%" style="stop-color:var(--accent-2);stop-opacity:0"/>
+              </radialGradient>
+            </defs>
+            <circle cx="580" cy="70" r="150" fill="url(#heroGlow)"/>
+            <g stroke="url(#heroLine)" stroke-width="1" opacity="0.35" fill="none">
+              <line x1="560" y1="40" x2="630" y2="80"/>
+              <line x1="630" y1="80" x2="600" y2="140"/>
+              <line x1="600" y1="140" x2="520" y2="120"/>
+              <line x1="520" y1="120" x2="560" y2="40"/>
+              <line x1="630" y1="80" x2="670" y2="150"/>
+              <line x1="600" y1="140" x2="650" y2="200"/>
+            </g>
+            <g fill="url(#heroLine)" opacity="0.55">
+              <circle cx="560" cy="40" r="4"/>
+              <circle cx="630" cy="80" r="5"/>
+              <circle cx="600" cy="140" r="4"/>
+              <circle cx="520" cy="120" r="3.5"/>
+              <circle cx="670" cy="150" r="3.5"/>
+              <circle cx="650" cy="200" r="4"/>
+            </g>
+          </svg>
+          <div class="hero-content">
+            <div class="badge">Inclusão • Aprendizagem Visual • Tecnologia Acessível</div>
+            <h1>Aprender fica mais fácil<br>com <span>imagens e explicações claras</span></h1>
+            <p>
+              O <strong>V.I.V.A</strong> (Visualização Ilustrada para a Valorização da Aprendizagem)
+              é uma plataforma educativa desenvolvida para todos os públicos,
+              com especial atenção às pessoas com Transtorno do Espectro Autista (TEA)
+              e Transtorno do Desenvolvimento Global, utilizando recursos visuais
+              e linguagem acessível para facilitar a compreensão dos conteúdos escolares.
+            </p>
+            <button class="cta-btn" onclick="showView('app')">✨ Começar a aprender</button>
+          </div>
         </section>
 
         <h2 class="section-title">🚀 Como funciona</h2>
@@ -1016,22 +1080,22 @@ const themeLabel = themeBtn.querySelector('.theme-label');
 const html = document.documentElement;
 
 function updateThemeBtnLabel() {
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  themeIcon.textContent = isDark ? '☀️' : '🌙';
-  themeLabel.textContent = isDark ? 'Tema claro' : 'Tema escuro';
+  const isLight = html.getAttribute('data-theme') === 'light';
+  themeIcon.textContent = isLight ? '🌙' : '☀️';
+  themeLabel.textContent = isLight ? 'Tema escuro' : 'Tema claro';
 }
-if (localStorage.getItem('viva-theme') === 'dark') {
-  html.setAttribute('data-theme', 'dark');
+if (localStorage.getItem('viva-theme') === 'light') {
+  html.setAttribute('data-theme', 'light');
 }
 updateThemeBtnLabel();
 
 themeBtn.addEventListener('click', () => {
-  if (html.getAttribute('data-theme') === 'dark') {
+  if (html.getAttribute('data-theme') === 'light') {
     html.removeAttribute('data-theme');
-    localStorage.setItem('viva-theme', 'light');
-  } else {
-    html.setAttribute('data-theme', 'dark');
     localStorage.setItem('viva-theme', 'dark');
+  } else {
+    html.setAttribute('data-theme', 'light');
+    localStorage.setItem('viva-theme', 'light');
   }
   updateThemeBtnLabel();
 });
