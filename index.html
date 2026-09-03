@@ -382,6 +382,33 @@ a { color: inherit; }
 .add-subject-form .form-row { display: flex; gap: 1rem; }
 .add-subject-form .form-actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; flex-wrap: wrap; }
 
+.emoji-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.emoji-option {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+.emoji-option:hover { border-color: var(--accent); transform: scale(1.08); }
+.emoji-option.selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: var(--shadow);
+  transform: scale(1.05);
+}
+
 /* Histórico */
 .history-header {
   display: flex;
@@ -832,15 +859,15 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
 
         <div class="add-subject-form" id="addSubjectForm">
           <h3>✨ Nova matéria</h3>
-          <div class="form-row">
-            <div class="input-group" style="max-width:90px;">
-              <label for="novaMateriaIcon">Ícone</label>
-              <input type="text" id="novaMateriaIcon" maxlength="4" placeholder="🎨" value="🎨" />
-            </div>
-            <div class="input-group" style="flex:1;">
-              <label for="novaMateriaNome">Nome da matéria</label>
-              <input type="text" id="novaMateriaNome" placeholder="Ex: Ciências, Inglês, Artes..." autocomplete="off" />
-            </div>
+          <div class="input-group">
+            <label>Escolha um ícone</label>
+            <input type="hidden" id="novaMateriaIcon" value="🎨" />
+            <div class="emoji-picker" id="emojiPicker"></div>
+            <input type="text" id="novaMateriaIconCustom" maxlength="4" placeholder="Ou digite seu próprio emoji" autocomplete="off" style="margin-top:0.6rem; max-width:220px;" />
+          </div>
+          <div class="input-group">
+            <label for="novaMateriaNome">Nome da matéria</label>
+            <input type="text" id="novaMateriaNome" placeholder="Ex: Ciências, Inglês, Artes..." autocomplete="off" />
           </div>
           <div class="form-actions">
             <button class="btn-primary" onclick="criarMateria()">Adicionar matéria</button>
@@ -1154,8 +1181,42 @@ function abrirFormNovaMateria() {
 function fecharFormNovaMateria() {
   document.getElementById('addSubjectForm').classList.remove('visible');
   document.getElementById('novaMateriaNome').value = '';
-  document.getElementById('novaMateriaIcon').value = '🎨';
+  document.getElementById('novaMateriaIconCustom').value = '';
+  selecionarEmoji('🎨');
 }
+
+const EMOJI_OPTIONS = [
+  '🎨', '🔬', '🧪', '🧬', '🌱', '🐾', '🌎', '🪐', '🎵', '🎭',
+  '⚽', '🏀', '🍎', '🧩', '💡', '🧠', '📐', '🧮', '💻', '🤖',
+  '🗺️', '🏺', '⚗️', '📷', '✏️', '📏', '🎬', '🕹️', '🧵', '🌈'
+];
+
+function renderEmojiPicker() {
+  const picker = document.getElementById('emojiPicker');
+  picker.innerHTML = EMOJI_OPTIONS.map(function(e) {
+    return '<button type="button" class="emoji-option" data-emoji="' + e + '" onclick="selecionarEmoji(\'' + e + '\')" aria-label="Usar ícone ' + e + '">' + e + '</button>';
+  }).join('');
+  selecionarEmoji(document.getElementById('novaMateriaIcon').value || '🎨');
+}
+
+function selecionarEmoji(emoji) {
+  document.getElementById('novaMateriaIcon').value = emoji;
+  document.querySelectorAll('.emoji-option').forEach(function(btn) {
+    btn.classList.toggle('selected', btn.dataset.emoji === emoji);
+  });
+}
+
+document.getElementById('novaMateriaIconCustom').addEventListener('input', function() {
+  const valor = this.value.trim();
+  if (valor) {
+    document.getElementById('novaMateriaIcon').value = valor;
+    document.querySelectorAll('.emoji-option').forEach(function(btn) { btn.classList.remove('selected'); });
+  } else {
+    selecionarEmoji('🎨');
+  }
+});
+
+renderEmojiPicker();
 
 function criarMateria() {
   const nome = document.getElementById('novaMateriaNome').value.trim();
