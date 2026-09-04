@@ -43,6 +43,54 @@
   --header-bg: #FFFFFF;
   --gradient: linear-gradient(135deg, #4F46E5 0%, #8B5CF6 55%, #22D3EE 100%);
 }
+
+/* Cores principais alternativas (Configurações) */
+[data-color="verde"] {
+  --accent: #16A34A;
+  --accent-2: #34D399;
+  --accent-hover: #15803D;
+  --accent-soft: rgba(22, 163, 74, 0.14);
+  --gradient: linear-gradient(135deg, #16A34A 0%, #34D399 100%);
+  --shadow: 0 4px 24px rgba(22, 163, 74, 0.18);
+  --shadow-hover: 0 12px 40px rgba(52, 211, 153, 0.26);
+}
+[data-color="azul"] {
+  --accent: #2563EB;
+  --accent-2: #38BDF8;
+  --accent-hover: #1D4ED8;
+  --accent-soft: rgba(37, 99, 235, 0.14);
+  --gradient: linear-gradient(135deg, #2563EB 0%, #38BDF8 100%);
+  --shadow: 0 4px 24px rgba(37, 99, 235, 0.18);
+  --shadow-hover: 0 12px 40px rgba(56, 189, 248, 0.26);
+}
+[data-color="rosa"] {
+  --accent: #DB2777;
+  --accent-2: #F472B6;
+  --accent-hover: #BE185D;
+  --accent-soft: rgba(219, 39, 119, 0.14);
+  --gradient: linear-gradient(135deg, #DB2777 0%, #F472B6 100%);
+  --shadow: 0 4px 24px rgba(219, 39, 119, 0.18);
+  --shadow-hover: 0 12px 40px rgba(244, 114, 182, 0.26);
+}
+[data-color="vermelho"] {
+  --accent: #DC2626;
+  --accent-2: #F87171;
+  --accent-hover: #B91C1C;
+  --accent-soft: rgba(220, 38, 38, 0.14);
+  --gradient: linear-gradient(135deg, #DC2626 0%, #F87171 100%);
+  --shadow: 0 4px 24px rgba(220, 38, 38, 0.18);
+  --shadow-hover: 0 12px 40px rgba(248, 113, 113, 0.26);
+}
+[data-color="amarelo"] {
+  --accent: #CA8A04;
+  --accent-2: #FACC15;
+  --accent-hover: #A16207;
+  --accent-soft: rgba(202, 138, 4, 0.16);
+  --gradient: linear-gradient(135deg, #CA8A04 0%, #FACC15 100%);
+  --shadow: 0 4px 24px rgba(202, 138, 4, 0.18);
+  --shadow-hover: 0 12px 40px rgba(250, 204, 21, 0.26);
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   font-family: 'Manrope', system-ui, sans-serif;
@@ -636,6 +684,96 @@ a { color: inherit; }
   color: var(--text);
 }
 
+/* Configurações */
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  font-weight: 700;
+}
+.switch { position: relative; display: inline-block; width: 46px; height: 26px; flex-shrink: 0; }
+.switch input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.switch-track {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+.switch-track::before {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+}
+.switch input:checked + .switch-track { background: var(--gradient); }
+.switch input:checked + .switch-track::before { transform: translateX(20px); }
+.switch input:focus-visible + .switch-track { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+.segmented {
+  display: flex;
+  gap: 0.4rem;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 0.3rem;
+  margin-top: 0.75rem;
+}
+.segmented-option {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-soft);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 0.9rem;
+  padding: 0.6rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.segmented-option.active { background: var(--gradient); color: var(--on-accent); box-shadow: var(--shadow); }
+
+.color-swatches { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.75rem; }
+.color-swatch {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+.color-swatch:hover { transform: scale(1.1); }
+.color-swatch.selected {
+  border-color: var(--text);
+  box-shadow: 0 0 0 3px var(--bg-card), 0 0 0 5px var(--text-soft);
+}
+.color-swatch.selected::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 1rem;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Escala de tamanho de fonte (aplicada na raiz) */
+html[data-font-size="pequena"] { font-size: 14px; }
+html[data-font-size="media"] { font-size: 16px; }
+html[data-font-size="grande"] { font-size: 18.5px; }
+
 /* Login view */
 .login-wrap { display: flex; justify-content: center; padding-top: 1.5rem; }
 .login-card {
@@ -774,6 +912,9 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
       <button class="nav-item" data-view="login" onclick="showView('login')">
         <span class="nav-icon">👤</span><span class="nav-label">Entrar</span>
       </button>
+      <button class="nav-item" data-view="config" onclick="showView('config')">
+        <span class="nav-icon">⚙️</span><span class="nav-label">Configurações</span>
+      </button>
     </nav>
 
     <div class="sidebar-footer">
@@ -901,6 +1042,7 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
               <div class="explanation-box">
                 <h3>📝 Explicação simples</h3>
                 <div class="explanation-content" id="explanationContent"></div>
+                <button type="button" class="back-btn" id="listenBtn" style="margin-top:1rem;" onclick="alternarLeituraAudio()">🔊 Ouvir explicação</button>
               </div>
               <div class="image-box">
                 <h3>🖼️ Imagem ilustrativa (IA)</h3>
@@ -1047,6 +1189,86 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
       </div>
     </section>
 
+    <!-- ===== VIEW: CONFIGURAÇÕES ===== -->
+    <section class="view" id="view-config">
+      <div class="view-inner">
+        <h2 class="section-title">⚙️ Configurações</h2>
+
+        <div class="about-card">
+          <h3>🔊 Leitura por áudio</h3>
+          <p>Ouça as explicações em voz alta — útil para quem tem dificuldade de leitura.</p>
+          <label class="switch-row">
+            <span>Ler explicações automaticamente em voz alta</span>
+            <span class="switch">
+              <input type="checkbox" id="audioToggle" onchange="salvarConfigAudio()" />
+              <span class="switch-track"></span>
+            </span>
+          </label>
+        </div>
+
+        <div class="about-card">
+          <h3>🔤 Tamanho da fonte</h3>
+          <p>Ajuste o tamanho do texto em todo o site.</p>
+          <div class="segmented" id="fontSizeControl">
+            <button type="button" class="segmented-option" data-size="pequena" onclick="definirTamanhoFonte('pequena')">Pequena</button>
+            <button type="button" class="segmented-option" data-size="media" onclick="definirTamanhoFonte('media')">Média</button>
+            <button type="button" class="segmented-option" data-size="grande" onclick="definirTamanhoFonte('grande')">Grande</button>
+          </div>
+        </div>
+
+        <div class="about-card">
+          <h3>🎨 Cor principal</h3>
+          <p>Escolha a cor de destaque usada nos botões e elementos do site.</p>
+          <div class="color-swatches" id="colorSwatches">
+            <button type="button" class="color-swatch" data-color="padrao" style="background:linear-gradient(135deg,#6C7CFB,#8B5CF6)" onclick="definirCor('padrao')" title="Padrão"></button>
+            <button type="button" class="color-swatch" data-color="verde" style="background:linear-gradient(135deg,#16A34A,#34D399)" onclick="definirCor('verde')" title="Verde"></button>
+            <button type="button" class="color-swatch" data-color="azul" style="background:linear-gradient(135deg,#2563EB,#38BDF8)" onclick="definirCor('azul')" title="Azul"></button>
+            <button type="button" class="color-swatch" data-color="rosa" style="background:linear-gradient(135deg,#DB2777,#F472B6)" onclick="definirCor('rosa')" title="Rosa"></button>
+            <button type="button" class="color-swatch" data-color="vermelho" style="background:linear-gradient(135deg,#DC2626,#F87171)" onclick="definirCor('vermelho')" title="Vermelho"></button>
+            <button type="button" class="color-swatch" data-color="amarelo" style="background:linear-gradient(135deg,#CA8A04,#FACC15)" onclick="definirCor('amarelo')" title="Amarelo"></button>
+          </div>
+        </div>
+
+        <div class="about-card" id="contaConfigLoggedOut">
+          <h3>👤 Conta</h3>
+          <p>Faça login para editar seu nome ou trocar sua senha.</p>
+          <button class="btn-primary" onclick="showView('login')">Ir para Entrar</button>
+        </div>
+
+        <div class="about-card" id="contaConfigLoggedIn" style="display:none;">
+          <h3>👤 Editar conta</h3>
+          <form id="editNomeForm">
+            <div class="input-group">
+              <label for="editNome">Nome de usuário</label>
+              <input type="text" id="editNome" autocomplete="off" required />
+            </div>
+            <button type="submit" class="btn-primary">Salvar nome</button>
+            <div class="auth-msg" id="editNomeMsg"></div>
+          </form>
+
+          <hr style="border:none; border-top:2px solid var(--border); margin:1.75rem 0;" />
+
+          <h3 style="margin-bottom:0.6rem;">🔒 Trocar senha</h3>
+          <form id="editSenhaForm">
+            <div class="input-group">
+              <label for="senhaAtual">Senha atual</label>
+              <input type="password" id="senhaAtual" autocomplete="off" required />
+            </div>
+            <div class="input-group">
+              <label for="senhaNova">Nova senha</label>
+              <input type="password" id="senhaNova" placeholder="Mínimo 6 caracteres" autocomplete="off" required />
+            </div>
+            <div class="input-group">
+              <label for="senhaNovaConfirmar">Confirmar nova senha</label>
+              <input type="password" id="senhaNovaConfirmar" autocomplete="off" required />
+            </div>
+            <button type="submit" class="btn-primary">Alterar senha</button>
+            <div class="auth-msg" id="editSenhaMsg"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -1127,6 +1349,68 @@ themeBtn.addEventListener('click', () => {
   updateThemeBtnLabel();
 });
 
+// ===== Configurações: tamanho da fonte =====
+function definirTamanhoFonte(tamanho) {
+  html.setAttribute('data-font-size', tamanho);
+  localStorage.setItem('viva-font-size', tamanho);
+  document.querySelectorAll('.segmented-option[data-size]').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.size === tamanho);
+  });
+}
+definirTamanhoFonte(localStorage.getItem('viva-font-size') || 'media');
+
+// ===== Configurações: cor principal =====
+function definirCor(cor) {
+  if (cor === 'padrao') {
+    html.removeAttribute('data-color');
+  } else {
+    html.setAttribute('data-color', cor);
+  }
+  localStorage.setItem('viva-color', cor);
+  document.querySelectorAll('.color-swatch[data-color]').forEach(function(btn) {
+    btn.classList.toggle('selected', btn.dataset.color === cor);
+  });
+}
+definirCor(localStorage.getItem('viva-color') || 'padrao');
+
+// ===== Configurações: leitura em voz alta =====
+function salvarConfigAudio() {
+  var ativo = document.getElementById('audioToggle').checked;
+  localStorage.setItem('viva-audio-auto', ativo ? 'true' : 'false');
+}
+document.getElementById('audioToggle').checked = localStorage.getItem('viva-audio-auto') === 'true';
+
+function falarTexto(texto) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  var textoLimpo = texto.replace(/<[^>]+>/g, ' ').trim();
+  if (!textoLimpo) return;
+  var utter = new SpeechSynthesisUtterance(textoLimpo);
+  utter.lang = 'pt-BR';
+  var vozes = window.speechSynthesis.getVoices();
+  var vozPt = vozes.find(function(v) { return v.lang && v.lang.toLowerCase().indexOf('pt') === 0; });
+  if (vozPt) utter.voice = vozPt;
+  var btn = document.getElementById('listenBtn');
+  utter.onstart = function() { if (btn) btn.textContent = '⏹️ Parar leitura'; };
+  utter.onend = function() { if (btn) btn.textContent = '🔊 Ouvir explicação'; };
+  utter.onerror = function() { if (btn) btn.textContent = '🔊 Ouvir explicação'; };
+  window.speechSynthesis.speak(utter);
+}
+
+function alternarLeituraAudio() {
+  if (!('speechSynthesis' in window)) {
+    alert('Seu navegador não tem suporte a leitura em voz alta.');
+    return;
+  }
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    document.getElementById('listenBtn').textContent = '🔊 Ouvir explicação';
+    return;
+  }
+  var conteudo = document.getElementById('explanationContent');
+  falarTexto(conteudo ? conteudo.innerText : '');
+}
+
 // ===== Navegação (sidebar / views) =====
 function showView(view) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -1137,6 +1421,7 @@ function showView(view) {
   if (navBtn) navBtn.classList.add('active');
 
   if (view === 'historico') renderHistorico();
+  if (view !== 'app' && window.speechSynthesis) window.speechSynthesis.cancel();
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1309,6 +1594,8 @@ function atualizarEstadoConta() {
   var accountInfo = document.getElementById('accountInfo');
   var navLabel = document.querySelector('.nav-item[data-view="login"] .nav-label');
   var navIcon = document.querySelector('.nav-item[data-view="login"] .nav-icon');
+  var contaLoggedOut = document.getElementById('contaConfigLoggedOut');
+  var contaLoggedIn = document.getElementById('contaConfigLoggedIn');
 
   if (email) {
     var user = getUsers().find(function(u) { return u.email === email; });
@@ -1318,11 +1605,16 @@ function atualizarEstadoConta() {
     document.getElementById('accountEmail').textContent = email;
     if (navLabel) navLabel.textContent = 'Minha conta';
     if (navIcon) navIcon.textContent = '✅';
+    if (contaLoggedOut) contaLoggedOut.style.display = 'none';
+    if (contaLoggedIn) contaLoggedIn.style.display = 'block';
+    if (user) document.getElementById('editNome').value = user.nome;
   } else {
     authForms.style.display = 'block';
     accountInfo.style.display = 'none';
     if (navLabel) navLabel.textContent = 'Entrar';
     if (navIcon) navIcon.textContent = '👤';
+    if (contaLoggedOut) contaLoggedOut.style.display = 'block';
+    if (contaLoggedIn) contaLoggedIn.style.display = 'none';
   }
 }
 
@@ -1384,6 +1676,59 @@ function fazerLogout() {
   atualizarEstadoConta();
   renderHistorico();
 }
+
+document.getElementById('editNomeForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var email = getSessionEmail();
+  if (!email) return;
+
+  var novoNome = document.getElementById('editNome').value.trim();
+  if (!novoNome) {
+    mostrarMsg('editNomeMsg', 'Digite um nome.', 'error');
+    return;
+  }
+
+  var users = getUsers();
+  var user = users.find(function(u) { return u.email === email; });
+  if (!user) return;
+
+  user.nome = novoNome;
+  saveUsers(users);
+  mostrarMsg('editNomeMsg', 'Nome atualizado com sucesso!', 'success');
+  atualizarEstadoConta();
+});
+
+document.getElementById('editSenhaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var email = getSessionEmail();
+  if (!email) return;
+
+  var atual = document.getElementById('senhaAtual').value;
+  var nova = document.getElementById('senhaNova').value;
+  var confirmar = document.getElementById('senhaNovaConfirmar').value;
+
+  var users = getUsers();
+  var user = users.find(function(u) { return u.email === email; });
+  if (!user) return;
+
+  if (user.senha !== atual) {
+    mostrarMsg('editSenhaMsg', 'Senha atual incorreta.', 'error');
+    return;
+  }
+  if (nova.length < 6) {
+    mostrarMsg('editSenhaMsg', 'A nova senha precisa ter pelo menos 6 caracteres.', 'error');
+    return;
+  }
+  if (nova !== confirmar) {
+    mostrarMsg('editSenhaMsg', 'As senhas não são iguais.', 'error');
+    return;
+  }
+
+  user.senha = nova;
+  saveUsers(users);
+  document.getElementById('editSenhaForm').reset();
+  mostrarMsg('editSenhaMsg', 'Senha alterada com sucesso!', 'success');
+});
 
 atualizarEstadoConta();
 
@@ -1533,6 +1878,10 @@ async function gerarExplicacao() {
     loading.classList.remove('visible');
     result.classList.add('visible');
     result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    if (localStorage.getItem('viva-audio-auto') === 'true') {
+      falarTexto(explanation.innerText);
+    }
 
     salvarNoHistorico({
       materiaChave: materiaAtual,
