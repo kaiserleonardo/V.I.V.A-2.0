@@ -1380,16 +1380,47 @@ function salvarConfigAudio() {
 }
 document.getElementById('audioToggle').checked = localStorage.getItem('viva-audio-auto') === 'true';
 
+// Carrega a lista de vozes assim que o navegador disponibilizar (é assíncrono em vários navegadores)
+var vozesDisponiveis = [];
+function atualizarListaVozes() {
+  vozesDisponiveis = window.speechSynthesis.getVoices();
+}
+if ('speechSynthesis' in window) {
+  atualizarListaVozes();
+  window.speechSynthesis.onvoiceschanged = atualizarListaVozes;
+}
+
+function escolherMelhorVoz() {
+  var candidatas = vozesDisponiveis.filter(function(v) {
+    return v.lang && v.lang.toLowerCase().indexOf('pt') === 0;
+  });
+  if (!candidatas.length) return null;
+
+  // Prioriza vozes de melhor qualidade (nomes que indicam vozes naturais/neurais/online)
+  var preferida =
+    candidatas.find(function(v) { return /google/i.test(v.name); }) ||
+    candidatas.find(function(v) { return /natural|neural|online|wavenet/i.test(v.name); }) ||
+    candidatas.find(function(v) { return v.lang.toLowerCase() === 'pt-br'; }) ||
+    candidatas[0];
+
+  return preferida;
+}
+
 function falarTexto(texto) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
-  var textoLimpo = texto.replace(/<[^>]+>/g, ' ').trim();
+
+  var textoLimpo = limparMarkdown(texto.replace(/<[^>]+>/g, ' '));
   if (!textoLimpo) return;
+
   var utter = new SpeechSynthesisUtterance(textoLimpo);
   utter.lang = 'pt-BR';
-  var vozes = window.speechSynthesis.getVoices();
-  var vozPt = vozes.find(function(v) { return v.lang && v.lang.toLowerCase().indexOf('pt') === 0; });
-  if (vozPt) utter.voice = vozPt;
+  utter.rate = 0.95;
+  utter.pitch = 1;
+
+  var voz = escolherMelhorVoz();
+  if (voz) utter.voice = voz;
+
   var btn = document.getElementById('listenBtn');
   utter.onstart = function() { if (btn) btn.textContent = '⏹️ Parar leitura'; };
   utter.onend = function() { if (btn) btn.textContent = '🔊 Ouvir explicação'; };
@@ -1902,13 +1933,27 @@ async function gerarExplicacao() {
   btn.disabled = false;
 }
 
+function limparMarkdown(texto) {
+  return texto
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/__(.*?)__/g, '$1')
+    .replace(/_(.*?)_/g, '$1')
+    .replace(/`(.*?)`/g, '$1')
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/^[-•]\s+/gm, '')
+    .replace(/[*_#`~]/g, '')
+    .replace(/[ \t]+/g, ' ')
+    .trim();
+}
+
 async function gerarTexto(tema, materia) {
-  var prompt = 'Explique de forma muito simples e clara, em português do Brasil, o seguinte tema da matéria de ' + materia + ': "' + tema + '". Use frases curtas e palavras fáceis. Linguagem adequada para crianças e pessoas com autismo. Seja objetivo e use exemplos do dia a dia. Não invente informações. Responda apenas com a explicação, sem introduções.';
+  var prompt = 'Explique de forma muito simples e clara, em português do Brasil, o seguinte tema da matéria de ' + materia + ': "' + tema + '". Use frases curtas e palavras fáceis. Linguagem adequada para crianças e pessoas com autismo. Seja objetivo e use exemplos do dia a dia. Não invente informações. Não use markdown, asteriscos ou símbolos de formatação. Responda apenas com a explicação, sem introduções.';
   var url = 'https://gen.pollinations.ai/text/' + encodeURIComponent(prompt) + '?key=' + POLLINATIONS_KEY;
   var res = await fetch(url);
   if (!res.ok) throw new Error('Erro ao gerar texto');
   var texto = await res.text();
-  texto = texto.trim();
+  texto = limparMarkdown(texto.trim());
   return texto.split(/\n+/).map(function(p) {
     p = p.trim();
     return p ? '<p>' + p + '</p>' : '';
