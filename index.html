@@ -189,7 +189,9 @@ footer { position: relative; z-index: 1; }
   border-color: transparent;
   box-shadow: var(--shadow);
 }
-.nav-icon { font-size: 1.3rem; line-height: 1; }
+.nav-icon { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.nav-icon svg, .theme-icon svg { width: 20px; height: 20px; display: block; }
+.theme-icon { display: inline-flex; align-items: center; justify-content: center; }
 
 .sidebar-footer {
   margin-top: 1rem;
@@ -518,7 +520,8 @@ footer { position: relative; z-index: 1; }
   border: 2px dashed var(--border);
   border-radius: 20px;
 }
-.empty-state .empty-icon { font-size: 2.8rem; display: block; margin-bottom: 0.75rem; }
+.empty-state .empty-icon { display: flex; justify-content: center; opacity: 0.5; margin-bottom: 0.75rem; }
+.empty-state .empty-icon svg { width: 2.8rem; height: 2.8rem; }
 
 .learning-panel {
   display: none;
@@ -636,7 +639,8 @@ footer { position: relative; z-index: 1; }
 }
 .image-placeholder img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block; }
 .image-placeholder .placeholder-content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 1.5rem; width: 100%; height: 100%; }
-.image-placeholder .emoji { font-size: 4rem; }
+.image-placeholder .emoji { display: flex; opacity: 0.5; }
+.image-placeholder .emoji svg { width: 4rem; height: 4rem; }
 .image-placeholder p { font-size: 0.95rem; color: var(--text-soft); max-width: 220px; }
 
 .loading { display: none; text-align: center; padding: 2rem; }
@@ -975,27 +979,31 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
 
     <nav class="sidebar-nav" aria-label="Navegação principal">
       <button class="nav-item active" data-view="inicio" onclick="showView('inicio')">
-        <span class="nav-icon">🏠</span><span class="nav-label">Início</span>
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg></span><span class="nav-label">Início</span>
       </button>
       <button class="nav-item" data-view="app" onclick="showView('app')">
-        <span class="nav-icon">📚</span><span class="nav-label">Aprender</span>
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><span class="nav-label">Aprender</span>
       </button>
       <button class="nav-item" data-view="historico" onclick="showView('historico')">
-        <span class="nav-icon">📜</span><span class="nav-label">Histórico</span>
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span><span class="nav-label">Histórico</span>
       </button>
       <button class="nav-item" data-view="sobre" onclick="showView('sobre')">
-        <span class="nav-icon">ℹ️</span><span class="nav-label">Sobre</span>
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="7.5" x2="12" y2="7.5"/></svg></span><span class="nav-label">Sobre</span>
       </button>
       <button class="nav-item" data-view="login" onclick="showView('login')">
-        <span class="nav-icon">👤</span><span class="nav-label">Entrar</span>
+        <span class="nav-icon" id="navIconLogin"><svg id="navIconUser" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21a8 8 0 0 1 16 0"/><circle cx="12" cy="8" r="4"/></svg><svg id="navIconCheck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></span><span class="nav-label">Entrar</span>
       </button>
       <button class="nav-item" data-view="config" onclick="showView('config')">
-        <span class="nav-icon">⚙️</span><span class="nav-label">Configurações</span>
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="9" cy="18" r="2"/></svg></span><span class="nav-label">Configurações</span>
       </button>
     </nav>
 
     <div class="sidebar-footer">
-      <button class="theme-btn" id="themeBtn"><span class="theme-icon">🌙</span> <span class="theme-label">Tema escuro</span></button>
+      <button class="theme-btn" id="themeBtn">
+        <span class="theme-icon" id="themeIconSun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4" y1="12" x2="2" y2="12"/><line x1="22" y1="12" x2="20" y2="12"/><line x1="5.6" y1="5.6" x2="4.2" y2="4.2"/><line x1="19.8" y1="19.8" x2="18.4" y2="18.4"/><line x1="5.6" y1="18.4" x2="4.2" y2="19.8"/><line x1="19.8" y1="4.2" x2="18.4" y2="5.6"/></svg></span>
+        <span class="theme-icon" id="themeIconMoon" style="display:none;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg></span>
+        <span class="theme-label">Tema claro</span>
+      </button>
     </div>
   </aside>
 
@@ -1044,11 +1052,11 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
               e Transtorno do Desenvolvimento Global, utilizando recursos visuais
               e linguagem acessível para facilitar a compreensão dos conteúdos escolares.
             </p>
-            <button class="cta-btn" onclick="showView('app')">✨ Começar a aprender</button>
+            <button class="cta-btn" onclick="showView('app')">Começar a aprender</button>
           </div>
         </section>
 
-        <h2 class="section-title">🚀 Como funciona</h2>
+        <h2 class="section-title">Como funciona</h2>
         <div class="steps-grid">
           <div class="step-card">
             <span class="step-num">1</span>
@@ -1072,11 +1080,11 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
     <!-- ===== VIEW: APRENDER (app original) ===== -->
     <section class="view" id="view-app">
       <div class="view-inner">
-        <h2 class="section-title" id="subjectsTitle">📚 Escolha a matéria</h2>
+        <h2 class="section-title" id="subjectsTitle">Escolha a matéria</h2>
         <div class="subjects-grid" id="subjectsGrid"></div>
 
         <div class="add-subject-form" id="addSubjectForm">
-          <h3>✨ Nova matéria</h3>
+          <h3>Nova matéria</h3>
           <div class="input-group">
             <label>Escolha um ícone</label>
             <input type="hidden" id="novaMateriaIcon" value="🎨" />
@@ -1106,7 +1114,7 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
             <div class="examples" id="examplesContainer"></div>
           </div>
 
-          <button class="btn-primary" id="explainBtn" onclick="gerarExplicacao()">✨ Explicar e Ilustrar</button>
+          <button class="btn-primary" id="explainBtn" onclick="gerarExplicacao()">Explicar e Ilustrar</button>
 
           <div class="loading" id="loading">
             <div class="spinner"></div>
@@ -1117,16 +1125,16 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
           <div class="result-area" id="resultArea">
             <div class="result-grid">
               <div class="explanation-box">
-                <h3>📝 Explicação simples</h3>
+                <h3>Explicação simples</h3>
                 <div class="explanation-content" id="explanationContent"></div>
-                <button type="button" class="back-btn" id="listenBtn" style="margin-top:1rem;" onclick="alternarLeituraAudio()">🔊 Ouvir explicação</button>
+                <button type="button" class="back-btn" id="listenBtn" style="margin-top:1rem;" onclick="alternarLeituraAudio()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;vertical-align:-3px;margin-right:0.3rem;"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg><span id="listenBtnLabel">Ouvir explicação</span></button>
               </div>
               <div class="image-box">
-                <h3>🖼️ Imagem ilustrativa (IA)</h3>
+                <h3>Imagem ilustrativa (IA)</h3>
                 <div class="image-placeholder" id="imagePlaceholder">
                   <span class="ai-badge">Gerada por IA</span>
                   <div class="placeholder-content" id="placeholderContent">
-                    <span class="emoji" id="imageEmoji">🎨</span>
+                    <span class="emoji" id="imageEmoji"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
                     <p id="imageDesc">A imagem será gerada pela IA aqui.</p>
                   </div>
                   <img id="aiImage" alt="Ilustração gerada por IA" style="display:none" />
@@ -1137,7 +1145,7 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
 
 
           <div class="tips">
-            <strong>💡 Dica:</strong>
+            <strong>Dica:</strong>
             Use frases curtas e palavras simples. Se quiser, peça para o adulto te ajudar a digitar.
           </div>
         </section>
@@ -1148,8 +1156,8 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
     <section class="view" id="view-historico">
       <div class="view-inner">
         <div class="history-header">
-          <h2 class="section-title">📜 Histórico de perguntas</h2>
-          <button class="back-btn" id="limparHistoricoBtn" onclick="limparHistorico()">🗑️ Limpar histórico</button>
+          <h2 class="section-title">Histórico de perguntas</h2>
+          <button class="back-btn" id="limparHistoricoBtn" onclick="limparHistorico()">Limpar histórico</button>
         </div>
         <p class="login-sub" id="historicoScopeMsg"></p>
         <div id="historyList"></div>
@@ -1159,7 +1167,7 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
     <!-- ===== VIEW: SOBRE ===== -->
     <section class="view" id="view-sobre">
       <div class="view-inner">
-        <h2 class="section-title">ℹ️ Sobre o V.I.V.A</h2>
+        <h2 class="section-title">Sobre o V.I.V.A</h2>
 
         <div class="about-card">
           <h3>Nossa missão</h3>
@@ -1251,15 +1259,15 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
             </form>
 
             <div class="login-note visible">
-              🔒 Sua conta é salva apenas neste navegador (não existe um servidor por trás) — não use uma senha que você usa em outros lugares.
+              Sua conta é salva apenas neste navegador (não existe um servidor por trás) — não use uma senha que você usa em outros lugares.
             </div>
           </div>
 
           <div class="login-card" id="accountInfo" style="display:none;">
-            <div class="account-avatar" id="accountAvatar">😊</div>
+            <div class="account-avatar" id="accountAvatar">?</div>
             <h2 id="accountName">—</h2>
             <p class="login-sub" id="accountEmail">—</p>
-            <button type="button" class="back-btn" style="width:100%; justify-content:center;" onclick="fazerLogout()">🚪 Sair da conta</button>
+            <button type="button" class="back-btn" style="width:100%; justify-content:center;" onclick="fazerLogout()">Sair da conta</button>
           </div>
 
         </div>
@@ -1269,10 +1277,10 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
     <!-- ===== VIEW: CONFIGURAÇÕES ===== -->
     <section class="view" id="view-config">
       <div class="view-inner">
-        <h2 class="section-title">⚙️ Configurações</h2>
+        <h2 class="section-title">Configurações</h2>
 
         <div class="about-card">
-          <h3>🔊 Leitura por áudio</h3>
+          <h3>Leitura por áudio</h3>
           <p>Ouça as explicações em voz alta — útil para quem tem dificuldade de leitura.</p>
           <label class="switch-row">
             <span>Ler explicações automaticamente em voz alta</span>
@@ -1284,7 +1292,7 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
         </div>
 
         <div class="about-card">
-          <h3>🔤 Tamanho da fonte</h3>
+          <h3>Tamanho da fonte</h3>
           <p>Ajuste o tamanho do texto em todo o site.</p>
           <div class="segmented" id="fontSizeControl">
             <button type="button" class="segmented-option" data-size="pequena" onclick="definirTamanhoFonte('pequena')">Pequena</button>
@@ -1294,7 +1302,7 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
         </div>
 
         <div class="about-card">
-          <h3>🎨 Cor principal</h3>
+          <h3>Cor principal</h3>
           <p>Escolha a cor de destaque usada nos botões e elementos do site.</p>
           <div class="color-swatches" id="colorSwatches">
             <button type="button" class="color-swatch" data-color="padrao" style="background:linear-gradient(135deg,#6C7CFB,#8B5CF6)" onclick="definirCor('padrao')" title="Padrão"></button>
@@ -1307,13 +1315,13 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
         </div>
 
         <div class="about-card" id="contaConfigLoggedOut">
-          <h3>👤 Conta</h3>
+          <h3>Conta</h3>
           <p>Faça login para editar seu nome ou trocar sua senha.</p>
           <button class="btn-primary" onclick="showView('login')">Ir para Entrar</button>
         </div>
 
         <div class="about-card" id="contaConfigLoggedIn" style="display:none;">
-          <h3>👤 Editar conta</h3>
+          <h3>Editar conta</h3>
           <form id="editNomeForm">
             <div class="input-group">
               <label for="editNome">Nome de usuário</label>
@@ -1325,7 +1333,7 @@ button:focus-visible, input:focus-visible, .subject-card:focus-visible {
 
           <hr style="border:none; border-top:2px solid var(--border); margin:1.75rem 0;" />
 
-          <h3 style="margin-bottom:0.6rem;">🔒 Trocar senha</h3>
+          <h3 style="margin-bottom:0.6rem;">Trocar senha</h3>
           <form id="editSenhaForm">
             <div class="input-group">
               <label for="senhaAtual">Senha atual</label>
@@ -1401,13 +1409,15 @@ let materiaAtual = null;
 
 // ===== Tema =====
 const themeBtn = document.getElementById('themeBtn');
-const themeIcon = themeBtn.querySelector('.theme-icon');
+const themeIconSun = document.getElementById('themeIconSun');
+const themeIconMoon = document.getElementById('themeIconMoon');
 const themeLabel = themeBtn.querySelector('.theme-label');
 const html = document.documentElement;
 
 function updateThemeBtnLabel() {
   const isLight = html.getAttribute('data-theme') === 'light';
-  themeIcon.textContent = isLight ? '🌙' : '☀️';
+  themeIconSun.style.display = isLight ? 'none' : 'inline-flex';
+  themeIconMoon.style.display = isLight ? 'inline-flex' : 'none';
   themeLabel.textContent = isLight ? 'Tema escuro' : 'Tema claro';
 }
 if (localStorage.getItem('viva-theme') === 'light') {
@@ -1498,10 +1508,10 @@ function falarTexto(texto) {
   var voz = escolherMelhorVoz();
   if (voz) utter.voice = voz;
 
-  var btn = document.getElementById('listenBtn');
-  utter.onstart = function() { if (btn) btn.textContent = '⏹️ Parar leitura'; };
-  utter.onend = function() { if (btn) btn.textContent = '🔊 Ouvir explicação'; };
-  utter.onerror = function() { if (btn) btn.textContent = '🔊 Ouvir explicação'; };
+  var btnLabel = document.getElementById('listenBtnLabel');
+  utter.onstart = function() { if (btnLabel) btnLabel.textContent = 'Parar leitura'; };
+  utter.onend = function() { if (btnLabel) btnLabel.textContent = 'Ouvir explicação'; };
+  utter.onerror = function() { if (btnLabel) btnLabel.textContent = 'Ouvir explicação'; };
   window.speechSynthesis.speak(utter);
 }
 
@@ -1512,7 +1522,7 @@ function alternarLeituraAudio() {
   }
   if (window.speechSynthesis.speaking) {
     window.speechSynthesis.cancel();
-    document.getElementById('listenBtn').textContent = '🔊 Ouvir explicação';
+    document.getElementById('listenBtnLabel').textContent = 'Ouvir explicação';
     return;
   }
   var conteudo = document.getElementById('explanationContent');
@@ -1701,7 +1711,8 @@ function atualizarEstadoConta() {
   var authForms = document.getElementById('authForms');
   var accountInfo = document.getElementById('accountInfo');
   var navLabel = document.querySelector('.nav-item[data-view="login"] .nav-label');
-  var navIcon = document.querySelector('.nav-item[data-view="login"] .nav-icon');
+  var navIconUser = document.getElementById('navIconUser');
+  var navIconCheck = document.getElementById('navIconCheck');
   var contaLoggedOut = document.getElementById('contaConfigLoggedOut');
   var contaLoggedIn = document.getElementById('contaConfigLoggedIn');
 
@@ -1709,10 +1720,12 @@ function atualizarEstadoConta() {
     var user = getUsers().find(function(u) { return u.email === email; });
     authForms.style.display = 'none';
     accountInfo.style.display = 'block';
-    document.getElementById('accountName').textContent = user ? ('Olá, ' + user.nome + '! 👋') : 'Olá! 👋';
+    document.getElementById('accountName').textContent = user ? ('Olá, ' + user.nome + '!') : 'Olá!';
     document.getElementById('accountEmail').textContent = email;
+    document.getElementById('accountAvatar').textContent = user && user.nome ? user.nome.trim().charAt(0).toUpperCase() : '?';
     if (navLabel) navLabel.textContent = 'Minha conta';
-    if (navIcon) navIcon.textContent = '✅';
+    if (navIconUser) navIconUser.style.display = 'none';
+    if (navIconCheck) navIconCheck.style.display = 'inline-flex';
     if (contaLoggedOut) contaLoggedOut.style.display = 'none';
     if (contaLoggedIn) contaLoggedIn.style.display = 'block';
     if (user) document.getElementById('editNome').value = user.nome;
@@ -1720,7 +1733,8 @@ function atualizarEstadoConta() {
     authForms.style.display = 'block';
     accountInfo.style.display = 'none';
     if (navLabel) navLabel.textContent = 'Entrar';
-    if (navIcon) navIcon.textContent = '👤';
+    if (navIconUser) navIconUser.style.display = 'inline-flex';
+    if (navIconCheck) navIconCheck.style.display = 'none';
     if (contaLoggedOut) contaLoggedOut.style.display = 'block';
     if (contaLoggedIn) contaLoggedIn.style.display = 'none';
   }
@@ -1880,7 +1894,7 @@ function renderHistorico() {
     : 'Você não está logado — este histórico fica salvo só neste navegador, como visitante.';
 
   if (!lista.length) {
-    container.innerHTML = '<div class="empty-state"><span class="empty-icon">📭</span>' +
+    container.innerHTML = '<div class="empty-state"><span class="empty-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg></span>' +
       '<p>Nenhuma pergunta salva ainda.<br>As perguntas que você fizer em "Aprender" aparecem aqui.</p></div>';
     return;
   }
@@ -1960,7 +1974,6 @@ async function gerarExplicacao() {
   aiImage.style.display = 'none';
   aiImage.src = '';
   placeholder.style.display = 'flex';
-  document.getElementById('imageEmoji').textContent = '⏳';
   document.getElementById('imageDesc').textContent = 'Gerando imagem com Inteligência Artificial...';
 
   var mat = getMaterias()[materiaAtual];
@@ -1977,7 +1990,6 @@ async function gerarExplicacao() {
       aiImage.style.display = 'block';
     };
     aiImage.onerror = function() {
-      document.getElementById('imageEmoji').textContent = '🎨';
       document.getElementById('imageDesc').textContent = 'Não foi possível gerar a imagem agora. Tente novamente.';
     };
     aiImage.src = imageUrl;
