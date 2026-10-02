@@ -1,85 +1,211 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>V.I.V.A – Aprendizagem Visual e Inclusiva</title>
-<meta name="description" content="Plataforma educativa acessível com explicações simples e recursos visuais." />
+<title>V.I.V.A – Aprendizagem Visual Interativa</title>
+<meta name="description" content="Plataforma educativa acessível com IA, animações suaves e recursos visuais inclusivos." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
 :root {
-  /* Tema Editorial Botânico (Papel & Sálvia) */
-  --bg: #F7F5F0;
+  --bg: #F5F2EB;
   --bg-card: #FFFFFF;
-  --bg-card-subtle: #EFECE6;
+  --bg-card-subtle: #FAF8F5;
   --text: #1E2923;
   --text-soft: #526058;
 
-  /* Destaque Principal: Verde-Sálvia Profundo */
   --accent: #2D5A46;
   --accent-hover: #214334;
-  --accent-soft: #E8F0EC;
+  --accent-soft: #E2EAE5;
 
-  /* Destaque Secundário: Terracota Orgânico */
   --tag-bg: #F6ECE8;
   --tag-text: #B8583B;
+  --autism-blue: #3B82F6;
+  --autism-gold: #F59E0B;
+  --autism-red: #EF4444;
+  --autism-green: #10B981;
+  --sunflower-yellow: #EAB308;
+  --sunflower-bg: #FEF9C3;
 
-  /* Bordas neutras em tom de argila/papel seco */
-  --border: #E2DDD3;
+  --border: #E0D9CC;
   --border-focus: #2D5A46;
 
-  /* Sombras naturais de tinta e papel */
-  --shadow-sm: 0 1px 3px rgba(30, 41, 35, 0.05);
-  --shadow-md: 0 4px 14px rgba(30, 41, 35, 0.08);
+  --shadow-sm: 0 4px 12px rgba(30, 41, 35, 0.04);
+  --shadow-md: 0 10px 28px rgba(30, 41, 35, 0.08);
+  --shadow-float: 0 16px 36px rgba(45, 90, 70, 0.15);
 
-  --header-bg: #FFFFFF;
+  --header-bg: rgba(255, 255, 255, 0.85);
   --on-accent: #FFFFFF;
   --sidebar-w: 260px;
+  
+  --font-scale: 1rem;
 }
 
 [data-theme="dark"] {
-  /* Modo Floresta Noturna */
-  --bg: #141C18;
-  --bg-card: #1C2621;
-  --bg-card-subtle: #25332C;
-  --text: #F2F5F3;
-  --text-soft: #A3B2A9;
+  --bg: #121815;
+  --bg-card: #1B2420;
+  --bg-card-subtle: #222D28;
+  --text: #F0F4F2;
+  --text-soft: #9DB0A5;
   
-  --accent: #62A384;
-  --accent-hover: #7CB59A;
-  --accent-soft: #1E332A;
+  --accent: #5BA883;
+  --accent-hover: #72B896;
+  --accent-soft: #1C3328;
   
-  --tag-bg: #3A261E;
-  --tag-text: #E89A82;
-  
-  --border: #2B3A32;
-  --border-focus: #62A384;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.4);
-  --header-bg: #1C2621;
+  --tag-bg: #32221B;
+  --tag-text: #ECA48E;
+  --sunflower-bg: #332B00;
+
+  --border: #283630;
+  --border-focus: #5BA883;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 10px 28px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 16px 36px rgba(0, 0, 0, 0.5);
+  --header-bg: rgba(27, 36, 32, 0.85);
+}
+
+[data-reduce-animations="true"] *,
+[data-reduce-animations="true"] *::before,
+[data-reduce-animations="true"] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+[data-reduce-animations="true"] .bg-orb {
+  display: none !important;
+}
+
+[data-reduce-animations="true"] .splash-screen {
+  display: none !important;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  font-size: var(--font-scale);
 }
+
 h1, h2, h3, .btn-primary, .step-num {
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
-/* App Shell */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.splash-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  animation: splashPulse 1.2s ease-in-out infinite alternate;
+}
+
+.splash-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #2D5A46 0%, #3B82F6 100%);
+  color: #fff;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  box-shadow: var(--shadow-float);
+}
+
+.splash-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+.splash-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.splash-progress-bar {
+  width: 220px;
+  height: 6px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.splash-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #3B82F6);
+  border-radius: 10px;
+  animation: splashLoad 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes splashLoad {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes splashPulse {
+  0% { transform: scale(0.98); }
+  100% { transform: scale(1.04); }
+}
+
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  animation: floatOrb 18s ease-in-out infinite alternate;
+}
+
+.orb-1 { width: 400px; height: 400px; background: rgba(91, 168, 131, 0.2); top: -100px; left: -100px; }
+.orb-2 { width: 350px; height: 350px; background: rgba(245, 158, 11, 0.15); bottom: -50px; right: -50px; animation-delay: -5s; }
+.orb-3 { width: 300px; height: 300px; background: rgba(59, 130, 246, 0.15); top: 40%; left: 50%; transform: translate(-50%, -50%); animation-delay: -10s; }
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 60px) scale(1.1); }
+  100% { transform: translate(-30px, -40px) scale(0.95); }
+}
+
 .app-shell { display: flex; min-height: 100vh; }
 
 .sidebar {
   width: var(--sidebar-w);
   flex-shrink: 0;
   background: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -98,53 +224,90 @@ h1, h2, h3, .btn-primary, .step-num {
   color: var(--text);
   padding-bottom: 1.25rem;
   border-bottom: 1px solid var(--border);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
+
 .logo-icon {
-  width: 40px;
-  height: 40px;
-  background: var(--accent);
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, #2D5A46 0%, #3B82F6 100%);
   color: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  box-shadow: 0 6px 14px rgba(45, 90, 70, 0.25);
+  transition: transform 0.3s ease;
 }
-.sidebar-logo .logo-title { font-weight: 800; font-size: 1.1rem; line-height: 1.2; }
-.sidebar-logo .logo-sub { font-size: 0.72rem; color: var(--text-soft); font-weight: 500; }
 
-.sidebar-nav { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
+.sidebar-logo:hover .logo-icon { transform: rotate(8deg) scale(1.05); }
+.sidebar-logo .logo-title { font-weight: 800; font-size: 1.15rem; line-height: 1.2; }
+.sidebar-logo .logo-sub { font-size: 0.72rem; color: var(--text-soft); font-weight: 600; }
+
+.user-profile-card {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.75rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.user-profile-info { display: flex; align-items: center; gap: 0.6rem; overflow: hidden; }
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.user-name { font-size: 0.88rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-status { font-size: 0.72rem; color: var(--text-soft); }
+
+.sidebar-nav { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; overflow-y: auto; }
 
 .nav-item {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 0.9rem;
-  border-radius: 10px;
-  border: none;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid transparent;
   background: transparent;
   color: var(--text-soft);
   font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   text-align: left;
-  transition: all 0.15s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   width: 100%;
 }
-.nav-item:hover { background: var(--bg-card-subtle); color: var(--text); }
-.nav-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
-.nav-icon { display: flex; align-items: center; }
-.nav-icon svg { width: 18px; height: 18px; }
+
+.nav-item:hover { background: var(--bg-card-subtle); color: var(--text); transform: translateX(4px); }
+.nav-item.active { background: var(--accent-soft); color: var(--accent); border-color: rgba(45, 90, 70, 0.2); font-weight: 700; box-shadow: var(--shadow-sm); }
+.nav-icon { display: flex; align-items: center; justify-content: center; width: 20px; }
+.nav-icon svg { width: 18px; height: 18px; transition: transform 0.2s ease; }
 
 .theme-btn {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--text);
   width: 100%;
-  padding: 0.65rem;
-  border-radius: 10px;
+  padding: 0.75rem;
+  border-radius: 12px;
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 600;
@@ -152,336 +315,217 @@ h1, h2, h3, .btn-primary, .step-num {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  margin-top: 0.5rem;
+  transition: all 0.2s ease;
 }
-.theme-btn:hover { background: var(--bg-card-subtle); }
+.theme-btn:hover { background: var(--bg-card-subtle); transform: translateY(-2px); }
 
-.main-content { flex: 1; min-width: 0; }
-.view { display: none; }
-.view.active { display: block; }
-.view-inner { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+.main-content { flex: 1; min-width: 0; position: relative; }
 
-/* Hero Section */
-.hero {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 3rem 2.5rem;
-  margin-bottom: 2.5rem;
-  box-shadow: var(--shadow-sm);
-}
-.hero-tag {
-  display: inline-block;
-  background: var(--tag-bg);
-  color: var(--tag-text);
-  font-size: 0.82rem;
-  font-weight: 700;
-  padding: 0.35rem 0.8rem;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-.hero h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; line-height: 1.25; margin-bottom: 1rem; }
-.hero p { font-size: 1.05rem; color: var(--text-soft); max-width: 680px; margin-bottom: 1.75rem; }
+.view { display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1); }
+.view.active { display: block; opacity: 1; transform: translateY(0); }
+.view-inner { max-width: 980px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 
-.btn-primary {
-  background: var(--accent);
-  color: var(--on-accent);
-  border: none;
-  padding: 0.85rem 1.6rem;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background 0.15s ease;
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(4px);
+  z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem;
 }
-.btn-primary:hover { background: var(--accent-hover); }
+.modal-overlay.active { opacity: 1; visibility: visible; }
 
-/* Seção de Demonstração Visual */
-.visual-showcase {
-  margin-bottom: 3rem;
+.auth-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: 22px; width: 100%; max-width: 420px; padding: 2.25rem; box-shadow: var(--shadow-float); transform: translateY(20px); transition: transform 0.3s ease;
 }
-.showcase-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 1.25rem;
-}
-@media (max-width: 768px) {
-  .showcase-grid { grid-template-columns: 1fr; }
-}
+.modal-overlay.active .auth-card { transform: translateY(0); }
 
-.showcase-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.showcase-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-.showcase-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
-  background: var(--tag-bg);
-  color: var(--tag-text);
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-}
-.showcase-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
-.showcase-card p { font-size: 0.9rem; color: var(--text-soft); margin-bottom: 1rem; }
+.auth-header { display: flex; justify-between: space-between; align-items: center; margin-bottom: 1.5rem; }
+.auth-tabs { display: flex; background: var(--bg-card-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 4px; margin-bottom: 1.5rem; }
+.auth-tab { flex: 1; padding: 0.6rem; border: none; background: transparent; color: var(--text-soft); font-weight: 700; font-size: 0.88rem; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
+.auth-tab.active { background: var(--bg-card); color: var(--text); box-shadow: var(--shadow-sm); }
 
-/* Mock de Exemplo Prático */
-.preview-box {
-  background: var(--bg-card-subtle);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-  font-size: 0.88rem;
-}
-.preview-box .before {
-  color: var(--text-soft);
-  text-decoration: line-through;
-  margin-bottom: 0.5rem;
-  font-style: italic;
-}
-.preview-box .after {
-  color: var(--text);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-.preview-box .after-tag {
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.15rem 0.4rem;
-  border-radius: 4px;
-}
+.video-section-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 22px; padding: 1.8rem; margin-top: 2rem; box-shadow: var(--shadow-sm); }
+.video-placeholder-wrapper { position: relative; width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #1E2923 0%, #2D5A46 100%); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-align: center; padding: 1.5rem; margin-top: 1rem; border: 1px solid var(--border); }
+.video-play-btn { width: 64px; height: 64px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(8px); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; border: 2px solid rgba(255, 255, 255, 0.6); transition: transform 0.3s ease; cursor: pointer; }
+.video-placeholder-wrapper:hover .video-play-btn { transform: scale(1.12); background: rgba(255, 255, 255, 0.35); }
+.video-badge { position: absolute; top: 1rem; right: 1rem; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(4px); color: #fff; font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 20px; font-weight: 700; border: 1px solid rgba(255, 255, 255, 0.2); }
 
-.mini-study-card {
-  background: var(--bg-card-subtle);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-.mini-icon {
-  width: 48px;
-  height: 48px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-.mini-info h4 { font-size: 0.95rem; font-weight: 700; }
-.mini-info p { font-size: 0.82rem; color: var(--text-soft); margin: 0; }
+.ribbon-corner { position: absolute; top: 0; right: 0; width: 90px; height: 90px; overflow: hidden; pointer-events: none; }
+.ribbon-corner-inner { position: absolute; top: 20px; right: -32px; transform: rotate(45deg); width: 130px; background: linear-gradient(90deg, #EF4444, #F59E0B, #10B981, #3B82F6, #8B5CF6); background-size: 200% 200%; animation: ribbonShimmer 4s ease infinite; color: #fff; font-size: 0.62rem; font-weight: 800; text-align: center; line-height: 20px; text-transform: uppercase; letter-spacing: 0.06em; box-shadow: 0 3px 8px rgba(0,0,0,0.18); }
 
-/* Passos */
-.section-title { font-size: 1.35rem; font-weight: 800; margin-bottom: 1.25rem; }
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.25rem;
-}
-.step-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.5rem;
-  box-shadow: var(--shadow-sm);
-}
-.step-num {
-  font-size: 0.85rem;
-  font-weight: 800;
-  color: var(--accent);
-  background: var(--accent-soft);
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.85rem;
-}
-.step-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem; }
-.step-card p { font-size: 0.9rem; color: var(--text-soft); }
+@keyframes ribbonShimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-/* Grade de Matérias */
-.subjects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1rem;
-}
-.subject-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 1.5rem;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: var(--shadow-sm);
-}
-.subject-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.subject-icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
-.subject-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+.lanyard-badge-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 1.25rem; position: relative; box-shadow: var(--shadow-sm); overflow: hidden; margin-bottom: 2rem; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.lanyard-badge-card:hover { transform: translateY(-3px) scale(1.005); box-shadow: var(--shadow-md); border-color: var(--accent); }
+.lanyard-strap { width: 12px; height: 100%; position: absolute; left: 0; top: 0; background: repeating-linear-gradient(0deg, #15803D 0px, #15803D 20px, #EAB308 20px, #EAB308 40px); animation: strapMove 20s linear infinite; }
+
+@keyframes strapMove { 0% { background-position: 0 0; } 100% { background-position: 0 100px; } }
+
+.lanyard-icon-wrapper { width: 52px; height: 52px; border-radius: 14px; background: var(--sunflower-bg); border: 1px solid rgba(234, 179, 8, 0.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0; animation: pulseGentle 3s ease-in-out infinite; }
+
+@keyframes pulseGentle { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+
+.highlight-text { background: linear-gradient(120deg, rgba(234, 179, 8, 0.25) 0%, rgba(16, 185, 129, 0.25) 100%); border-radius: 6px; padding: 0.1em 0.35em; display: inline-block; transition: transform 0.2s ease; }
+.hero { background: var(--bg-card); border: 1px solid var(--border); border-radius: 22px; padding: 3.25rem 2.5rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; transition: border-color 0.3s ease; }
+.hero:hover { border-color: var(--accent); }
+.hero-tags-wrapper { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.25rem; }
+.hero-tag { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.78rem; font-weight: 700; padding: 0.4rem 0.85rem; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.03em; }
+
+.tag-autismo { background: #EBF5FF; color: #1D4ED8; border: 1px solid #BFDBFE; }
+.tag-girassol { background: var(--sunflower-bg); color: #854D0E; border: 1px solid #FEF08A; }
+.tag-neuro { background: #F3E8FF; color: #6B21A8; border: 1px solid #E9D5FF; }
+
+.hero h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; line-height: 1.22; margin-bottom: 1rem; letter-spacing: -0.02em; }
+.hero p { font-size: 1.08rem; color: var(--text-soft); max-width: 680px; margin-bottom: 1.75rem; }
+
+.btn-primary { background: var(--accent); color: var(--on-accent); border: none; padding: 0.95rem 1.85rem; border-radius: 14px; font-size: 1rem; font-weight: 700; cursor: pointer; display: inline-flex; align-items: center; gap: 0.65rem; transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 6px 16px rgba(45, 90, 70, 0.22); }
+.btn-primary:hover { background: var(--accent-hover); transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 22px rgba(45, 90, 70, 0.32); }
+
+.btn-secondary { background: var(--bg-card-subtle); color: var(--text); border: 1px solid var(--border); padding: 0.75rem 1.25rem; border-radius: 12px; font-size: 0.9rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; }
+.btn-secondary:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+.section-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem; }
+.section-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 0; }
+
+.subjects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; }
+.subject-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 1.6rem; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: var(--shadow-sm); position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+.subject-card:hover { border-color: var(--accent); transform: translateY(-6px) scale(1.02); box-shadow: var(--shadow-md); }
+
+.subject-header-action { position: absolute; top: 1rem; right: 1rem; display: flex; gap: 0.35rem; opacity: 0; transition: opacity 0.2s ease; }
+.subject-card:hover .subject-header-action { opacity: 1; }
+
+.icon-btn-sm { background: var(--bg-card-subtle); border: 1px solid var(--border); width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.82rem; cursor: pointer; transition: all 0.2s ease; }
+.icon-btn-sm:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); transform: scale(1.1); }
+
+.subject-icon { font-size: 2.4rem; margin-bottom: 0.85rem; display: inline-block; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.subject-card:hover .subject-icon { transform: scale(1.2) rotate(8deg); }
+.subject-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
 .subject-card p { font-size: 0.85rem; color: var(--text-soft); }
 
-/* Painel de Aprendizado */
-.learning-panel {
-  display: none;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: var(--shadow-sm);
-}
+.form-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 1.8rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-md); }
+.form-grid { display: grid; grid-template-columns: 80px 1fr; gap: 1rem; }
+@media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+.learning-panel { display: none; background: var(--bg-card); border: 1px solid var(--border); border-radius: 22px; padding: 2.25rem; box-shadow: var(--shadow-sm); }
 .learning-panel.visible { display: block; }
 
 .input-group { margin-bottom: 1.25rem; }
 .input-group label { display: block; font-weight: 700; margin-bottom: 0.5rem; font-size: 0.95rem; }
-.input-group input {
-  width: 100%;
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-size: 1rem;
-  font-family: inherit;
-  background: var(--bg);
-  color: var(--text);
+.input-group input, .input-group textarea, .input-group select {
+  width: 100%; padding: 0.9rem 1.1rem; border: 1px solid var(--border); border-radius: 14px; font-size: 0.98rem; font-family: inherit; background: var(--bg); color: var(--text); transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
-.input-group input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+.input-group input:focus, .input-group textarea:focus, .input-group select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
 
-.back-btn {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 0.5rem 0.9rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.88rem;
-}
-.back-btn:hover { background: var(--bg-card-subtle); }
+.back-btn { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 0.6rem 1.1rem; border-radius: 12px; cursor: pointer; font-weight: 600; font-size: 0.88rem; transition: all 0.2s ease; }
+.back-btn:hover { background: var(--bg-card-subtle); transform: translateX(-3px); }
 
 .result-area { display: none; margin-top: 2rem; }
 .result-area.visible { display: block; }
 .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 @media (max-width: 768px) { .result-grid { grid-template-columns: 1fr; } }
 
-.explanation-box, .image-box {
-  background: var(--bg-card-subtle);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.25rem;
-}
-.image-placeholder {
-  width: 100%;
-  aspect-ratio: 1/1;
-  background: var(--bg);
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.image-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+.explanation-box, .image-box { background: var(--bg-card-subtle); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; }
+.image-placeholder { width: 100%; aspect-ratio: 1/1; background: var(--bg); border-radius: 14px; border: 1px solid var(--border); overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
+.image-placeholder img { width: 100%; height: 100%; object-fit: cover; transition: opacity 0.4s ease, transform 0.4s ease; opacity: 0; }
+.image-placeholder img:hover { transform: scale(1.04); }
 
-/* Estilos da Aba Histórico */
+.skeleton-loader {
+  width: 100%; height: 100%; background: linear-gradient(90deg, var(--bg-card-subtle) 25%, var(--border) 50%, var(--bg-card-subtle) 75%); background-size: 200% 100%; animation: loadingShimmer 1.5s infinite; position: absolute; top: 0; left: 0; display: none; z-index: 2;
+}
+.skeleton-loader.active { display: block; }
+
+@keyframes loadingShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+.notes-layout { display: grid; grid-template-columns: 280px 1fr; gap: 1.5rem; }
+@media (max-width: 800px) { .notes-layout { grid-template-columns: 1fr; } }
+
+.notes-sidebar { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.85rem; max-height: 600px; overflow-y: auto; }
+.note-item { padding: 0.9rem 1rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-card-subtle); cursor: pointer; transition: all 0.2s ease; }
+.note-item:hover { border-color: var(--accent); transform: translateX(3px); }
+.note-item.active { background: var(--accent-soft); border-color: var(--accent); }
+.note-item h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.2rem; }
+.note-item p { font-size: 0.8rem; color: var(--text-soft); text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+
+.note-editor { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; }
+
+.config-group { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }
+.config-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.config-item:last-child { border-bottom: none; }
+.config-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+.config-info p { font-size: 0.85rem; color: var(--text-soft); }
+
+.toggle-switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .3s; border-radius: 34px; }
+.slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 4px; bottom: 4px; background-color: white; transition: .3s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--accent); }
+input:checked + .slider:before { transform: translateX(24px); }
+
 .history-container { margin-top: 1.5rem; }
-.history-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.25rem;
-}
+.history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
 .history-list { display: flex; flex-direction: column; gap: 0.85rem; }
-.history-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.15s ease;
-  box-shadow: var(--shadow-sm);
-}
-.history-card:hover { border-color: var(--accent); }
+.history-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.1rem 1.4rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.25s ease; box-shadow: var(--shadow-sm); }
+.history-card:hover { border-color: var(--accent); transform: translateX(5px); box-shadow: var(--shadow-md); }
 .history-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.15rem; }
-.history-info span { font-size: 0.8rem; color: var(--text-soft); }
+.history-info span { font-size: 0.82rem; color: var(--text-soft); }
 .history-actions { display: flex; gap: 0.5rem; }
-.btn-sm {
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid var(--border);
-  background: var(--bg-card-subtle);
-  color: var(--text);
-}
-.btn-sm:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
-.btn-danger-sm {
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid #FCA5A5;
-  background: #FEF2F2;
-  color: #991B1B;
-}
-.btn-danger-sm:hover { background: #FEE2E2; }
 
-.empty-history {
-  text-align: center;
-  padding: 3rem 1.5rem;
-  background: var(--bg-card);
-  border: 1px dashed var(--border);
-  border-radius: 14px;
-  color: var(--text-soft);
-}
+.btn-sm { padding: 0.45rem 0.85rem; border-radius: 10px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: var(--bg-card-subtle); color: var(--text); transition: all 0.2s ease; }
+.btn-sm:hover { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
 
-footer {
-  text-align: center;
-  padding: 2rem;
-  border-top: 1px solid var(--border);
-  color: var(--text-soft);
-  font-size: 0.88rem;
-}
+.btn-danger-sm { padding: 0.45rem 0.85rem; border-radius: 10px; font-size: 0.82rem; font-weight: 600; cursor: pointer; border: 1px solid #FCA5A5; background: #FEF2F2; color: #991B1B; transition: all 0.2s ease; }
+.btn-danger-sm:hover { background: #FEE2E2; transform: translateY(-1px); }
+
+.empty-state { text-align: center; padding: 3rem 1.5rem; background: var(--bg-card); border: 1px dashed var(--border); border-radius: 18px; color: var(--text-soft); }
+
+footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border); color: var(--text-soft); font-size: 0.88rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
 </style>
 </head>
 <body>
 
+<div class="splash-screen" id="splashScreen">
+  <div class="splash-logo">
+    <div class="splash-icon">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
+        <path d="M12 12C10.5 9.5 8 8 5.5 8C3 8 1 10 1 12.5C1 15 3 17 5.5 17C8 17 10.5 15.5 12 13C13.5 15.5 16 17 18.5 17C21 17 23 15 23 12.5C23 10 21 8 18.5 8C16 8 13.5 9.5 12 12Z" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div>
+      <div class="splash-title">V.I.V.A</div>
+      <div class="splash-subtitle">Aprendizagem Inclusiva com IA</div>
+    </div>
+  </div>
+  <div class="splash-progress-bar">
+    <div class="splash-progress-fill"></div>
+  </div>
+</div>
+
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+<div class="bg-orb orb-3"></div>
+
 <div class="app-shell">
   <aside class="sidebar">
     <a href="#" class="sidebar-logo" onclick="showView('inicio'); return false;">
-      <div class="logo-icon">V</div>
+      <div class="logo-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M12 12C10.5 9.5 8 8 5.5 8C3 8 1 10 1 12.5C1 15 3 17 5.5 17C8 17 10.5 15.5 12 13C13.5 15.5 16 17 18.5 17C21 17 23 15 23 12.5C23 10 21 8 18.5 8C16 8 13.5 9.5 12 12Z" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+      </div>
       <div>
         <div class="logo-title">V.I.V.A</div>
-        <div class="logo-sub">Aprendizagem Visual</div>
+        <div class="logo-sub">Aprendizagem Inclusiva</div>
       </div>
     </a>
+
+    <div class="user-profile-card">
+      <div class="user-profile-info">
+        <div class="user-avatar" id="sidebarAvatar">👤</div>
+        <div>
+          <div class="user-name" id="sidebarUsername">Visitante</div>
+          <div class="user-status" id="sidebarUserStatus">Modo Local</div>
+        </div>
+      </div>
+      <button class="btn-sm" id="authBtnSidebar" onclick="abrirModalAuth()">Entrar</button>
+    </div>
 
     <nav class="sidebar-nav">
       <button class="nav-item active" data-view="inicio" onclick="showView('inicio')">
@@ -490,11 +534,19 @@ footer {
       </button>
       <button class="nav-item" data-view="app" onclick="showView('app')">
         <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-        <span>Aprender</span>
+        <span>Aprender com IA</span>
+      </button>
+      <button class="nav-item" data-view="anotacoes" onclick="showView('anotacoes')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+        <span>Anotações</span>
       </button>
       <button class="nav-item" data-view="historico" onclick="showView('historico')">
         <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
         <span>Histórico</span>
+      </button>
+      <button class="nav-item" data-view="configuracoes" onclick="showView('configuracoes')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+        <span>Configurações</span>
       </button>
       <button class="nav-item" data-view="sobre" onclick="showView('sobre')">
         <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="7.5" x2="12" y2="7.5"/></svg></span>
@@ -506,103 +558,101 @@ footer {
   </aside>
 
   <main class="main-content">
-    <!-- INÍCIO -->
     <section class="view active" id="view-inicio">
       <div class="view-inner">
-        <section class="hero">
-          <span class="hero-tag">Acessibilidade & Aprendizagem</span>
-          <h1>Compreenda conteúdos escolares com imagens e linguagem simples</h1>
-          <p>O V.I.V.A auxilia alunos e educadores combinando explicações diretas e ilustrações focadas na neurodiversidade e no apoio à aprendizagem.</p>
-          <button class="btn-primary" onclick="showView('app')">Explorar matérias</button>
-        </section>
-
-        <!-- EXEMPLOS VISUAIS PRÁTICOS -->
-        <section class="visual-showcase">
-          <h2 class="section-title">Como o V.I.V.A facilita o estudo</h2>
-          
-          <div class="showcase-grid">
-            <div class="showcase-card">
-              <div>
-                <div class="showcase-header">
-                  <h3>Linguagem Direta</h3>
-                  <span class="showcase-badge">Exemplo Prático</span>
-                </div>
-                <p>Transformamos parágrafos complexos de livros didáticos em explicações estruturadas e fáceis de assimilar.</p>
-              </div>
-              <div class="preview-box">
-                <div class="before">"A fotossíntese é o processo bioquímico através do qual plantas sintetizam matéria orgânica..."</div>
-                <div class="after">
-                  <span class="after-tag">V.I.V.A</span>
-                  <span>Plantas usam a luz do sol para fabricar seu próprio alimento.</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="showcase-card">
-              <div>
-                <div class="showcase-header">
-                  <h3>Associação Imagem + Texto</h3>
-                  <span class="showcase-badge">Recurso Visual</span>
-                </div>
-                <p>Cada conceito vem acompanhado de uma ilustração explicativa para reforçar a memória visual.</p>
-              </div>
-              <div class="mini-study-card">
-                <div class="mini-icon">🌱</div>
-                <div class="mini-info">
-                  <h4>O Ciclo da Água</h4>
-                  <p>3 etapas simples: Evaporação, Condensação e Precipitação.</p>
-                </div>
-              </div>
-            </div>
+        <div class="lanyard-badge-card">
+          <div class="lanyard-strap"></div>
+          <div class="lanyard-icon-wrapper">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3" fill="#854D0E"/>
+              <path d="M12 3V6M12 18V21M3 12H6M18 12H21M5.6 5.6L7.8 7.8M16.2 16.2L18.4 18.4M5.6 18.4L7.8 16.2M16.2 7.8L18.4 5.6" stroke="#EAB308" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
           </div>
-        </section>
-
-        <h2 class="section-title">Passo a passo</h2>
-        <div class="steps-grid">
-          <div class="step-card">
-            <div class="step-num">1</div>
-            <h3>Escolha a disciplina</h3>
-            <p>Selecione a matéria escolar desejada para iniciar o estudo.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">2</div>
-            <h3>Digite sua dúvida</h3>
-            <p>Escreva a pergunta com suas próprias palavras ou use um exemplo.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">3</div>
-            <h3>Visualização clara</h3>
-            <p>Receba a explicação textual acompanhada de um recurso visual ilustrativo.</p>
+          <div>
+            <h4 style="font-size:0.98rem; font-weight:800; color:var(--text); margin-bottom:0.15rem;">Ambiente Acolhedor & Acessível</h4>
+            <p style="font-size:0.86rem; color:var(--text-soft); margin:0;">
+              Projetado respeitando as necessidades de estudantes com Autismo, TDAH, Dislexia e Altas Habilidades.
+            </p>
           </div>
         </div>
+
+        <section class="hero">
+          <div class="ribbon-corner">
+            <div class="ribbon-corner-inner">Inclusão</div>
+          </div>
+
+          <div class="hero-tags-wrapper">
+            <span class="hero-tag tag-autismo">Autismo & Espectro</span>
+            <span class="hero-tag tag-girassol">🌻 Cordão de Girassol</span>
+            <span class="hero-tag tag-neuro">♾ Neurodiversidade</span>
+          </div>
+
+          <h1>Compreenda conteúdos escolares com <span class="highlight-text">IA visual</span> e linguagem direta</h1>
+          <p>O V.I.V.A adapta matérias escolares em tempo real gerando resumos claros e ilustrações didáticas personalizadas com SeeDream 5.0 Pro.</p>
+          <button class="btn-primary" onclick="showView('app')">Explorar matérias →</button>
+        </section>
+
+        <section class="video-section-card">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <h2 class="section-title" style="font-size:1.25rem;">🎬 Vídeo de Apresentação & Tutorial</h2>
+              <p style="color:var(--text-soft); font-size:0.88rem;">Espaço reservado para o vídeo demonstrativo da plataforma.</p>
+            </div>
+            <span style="font-size:0.8rem; background:var(--accent-soft); color:var(--accent); font-weight:700; padding:0.3rem 0.75rem; border-radius:10px;">Em Breve</span>
+          </div>
+
+          <div class="video-placeholder-wrapper">
+            <span class="video-badge">Vídeo Aula / Introdução</span>
+            <div class="video-play-btn">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <polygon points="5,3 19,12 5,21" fill="#FFFFFF"/>
+              </svg>
+            </div>
+            <h3 style="font-size:1.15rem; font-weight:700; margin-bottom:0.3rem;">Espaço Reservado para o Vídeo</h3>
+            <p style="font-size:0.88rem; opacity:0.85; max-width:480px;">Este player receberá o vídeo demonstrativo com explicações visuais de como utilizar todos os recursos do V.I.V.A.</p>
+          </div>
+        </section>
       </div>
     </section>
 
-    <!-- APRENDER -->
     <section class="view" id="view-app">
       <div class="view-inner">
-        <h2 class="section-title" id="subjectsTitle">Selecione uma disciplina</h2>
-        <div class="subjects-grid" id="subjectsGrid">
-          <div class="subject-card" onclick="selecionarMateria('Português')">
-            <span class="subject-icon">📖</span>
-            <h3>Português</h3>
-            <p>Gramática, leitura e ortografia</p>
+        <div id="subjectsOverview">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title">Disciplinas e Matérias</h2>
+              <p style="color:var(--text-soft); font-size:0.9rem;">Escolha uma matéria ou crie as suas próprias categorias customizadas.</p>
+            </div>
+            <button class="btn-primary" style="padding: 0.65rem 1.2rem; font-size:0.9rem;" onclick="abrirFormMateria()">➕ Nova Matéria</button>
           </div>
-          <div class="subject-card" onclick="selecionarMateria('Matemática')">
-            <span class="subject-icon">🔢</span>
-            <h3>Matemática</h3>
-            <p>Cálculos, operações e formas</p>
+
+          <div class="form-card" id="materiaFormCard" style="display: none;">
+            <h3 id="materiaFormTitle" style="margin-bottom: 1rem; font-size:1.1rem;">Criar Nova Matéria</h3>
+            <input type="hidden" id="materiaEditId" value="" />
+            
+            <div class="form-grid">
+              <div class="input-group">
+                <label for="materiaEmoji">Emoji / Ícone</label>
+                <input type="text" id="materiaEmoji" placeholder="🎨" maxlength="4" style="text-align: center; font-size: 1.3rem;" />
+              </div>
+              <div class="input-group">
+                <label for="materiaNome">Nome da Matéria</label>
+                <input type="text" id="materiaNome" placeholder="Ex: Ciências, Biologia..." />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label for="materiaDesc">Descrição Curta</label>
+              <input type="text" id="materiaDesc" placeholder="Ex: Células, corpo humano e seres vivos" />
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1rem;">
+              <button class="btn-secondary" onclick="fecharFormMateria()">Cancelar</button>
+              <button class="btn-primary" onclick="salvarMateria()">Salvar Matéria ✨</button>
+            </div>
           </div>
-          <div class="subject-card" onclick="selecionarMateria('História')">
-            <span class="subject-icon">🏛️</span>
-            <h3>História</h3>
-            <p>Fatos históricos e sociedade</p>
-          </div>
-          <div class="subject-card" onclick="selecionarMateria('Geografia')">
-            <span class="subject-icon">🌍</span>
-            <h3>Geografia</h3>
-            <p>Mapas, natureza e regiões</p>
-          </div>
+
+          <div class="subjects-grid" id="subjectsGrid"></div>
         </div>
 
         <section class="learning-panel" id="learningPanel">
@@ -612,22 +662,30 @@ footer {
           </div>
 
           <div class="input-group">
-            <label for="topicInput">O que você gostaria de compreender agora?</label>
-            <input type="text" id="topicInput" placeholder="Exemplo: O que é um ecossistema?" onkeypress="handleKeyPress(event)" />
+            <label for="topicInput">O que gostarias de compreender agora?</label>
+            <input type="text" id="topicInput" placeholder="Exemplo: O que é a fotossíntese? Como funciona o sistema solar?" onkeypress="handleKeyPress(event)" />
           </div>
 
-          <button class="btn-primary" onclick="gerarExplicacao()">Gerar explicação visual</button>
+          <button class="btn-primary" id="btnGerarIA" onclick="gerarExplicacao()">Gerar explicação visual com IA ✨</button>
 
           <div class="result-area" id="resultArea">
             <div class="result-grid">
               <div class="explanation-box">
-                <h3 style="margin-bottom:0.75rem;">Explicação resumida</h3>
+                <h3 style="margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+                  <span>📝</span> Explicação por IA
+                </h3>
                 <div id="explanationContent"></div>
               </div>
               <div class="image-box">
-                <h3 style="margin-bottom:0.75rem;">Ilustração didática</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                  <h3 style="margin:0; display:flex; align-items:center; gap:0.5rem;" id="imageBoxTitle">
+                    <span>🎨</span> Ilustração Didática (SeeDream 5.0 Pro)
+                  </h3>
+                  <button class="btn-sm" id="btnRegerarImagem" onclick="regerarApenasImagem()" style="display:none;">🔄 Nova Imagem</button>
+                </div>
                 <div class="image-placeholder">
-                  <img id="aiImage" alt="Ilustração didática" />
+                  <div class="skeleton-loader" id="skeletonLoader"></div>
+                  <img id="aiImage" alt="Ilustração didática gerada por IA" />
                 </div>
               </div>
             </div>
@@ -636,13 +694,51 @@ footer {
       </div>
     </section>
 
-    <!-- HISTÓRICO -->
+    <section class="view" id="view-anotacoes">
+      <div class="view-inner">
+        <div class="section-header-flex">
+          <div>
+            <h2 class="section-title">Bloco de Anotações</h2>
+            <p style="color:var(--text-soft); font-size:0.9rem;">Guarde resumos, lembretes e anotações pessoais de estudo.</p>
+          </div>
+          <button class="btn-primary" style="padding: 0.65rem 1.2rem; font-size:0.9rem;" onclick="criarNovaAnotacao()">➕ Nova Anotação</button>
+        </div>
+
+        <div class="notes-layout">
+          <div class="notes-sidebar" id="notesList"></div>
+
+          <div class="note-editor" id="noteEditor">
+            <input type="hidden" id="noteCurrentId" value="" />
+            <div class="input-group" style="margin:0;">
+              <label for="noteTitleInput">Título da Anotação</label>
+              <input type="text" id="noteTitleInput" placeholder="Escreve o título..." oninput="autoSalvarAnotacao()" />
+            </div>
+
+            <div class="input-group" style="margin:0;">
+              <label for="noteTagInput">Categoria / Matéria</label>
+              <input type="text" id="noteTagInput" placeholder="Ex: Biologia, Dica de Estudo..." oninput="autoSalvarAnotacao()" />
+            </div>
+
+            <div class="input-group" style="margin:0; flex:1; display:flex; flex-direction:column;">
+              <label for="noteBodyInput">Conteúdo da Anotação</label>
+              <textarea id="noteBodyInput" rows="10" placeholder="Escreve as tuas anotações aqui..." oninput="autoSalvarAnotacao()"></textarea>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;">
+              <span id="noteSaveStatus" style="font-size:0.8rem; color:var(--text-soft);">Salvo automaticamente</span>
+              <button class="btn-danger-sm" onclick="deletarAnotacaoAtual()">Eliminar Anotação</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="view" id="view-historico">
       <div class="view-inner">
         <div class="history-header">
           <div>
-            <h2 class="section-title" style="margin-bottom:0.25rem;">Histórico de consultas</h2>
-            <p style="color:var(--text-soft);">Suas buscas recentes ficam registradas neste navegador para fácil revisão.</p>
+            <h2 class="section-title" style="margin-bottom:0.25rem;">Histórico de pesquisas</h2>
+            <p style="color:var(--text-soft);">As tuas consultas recentes ficam registadas para revisão rápida.</p>
           </div>
           <button class="btn-danger-sm" id="clearHistoryBtn" onclick="limparHistorico()" style="display:none;">Limpar tudo</button>
         </div>
@@ -653,71 +749,371 @@ footer {
       </div>
     </section>
 
-    <!-- SOBRE -->
+    <section class="view" id="view-configuracoes">
+      <div class="view-inner">
+        <h2 class="section-title" style="margin-bottom: 0.25rem;">Configurações e Preferências</h2>
+        <p style="color:var(--text-soft); margin-bottom: 2rem;">Personaliza a tua experiência de utilização e escolha os modelos de IA preferidos.</p>
+
+        <div class="config-group">
+          <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent);">🎨 Modelo de IA para Imagens</h3>
+          
+          <div class="config-item">
+            <div class="config-info">
+              <h4>Modelo de Gerador de Imagens</h4>
+              <p>Selecione a IA utilizada para criar as ilustrações didáticas das matérias.</p>
+            </div>
+            <select id="imageModelSelect" onchange="alterarModeloImagem(this.value)" style="padding:0.4rem 0.8rem; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-weight:600;">
+              <option value="bytedance/seedream-5.0-pro">ByteDance SeeDream 5.0 Pro ✨ (Padrão)</option>
+              <option value="turbo">SDXL Turbo (Rápido)</option>
+              <option value="flux">FLUX</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent);">🍯 Conta e Chave de Pólens (Pollinations AI)</h3>
+          
+          <div class="config-item" style="flex-direction:column; align-items:flex-start; gap:0.5rem;">
+            <div class="config-info">
+              <h4>Token / API Key de Pólens</h4>
+              <p>Ao inserir a tua chave, a geração de texto e imagem passa a utilizar o teu saldo de pólens, removendo anúncios e aumentando a velocidade.</p>
+            </div>
+            <div style="width:100%; margin-top:0.5rem;">
+              <label for="pollenApiKeyInput" style="font-size:0.85rem; font-weight:700; display:block; margin-bottom:0.3rem;">Chave da API de Pólens (Pollinations):</label>
+              <div style="display:flex; gap:0.5rem;">
+                <input type="password" id="pollenApiKeyInput" placeholder="Cole a sua Pollinations / Pollen API Key aqui..." style="flex:1; padding:0.6rem 0.9rem; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text);" />
+                <button class="btn-sm" onclick="salvarChavePollen()">Guardar Chave</button>
+              </div>
+              <span id="pollenKeyStatus" style="font-size:0.78rem; color:var(--text-soft); margin-top:0.3rem; display:block;"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent);">👤 Minha Conta Local</h3>
+          <div class="config-item">
+            <div class="config-info">
+              <h4 id="configUserLabel">Conta Atual: Visitante</h4>
+              <p id="configUserSub">Os teus dados estão a ser guardados no navegador deste dispositivo.</p>
+            </div>
+            <button class="btn-secondary" id="configAccountBtn" onclick="abrirModalAuth()">Gerir Conta</button>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent);">♿ Acessibilidade e Estímulo Visual</h3>
+          
+          <div class="config-item">
+            <div class="config-info">
+              <h4>Reduzir Animações</h4>
+              <p>Diminui efeitos de movimento e transições mantendo o site perfeitamente funcional.</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggleAnimations" onchange="alterarAnimacoes(this.checked)" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="config-item">
+            <div class="config-info">
+              <h4>Tamanho do Texto</h4>
+              <p>Aumenta o tamanho da fonte de leitura dos tópicos e explicações.</p>
+            </div>
+            <select id="fontSizeSelect" onchange="alterarTamanhoFonte(this.value)" style="padding:0.4rem 0.8rem; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-weight:600;">
+              <option value="normal">Padrão</option>
+              <option value="grande">Grande (+15%)</option>
+              <option value="extragrande">Extra Grande (+30%)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent);">⚙️ Preferências do Sistema</h3>
+          
+          <div class="config-item">
+            <div class="config-info">
+              <h4>Salvar Histórico Localmente</h4>
+              <p>Armazena automaticamente pesquisas e consultas na memória da sua máquina.</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggleHistory" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="view" id="view-sobre">
       <div class="view-inner">
         <h2 class="section-title">Sobre o Projeto V.I.V.A</h2>
         <p style="color:var(--text-soft); font-size:1.05rem; margin-bottom: 2rem;">
-          O <strong>V.I.V.A</strong> (<em>Visualização Ilustrada para Valorização da Aprendizagem</em>) foi concebido para transformar conteúdos didáticos complexos em experiências de aprendizagem intuitivas, calmas e inclusivas.
+          O <strong>V.I.V.A</strong> (<em>Visualização Ilustrada para Valorização da Aprendizagem</em>) foi concebido para transformar conteúdos didáticos em experiências intuitivas, calmas e neuroinclusivas utilizando IA generativa.
         </p>
 
-        <div class="showcase-grid" style="margin-bottom: 2rem;">
-          <div class="showcase-card">
-            <div>
-              <h3 style="margin-bottom:0.5rem; color:var(--accent);">🎯 A Nossa Missão</h3>
-              <p style="font-size:0.92rem; color:var(--text-soft); margin:0;">
-                Eliminar as barreiras do ensino tradicional. Muitos estudantes enfrentam dificuldades com parágrafos extensos e linguagem académica rígida. O V.I.V.A reestrutura essas informações de forma direta e visualmente clara.
-              </p>
+        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:1.8rem; margin-bottom:2rem; box-shadow:var(--shadow-sm); position:relative; overflow:hidden;">
+          <div style="height:6px; background:linear-gradient(90deg, #EF4444, #F59E0B, #10B981, #3B82F6, #8B5CF6); position:absolute; top:0; left:0; right:0;"></div>
+          
+          <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+            <div style="width:42px; height:42px; background:var(--accent-soft); border-radius:12px; display:flex; align-items:center; justify-content:center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 12C10.5 9.5 8 8 5.5 8C3 8 1 10 1 12.5C1 15 3 17 5.5 17C8 17 10.5 15.5 12 13C13.5 15.5 16 17 18.5 17C21 17 23 15 23 12.5C23 10 21 8 18.5 8C16 8 13.5 9.5 12 12Z" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 style="font-size:1.2rem; font-weight:800; color:var(--text);">Símbolos e Representatividade</h3>
+          </div>
+
+          <p style="font-size:0.95rem; color:var(--text-soft); line-height:1.7; margin-bottom:1.25rem;">
+            Incorporamos elementos visuais reconhecidos internacionalmente pela comunidade neurodivergente para garantir acolhimento imediato:
+          </p>
+
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
+            <div style="background:var(--bg-card-subtle); padding:1.1rem; border-radius:14px; border:1px solid var(--border);">
+              <h4 style="font-size:0.9rem; font-weight:700; color:var(--accent); margin-bottom:0.3rem;">♾️ O Infinito Colorido</h4>
+              <p style="font-size:0.83rem; color:var(--text-soft);">Representa a variação infinita do espectro autista e a diversidade das mentes humanas.</p>
+            </div>
+            <div style="background:var(--bg-card-subtle); padding:1.1rem; border-radius:14px; border:1px solid var(--border);">
+              <h4 style="font-size:0.9rem; font-weight:700; color:#854D0E; margin-bottom:0.3rem;">🌻 Cordão de Girassol</h4>
+              <p style="font-size:0.83rem; color:var(--text-soft);">Símbolo de conscientização para deficiências e condições ocultas.</p>
             </div>
           </div>
-          <div class="showcase-card">
-            <div>
-              <h3 style="margin-bottom:0.5rem; color:var(--accent);">🧩 Foco na Neurodiversidade</h3>
-              <p style="font-size:0.92rem; color:var(--text-soft); margin:0;">
-                A interface e o método do V.I.V.A foram pensados para apoiar estudantes com TDAH, Autismo, Dislexia ou outras preferências de aprendizagem, evitando o cansaço visual e a sobrecarga cognitiva.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <h3 class="section-title" style="font-size: 1.15rem; margin-top: 2rem;">Os 3 Pilares do V.I.V.A</h3>
-        <div class="steps-grid" style="margin-bottom: 2.5rem;">
-          <div class="step-card">
-            <div class="step-num">1</div>
-            <h3>Linguagem Acessível</h3>
-            <p>Tradução de textos escolares complexos para frases curtas, objetivas e em ordem direta de leitura.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">2</div>
-            <h3>Ancoragem Visual</h3>
-            <p>Associação de cada conceito a uma ilustração ou esquema didático que facilita a fixação na memória visual.</p>
-          </div>
-          <div class="step-card">
-            <div class="step-num">3</div>
-            <h3>Design Humanizado</h3>
-            <p>Paleta de cores inspirada em papel e elementos da natureza, garantindo um ambiente de estudo sem distrações.</p>
-          </div>
-        </div>
-
-        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:14px; padding:1.5rem; box-shadow:var(--shadow-sm);">
-          <h3 style="font-size:1.1rem; margin-bottom:0.75rem; color:var(--text);">👥 Para quem é esta plataforma?</h3>
-          <ul style="padding-left:1.25rem; color:var(--text-soft); font-size:0.92rem; line-height:1.7;">
-            <li style="margin-bottom:0.4rem;"><strong>Estudantes:</strong> Para tirar dúvidas de matérias escolares com explicações simples e objetivas no seu próprio ritmo.</li>
-            <li style="margin-bottom:0.4rem;"><strong>Educadores e Mediadores:</strong> Para obter recursos adaptados, esquemas visuais e apoio pedagógico para a inclusão em sala de aula.</li>
-            <li><strong>Famílias:</strong> Para auxiliar nos deveres de casa e reforço escolar sem stress ou complicações.</li>
-          </ul>
         </div>
       </div>
     </section>
   </main>
 </div>
 
+<div class="modal-overlay" id="authModal">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h3 style="font-weight:800; font-size:1.25rem;" id="authModalTitle">Minha Conta Local</h3>
+      <button class="icon-btn-sm" onclick="fecharModalAuth()">✕</button>
+    </div>
+
+    <div class="auth-tabs" id="authTabs">
+      <button class="auth-tab active" onclick="alternarAbaAuth('login')">Entrar</button>
+      <button class="auth-tab" onclick="alternarAbaAuth('cadastro')">Criar Conta</button>
+    </div>
+
+    <div id="formLogin">
+      <div class="input-group">
+        <label for="loginName">Nome do Utilizador</label>
+        <input type="text" id="loginName" placeholder="Escreve o teu nome..." />
+      </div>
+      <div class="input-group">
+        <label for="loginSenha">Palavra-passe</label>
+        <input type="password" id="loginSenha" placeholder="••••••••" />
+      </div>
+      <p style="font-size:0.78rem; color:var(--text-soft); margin-bottom:1rem;">
+        🔒 Os teus dados ficam guardados de forma segura diretamente no teu navegador (localStorage).
+      </p>
+      <button class="btn-primary" style="width:100%; justify-content:center;" onclick="realizarLogin()">Entrar na Conta ✨</button>
+    </div>
+
+    <div id="formCadastro" style="display:none;">
+      <div class="input-group">
+        <label for="cadName">Nome do Estudante</label>
+        <input type="text" id="cadName" placeholder="Ex: Maria Clara" />
+      </div>
+      <div class="input-group">
+        <label for="cadAvatar">Emoji de Perfil</label>
+        <select id="cadAvatar" style="padding:0.8rem;">
+          <option value="🌱">🌱 Broto</option>
+          <option value="🌻">🌻 Girassol</option>
+          <option value="🚀">🚀 Foguete</option>
+          <option value="🎨">🎨 Artista</option>
+          <option value="📚">📚 Leitor</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="cadSenha">Cria uma Palavra-passe</label>
+        <input type="password" id="cadSenha" placeholder="••••••••" />
+      </div>
+      <button class="btn-primary" style="width:100%; justify-content:center;" onclick="realizarCadastro()">Criar Conta Local ✨</button>
+    </div>
+
+    <div id="panelLogado" style="display:none; text-align:center;">
+      <div style="font-size:3rem; margin-bottom:0.5rem;" id="userPanelAvatar">🌱</div>
+      <h3 style="font-size:1.2rem; font-weight:800;" id="userPanelName">Nome</h3>
+      <p style="font-size:0.85rem; color:var(--text-soft); margin-bottom:1.5rem;">A tua conta local está ativa e protegida nesta máquina.</p>
+      <button class="btn-danger-sm" style="width:100%; padding:0.75rem;" onclick="realizarLogout()">Sair da Conta</button>
+    </div>
+  </div>
+</div>
+
 <footer>
-  <p><strong>V.I.V.A</strong> — Visualização Ilustrada para Valorização da Aprendizagem</p>
+  <div style="display:flex; align-items:center; gap:0.5rem; font-weight:700; color:var(--text);">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <path d="M12 12C10.5 9.5 8 8 5.5 8C3 8 1 10 1 12.5C1 15 3 17 5.5 17C8 17 10.5 15.5 12 13C13.5 15.5 16 17 18.5 17C21 17 23 15 23 12.5C23 10 21 8 18.5 8C16 8 13.5 9.5 12 12Z" stroke="var(--accent)" stroke-width="2"/>
+    </svg>
+    V.I.V.A — Visualização Ilustrada para Valorização da Aprendizagem
+  </div>
+  <p style="font-size:0.8rem; color:var(--text-soft);">Promovendo acessibilidade pedagógica e acolhimento à neurodiversidade.</p>
 </footer>
 
 <script>
-// --- GERENCIAMENTO DE TEMA ---
+function executarSplashScreen() {
+  const splash = document.getElementById('splashScreen');
+  const reduceAnim = localStorage.getItem('viva_reduce_anim') === 'true';
+
+  if (reduceAnim) {
+    splash.classList.add('hidden');
+    return;
+  }
+
+  setTimeout(() => {
+    splash.classList.add('hidden');
+  }, 1300);
+}
+
+let usuarioAtual = null;
+
+function carregarUsuarioSessao() {
+  const sessao = localStorage.getItem('viva_sessao_ativa');
+  usuarioAtual = sessao ? JSON.parse(sessao) : null;
+  atualizarInterfaceUsuario();
+}
+
+function atualizarInterfaceUsuario() {
+  const avatarEl = document.getElementById('sidebarAvatar');
+  const nameEl = document.getElementById('sidebarUsername');
+  const statusEl = document.getElementById('sidebarUserStatus');
+  const btnSidebar = document.getElementById('authBtnSidebar');
+
+  const configLabel = document.getElementById('configUserLabel');
+  const configSub = document.getElementById('configUserSub');
+  const configBtn = document.getElementById('configAccountBtn');
+
+  if (usuarioAtual) {
+    avatarEl.textContent = usuarioAtual.avatar || '👤';
+    nameEl.textContent = usuarioAtual.nome;
+    statusEl.textContent = 'Conta Salva';
+    btnSidebar.textContent = 'Perfil';
+
+    configLabel.textContent = `Conta Ativa: ${usuarioAtual.nome}${usuarioAtual.avatar || ''}`;
+    configSub.textContent = 'As tuas matérias e anotações estão associadas a este perfil local.';
+    configBtn.textContent = 'Ver Perfil';
+  } else {
+    avatarEl.textContent = '👤';
+    nameEl.textContent = 'Visitante';
+    statusEl.textContent = 'Modo Local';
+    btnSidebar.textContent = 'Entrar';
+
+    configLabel.textContent = 'Conta Atual: Visitante';
+    configSub.textContent = 'Os teus dados estão a ser guardados no modo padrão do navegador.';
+    configBtn.textContent = 'Entrar / Criar Conta';
+  }
+
+  carregarMaterias();
+}
+
+function abrirModalAuth() {
+  const modal = document.getElementById('authModal');
+  modal.classList.add('active');
+
+  if (usuarioAtual) {
+    document.getElementById('authTabs').style.display = 'none';
+    document.getElementById('formLogin').style.display = 'none';
+    document.getElementById('formCadastro').style.display = 'none';
+    document.getElementById('panelLogado').style.display = 'block';
+
+    document.getElementById('userPanelAvatar').textContent = usuarioAtual.avatar || '🌱';
+    document.getElementById('userPanelName').textContent = usuarioAtual.nome;
+  } else {
+    document.getElementById('authTabs').style.display = 'flex';
+    document.getElementById('panelLogado').style.display = 'none';
+    alternarAbaAuth('login');
+  }
+}
+
+function fecharModalAuth() {
+  document.getElementById('authModal').classList.remove('active');
+}
+
+function alternarAbaAuth(aba) {
+  const tabs = document.querySelectorAll('.auth-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+
+  if (aba === 'login') {
+    tabs[0].classList.add('active');
+    document.getElementById('formLogin').style.display = 'block';
+    document.getElementById('formCadastro').style.display = 'none';
+  } else {
+    tabs[1].classList.add('active');
+    document.getElementById('formLogin').style.display = 'none';
+    document.getElementById('formCadastro').style.display = 'block';
+  }
+}
+
+function realizarCadastro() {
+  const nome = document.getElementById('cadName').value.trim();
+  const avatar = document.getElementById('cadAvatar').value;
+  const senha = document.getElementById('cadSenha').value.trim();
+
+  if (!nome || !senha) {
+    alert('Por favor, preenche o nome e a palavra-passe.');
+    return;
+  }
+
+  let usuarios = JSON.parse(localStorage.getItem('viva_usuarios')) || [];
+  const existe = usuarios.find(u => u.nome.toLowerCase() === nome.toLowerCase());
+
+  if (existe) {
+    alert('Já existe um perfil registado com este nome neste dispositivo.');
+    return;
+  }
+
+  const novoUsuario = { id: Date.now().toString(), nome, avatar, senha };
+  usuarios.push(novoUsuario);
+  localStorage.setItem('viva_usuarios', JSON.stringify(usuarios));
+
+  usuarioAtual = novoUsuario;
+  localStorage.setItem('viva_sessao_ativa', JSON.stringify(novoUsuario));
+  atualizarInterfaceUsuario();
+  fecharModalAuth();
+
+  document.getElementById('cadName').value = '';
+  document.getElementById('cadSenha').value = '';
+  alert(`Bem-vindo(a), ${nome}! A tua conta local foi criada com sucesso.`);
+}
+
+function realizarLogin() {
+  const nome = document.getElementById('loginName').value.trim();
+  const senha = document.getElementById('loginSenha').value.trim();
+
+  let usuarios = JSON.parse(localStorage.getItem('viva_usuarios')) || [];
+  const usuario = usuarios.find(u => u.nome.toLowerCase() === nome.toLowerCase() && u.senha === senha);
+
+  if (!usuario) {
+    alert('Utilizador ou palavra-passe incorretos.');
+    return;
+  }
+
+  usuarioAtual = usuario;
+  localStorage.setItem('viva_sessao_ativa', JSON.stringify(usuario));
+  atualizarInterfaceUsuario();
+  fecharModalAuth();
+
+  document.getElementById('loginName').value = '';
+  document.getElementById('loginSenha').value = '';
+}
+
+function realizarLogout() {
+  usuarioAtual = null;
+  localStorage.removeItem('viva_sessao_ativa');
+  atualizarInterfaceUsuario();
+  fecharModalAuth();
+  carregarAnotacoes();
+  carregarHistorico();
+}
+
+function getStorageKey(keyBase) {
+  if (usuarioAtual && usuarioAtual.id) {
+    return `${keyBase}_usr_${usuarioAtual.id}`;
+  }
+  return keyBase;
+}
+
 const themeBtn = document.getElementById('themeBtn');
 const html = document.documentElement;
 
@@ -730,6 +1126,22 @@ function initTheme() {
     html.removeAttribute('data-theme');
     themeBtn.textContent = 'Modo Escuro';
   }
+
+  const reduceAnim = localStorage.getItem('viva_reduce_anim') === 'true';
+  document.getElementById('toggleAnimations').checked = reduceAnim;
+  alterarAnimacoes(reduceAnim);
+
+  const fontSize = localStorage.getItem('viva_font_size') || 'normal';
+  document.getElementById('fontSizeSelect').value = fontSize;
+  alterarTamanhoFonte(fontSize);
+
+  const savedPollenKey = localStorage.getItem('viva_pollen_key') || '';
+  document.getElementById('pollenApiKeyInput').value = savedPollenKey;
+  atualizarStatusChavePollen();
+
+  const savedImageModel = localStorage.getItem('viva_image_model') || 'bytedance/seedream-5.0-pro';
+  document.getElementById('imageModelSelect').value = savedImageModel;
+  atualizarTituloModeloImagem(savedImageModel);
 }
 
 themeBtn.addEventListener('click', () => {
@@ -745,25 +1157,188 @@ themeBtn.addEventListener('click', () => {
   }
 });
 
-// --- GERENCIAMENTO DE NAVEGAÇÃO ---
-let materiaAtual = 'Geral';
+function alterarAnimacoes(reduzir) {
+  if (reduzir) {
+    html.setAttribute('data-reduce-animations', 'true');
+  } else {
+    html.removeAttribute('data-reduce-animations');
+  }
+  localStorage.setItem('viva_reduce_anim', reduzir);
+}
+
+function alterarTamanhoFonte(tamanho) {
+  if (tamanho === 'grande') {
+    html.style.setProperty('--font-scale', '1.12rem');
+  } else if (tamanho === 'extragrande') {
+    html.style.setProperty('--font-scale', '1.25rem');
+  } else {
+    html.style.setProperty('--font-scale', '1rem');
+  }
+  localStorage.setItem('viva_font_size', tamanho);
+}
+
+function alterarModeloImagem(modelo) {
+  localStorage.setItem('viva_image_model', modelo);
+  atualizarTituloModeloImagem(modelo);
+}
+
+function atualizarTituloModeloImagem(modelo) {
+  const titleEl = document.getElementById('imageBoxTitle');
+  if (titleEl) {
+    let nomeExibicao = 'SeeDream 5.0 Pro';
+    if (modelo === 'turbo') nomeExibicao = 'SDXL Turbo';
+    if (modelo === 'flux') nomeExibicao = 'FLUX';
+    titleEl.innerHTML = `<span>🎨</span> Ilustração Didática (${nomeExibicao})`;
+  }
+}
+
+function salvarChavePollen() {
+  const key = document.getElementById('pollenApiKeyInput').value.trim();
+  localStorage.setItem('viva_pollen_key', key);
+  atualizarStatusChavePollen();
+  alert('Chave de Pólens guardada com sucesso!');
+}
+
+function atualizarStatusChavePollen() {
+  const key = localStorage.getItem('viva_pollen_key');
+  const statusEl = document.getElementById('pollenKeyStatus');
+  if (key) {
+    statusEl.textContent = '🟢 Conta de Pólens ativa e autenticada (Sem anúncios / Alta Prioridade).';
+    statusEl.style.color = '#10B981';
+  } else {
+    statusEl.textContent = '🔵 A utilizar modo público gratuito. Adicione a sua chave para usar o saldo de Pólens.';
+    statusEl.style.color = 'var(--text-soft)';
+  }
+}
 
 function showView(view) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.getElementById('view-' + view).classList.add('active');
+  const currentView = document.querySelector('.view.active');
+  const targetView = document.getElementById('view-' + view);
+
+  if (currentView === targetView) return;
+
+  if (currentView) {
+    currentView.classList.remove('active');
+  }
+  
+  targetView.classList.add('active');
+
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const activeNav = document.querySelector(`.nav-item[data-view="${view}"]`);
   if (activeNav) activeNav.classList.add('active');
 
-  if (view === 'historico') {
-    carregarHistorico();
+  if (view === 'historico') carregarHistorico();
+  if (view === 'anotacoes') carregarAnotacoes();
+}
+
+const materiasPadrao = [
+  { id: '1', nome: 'Português', emoji: '📖', desc: 'Gramática, leitura e ortografia' },
+  { id: '2', nome: 'Matemática', emoji: '🔢', desc: 'Cálculos, operações e formas' },
+  { id: '3', nome: 'História', emoji: '🏛️', desc: 'Factos históricos e sociedade' },
+  { id: '4', nome: 'Geografia', emoji: '🌍', desc: 'Mapas, natureza e regiões' }
+];
+
+let materias = [];
+let materiaAtual = 'Geral';
+let ultimoTemaPesquisado = '';
+
+function carregarMaterias() {
+  const key = getStorageKey('viva_materias');
+  const salvas = localStorage.getItem(key);
+  if (salvas) {
+    materias = JSON.parse(salvas);
+  } else {
+    materias = [...materiasPadrao];
+    salvarMateriasStorage();
+  }
+  renderizarMaterias();
+}
+
+function salvarMateriasStorage() {
+  const key = getStorageKey('viva_materias');
+  localStorage.setItem(key, JSON.stringify(materias));
+}
+
+function renderizarMaterias() {
+  const grid = document.getElementById('subjectsGrid');
+  grid.innerHTML = materias.map(item => `
+    <div class="subject-card" onclick="selecionarMateria('${item.nome}')">
+      <div class="subject-header-action" onclick="event.stopPropagation();">
+        <button class="icon-btn-sm" title="Editar" onclick="editarMateria('${item.id}')">✏️️</button>
+        <button class="icon-btn-sm" title="Eliminar" onclick="excluirMateria('${item.id}')">🗑️</button>
+      </div>
+      <div>
+        <span class="subject-icon">${item.emoji}</span>
+        <h3>${item.nome}</h3>
+        <p>${item.desc}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function abrirFormMateria() {
+  document.getElementById('materiaEditId').value = '';
+  document.getElementById('materiaEmoji').value = '';
+  document.getElementById('materiaNome').value = '';
+  document.getElementById('materiaDesc').value = '';
+  document.getElementById('materiaFormTitle').textContent = 'Criar Nova Matéria';
+  document.getElementById('materiaFormCard').style.display = 'block';
+  document.getElementById('materiaNome').focus();
+}
+
+function fecharFormMateria() {
+  document.getElementById('materiaFormCard').style.display = 'none';
+}
+
+function salvarMateria() {
+  const id = document.getElementById('materiaEditId').value;
+  const emoji = document.getElementById('materiaEmoji').value.trim() || '📚';
+  const nome = document.getElementById('materiaNome').value.trim();
+  const desc = document.getElementById('materiaDesc').value.trim() || 'Matéria de estudo';
+
+  if (!nome) {
+    alert('Por favor, indica o nome da matéria.');
+    return;
+  }
+
+  if (id) {
+    const index = materias.findIndex(m => m.id === id);
+    if (index !== -1) {
+      materias[index] = { id, nome, emoji, desc };
+    }
+  } else {
+    const novoid = Date.now().toString();
+    materias.push({ id: novoid, nome, emoji, desc });
+  }
+
+  salvarMateriasStorage();
+  renderizarMaterias();
+  fecharFormMateria();
+}
+
+function editarMateria(id) {
+  const m = materias.find(item => item.id === id);
+  if (!m) return;
+
+  document.getElementById('materiaEditId').value = m.id;
+  document.getElementById('materiaEmoji').value = m.emoji;
+  document.getElementById('materiaNome').value = m.nome;
+  document.getElementById('materiaDesc').value = m.desc;
+  document.getElementById('materiaFormTitle').textContent = 'Editar Matéria';
+  document.getElementById('materiaFormCard').style.display = 'block';
+}
+
+function excluirMateria(id) {
+  if (confirm('Desejas eliminar esta matéria?')) {
+    materias = materias.filter(item => item.id !== id);
+    salvarMateriasStorage();
+    renderizarMaterias();
   }
 }
 
 function selecionarMateria(nome) {
   materiaAtual = nome;
-  document.getElementById('subjectsGrid').style.display = 'none';
-  document.getElementById('subjectsTitle').style.display = 'none';
+  document.getElementById('subjectsOverview').style.display = 'none';
   document.getElementById('learningPanel').classList.add('visible');
   document.getElementById('panelTitle').textContent = nome.toUpperCase();
   document.getElementById('topicInput').focus();
@@ -771,109 +1346,177 @@ function selecionarMateria(nome) {
 
 function voltarMaterias() {
   document.getElementById('learningPanel').classList.remove('visible');
-  document.getElementById('subjectsGrid').style.display = 'grid';
-  document.getElementById('subjectsTitle').style.display = 'block';
+  document.getElementById('subjectsOverview').style.display = 'block';
   document.getElementById('resultArea').classList.remove('visible');
   document.getElementById('topicInput').value = '';
 }
 
 function handleKeyPress(e) {
-  if (e.key === 'Enter') {
-    gerarExplicacao();
+  if (e.key === 'Enter') gerarExplicacao();
+}
+
+function construirPromptImagem(tema, materia) {
+  return `${tema}${materia} educational illustration, clear minimalist vector graphic, clean isolated background, vibrant child friendly colors, simple diagram style, flat design, high quality, no text noise`;
+}
+
+// GERAÇÃO DE IMAGEM OTIMIZADA COM BYTEDANCE SEEDREAM 5.0 PRO
+function carregarImagemIA(tema, materia) {
+  const imgElem = document.getElementById('aiImage');
+  const skeleton = document.getElementById('skeletonLoader');
+  const btnRegerar = document.getElementById('btnRegerarImagem');
+  const pollenKey = localStorage.getItem('viva_pollen_key') || '';
+  const modelo = localStorage.getItem('viva_image_model') || 'bytedance/seedream-5.0-pro';
+
+  skeleton.classList.add('active');
+  imgElem.style.opacity = '0';
+  if (btnRegerar) btnRegerar.style.display = 'inline-block';
+
+  const promptFinal = construirPromptImagem(tema, materia);
+  const promptEncoded = encodeURIComponent(promptFinal);
+  const seed = Math.floor(Math.random() * 900000) + 100000;
+  
+  // Modelo 'bytedance/seedream-5.0-pro' configurado como modelo padrão
+  let primaryUrl = `https://image.pollinations.ai/prompt/${promptEncoded}?width=512&height=512&nologo=true&seed=${seed}&model=${encodeURIComponent(modelo)}`;
+  
+  if (pollenKey) {
+    primaryUrl += `&key=${encodeURIComponent(pollenKey)}`;
+  }
+
+  imgElem.onload = () => {
+    skeleton.classList.remove('active');
+    imgElem.style.opacity = '1';
+  };
+
+  imgElem.onerror = () => {
+    let fallbackUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(tema + ' educational visual graphic')}?width=400&height=400&nologo=true`;
+    if (pollenKey) {
+      fallbackUrl += `&key=${encodeURIComponent(pollenKey)}`;
+    }
+    imgElem.onerror = () => {
+      skeleton.classList.remove('active');
+      imgElem.style.opacity = '1';
+      imgElem.alt = 'Não foi possível carregar a ilustração.';
+    };
+    imgElem.src = fallbackUrl;
+  };
+
+  imgElem.src = primaryUrl;
+}
+
+function regerarApenasImagem() {
+  if (ultimoTemaPesquisado) {
+    carregarImagemIA(ultimoTemaPesquisado, materiaAtual);
   }
 }
 
-// --- BASE DE CONHECIMENTO SIMULADA DA PLATAFORMA ---
-const respostasProntas = {
-  'ecossistema': {
-    texto: `<p>Um <strong>ecossistema</strong> é o conjunto formado pelos seres vivos (plantas, animais, microrganismos) e os elementos não vivos do ambiente (água, luz, solo, ar).</p>
-            <ul style="margin-top:0.5rem; padding-left:1.2rem; color:var(--text-soft);">
-              <li><strong>Componentes Vivos:</strong> Árvores, peixes, insetos.</li>
-              <li><strong>Componentes Não-Vivos:</strong> Luz solar, temperatura, minerais.</li>
-            </ul>`,
-    promptImg: 'ecosystem nature forest river animals vector illustration simple'
-  },
-  'fotossintese': {
-    texto: `<p>A <strong>fotossíntese</strong> é o processo pelo qual as plantas usam a luz do sol para produzir seu próprio alimento e liberar oxigênio para a atmosfera.</p>
-            <ol style="margin-top:0.5rem; padding-left:1.2rem; color:var(--text-soft);">
-              <li>Absorção de água pelas raízes e gás carbônico pelo ar.</li>
-              <li>Captação da luz solar através da clorofila.</li>
-              <li>Produção de glicose (energia) e liberação de oxigênio.</li>
-            </ol>`,
-    promptImg: 'photosynthesis plant leaf sunlight water cycle vector illustration simple'
-  },
-  'fração': {
-    texto: `<p>Uma <strong>fração</strong> representa a parte de um todo que foi dividido em pedaços iguais.</p>
-            <ul style="margin-top:0.5rem; padding-left:1.2rem; color:var(--text-soft);">
-              <li><strong>Numerador (número de cima):</strong> Quantas partes tomamos.</li>
-              <li><strong>Denominador (número de baixo):</strong> Em quantas partes o todo foi dividido.</li>
-            </ul>`,
-    promptImg: 'fractions math pie chart geometric shapes educational illustration'
-  }
-};
-
-// --- GERAÇÃO DE EXPLICAÇÕES & HISTÓRICO ---
 async function gerarExplicacao(temaBusca = null, materiaBusca = null) {
   const inputElem = document.getElementById('topicInput');
+  const btnGerar = document.getElementById('btnGerarIA');
   const tema = temaBusca || inputElem.value.trim();
   const materia = materiaBusca || materiaAtual;
 
-  if (!tema) return;
-
-  const explanationBox = document.getElementById('explanationContent');
-  const imgElem = document.getElementById('aiImage');
-  const resultArea = document.getElementById('resultArea');
-
-  // Termo em minúsculo para busca na base
-  const temaChave = tema.toLowerCase();
-  
-  if (respostasProntas[temaChave]) {
-    explanationBox.innerHTML = respostasProntas[temaChave].texto;
-    imgElem.src = `https://gen.pollinations.ai/image/${encodeURIComponent(respostasProntas[temaChave].promptImg)}?width=400&height=400&nologo=true`;
-  } else {
-    explanationBox.innerHTML = `
-      <p style="margin-bottom:0.75rem;">Explicando <strong>${tema}</strong> em <strong>${materia}</strong>:</p>
-      <ul style="padding-left:1.2rem; color:var(--text-soft); line-height:1.7;">
-        <li><strong>Conceito Central:</strong> Entendimento resumido e estruturado sobre o tema selecionado.</li>
-        <li><strong>Aplicação Prática:</strong> Como este conteúdo se conecta com o seu estudo do dia a dia.</li>
-        <li><strong>Ponto de Atenção:</strong> Destaque para fixar o conceito de forma simples e direta.</li>
-      </ul>
-    `;
-    imgElem.src = `https://gen.pollinations.ai/image/${encodeURIComponent(tema + " educational visual vector simple graphic illustration")}?width=400&height=400&nologo=true`;
+  if (!tema) {
+    alert('Por favor, introduz um tema ou pergunta.');
+    return;
   }
 
-  resultArea.classList.add('visible');
-  salvarHistorico(tema, materia);
+  ultimoTemaPesquisado = tema;
+  const explanationBox = document.getElementById('explanationContent');
+  const resultArea = document.getElementById('resultArea');
 
-  // Rolagem suave até o resultado
-  resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  resultArea.classList.add('visible');
+  explanationBox.innerHTML = `
+    <div style="padding:1rem; text-align:center;">
+      <p style="font-weight:700; color:var(--accent); margin-bottom:0.3rem;">⏳ A Inteligência Artificial está a gerar o conteúdo...</p>
+      <p style="font-size:0.85rem; color:var(--text-soft);">A criar resumo neuroinclusivo e ilustração didática personalizada.</p>
+    </div>
+  `;
+
+  btnGerar.disabled = true;
+  btnGerar.style.opacity = '0.7';
+
+  carregarImagemIA(tema, materia);
+
+  const promptSistema = `És o assistente pedagógico V.I.V.A., especialista em educação neuroinclusiva (Autismo, TDAH, Dislexia).
+O utilizador deseja aprender sobre o tema "${tema}" na disciplina de "${materia}".
+
+INSTRUÇÕES DE FORMATO:
+- Responde em Português.
+- Usa formatação HTML simples (<p>, <ul>, <li>, <strong>). NÃO uses blocos de código nem marcadores \`\`\`html.
+- Mantém o texto conciso, direto e dividido nestes 3 pontos claros:
+  1. <strong>O que é:</strong> Definição simples e acolhedora em poucas frases.
+  2. <strong>Como funciona / Exemplo:</strong> Explicação prática passo a passo.
+  3. <strong>Ponto-chave para memorizar:</strong> Uma dica rápida de fixação.`;
+
+  try {
+    let textoResultado = '';
+    const pollenKey = localStorage.getItem('viva_pollen_key');
+
+    const headers = { 'Content-Type': 'application/json' };
+    if (pollenKey) {
+      headers['Authorization'] = `Bearer ${pollenKey}`;
+    }
+
+    const respPollinations = await fetch('https://text.pollinations.ai/', {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({
+        messages: [
+          { role: 'system', content: 'És um assistente pedagógico. Responde apenas em HTML limpo.' },
+          { role: 'user', content: promptSistema }
+        ],
+        model: 'openai'
+      })
+    });
+    textoResultado = await respPollinations.text();
+
+    textoResultado = textoResultado.replace(/```html/gi, '').replace(/```/g, '').trim();
+    explanationBox.innerHTML = textoResultado || `<p>Não foi possível gerar a explicação. Tenta novamente.</p>`;
+
+    salvarHistorico(tema, materia);
+  } catch (error) {
+    console.error('Erro na integração com a IA:', error);
+    explanationBox.innerHTML = `
+      <div style="color:#991B1B; background:#FEF2F2; padding:1rem; border-radius:12px;">
+        <p><strong>Não foi possível ligar aos serviços de IA.</strong></p>
+        <p style="font-size:0.85rem; margin-top:0.3rem;">Verifica a tua ligação à Internet e tenta novamente.</p>
+      </div>
+    `;
+  } finally {
+    btnGerar.disabled = false;
+    btnGerar.style.opacity = '1';
+    resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
 function salvarHistorico(tema, materia) {
-  let historico = JSON.parse(localStorage.getItem('viva_historico')) || [];
-  
-  // Evitar duplicatas consecutivas
+  const permitiHist = document.getElementById('toggleHistory')?.checked;
+  if (!permitiHist) return;
+
+  const key = getStorageKey('viva_historico');
+  let historico = JSON.parse(localStorage.getItem(key)) || [];
   historico = historico.filter(item => item.tema.toLowerCase() !== tema.toLowerCase());
   
   historico.unshift({
     id: Date.now(),
     tema: tema,
     materia: materia,
-    data: new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
+    data: new Date().toLocaleDateString('pt-PT', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
   });
 
-  localStorage.setItem('viva_historico', JSON.stringify(historico));
+  localStorage.setItem(key, JSON.stringify(historico));
 }
 
 function carregarHistorico() {
   const historyList = document.getElementById('historyList');
   const clearBtn = document.getElementById('clearHistoryBtn');
-  const historico = JSON.parse(localStorage.getItem('viva_historico')) || [];
+  const key = getStorageKey('viva_historico');
+  const historico = JSON.parse(localStorage.getItem(key)) || [];
 
   if (historico.length === 0) {
     historyList.innerHTML = `
-      <div class="empty-history">
-        <p>Você ainda não realizou consultas recentes.</p>
+      <div class="empty-state">
+        <p>Ainda não realizaste consultas recentes.</p>
         <button class="btn-primary" style="margin-top:1rem; font-size:0.9rem;" onclick="showView('app')">Ir para as matérias</button>
       </div>
     `;
@@ -904,22 +1547,133 @@ function revisarConsulta(tema, materia) {
 }
 
 function removerItemHistorico(id) {
-  let historico = JSON.parse(localStorage.getItem('viva_historico')) || [];
+  const key = getStorageKey('viva_historico');
+  let historico = JSON.parse(localStorage.getItem(key)) || [];
   historico = historico.filter(item => item.id !== id);
-  localStorage.setItem('viva_historico', JSON.stringify(historico));
+  localStorage.setItem(key, JSON.stringify(historico));
   carregarHistorico();
 }
 
 function limparHistorico() {
-  if (confirm('Deseja apagar todo o seu histórico de pesquisas?')) {
-    localStorage.removeItem('viva_historico');
+  if (confirm('Desejas apagar todo o teu histórico de pesquisas?')) {
+    const key = getStorageKey('viva_historico');
+    localStorage.removeItem(key);
     carregarHistorico();
   }
 }
 
-// Inicialização ao carregar a página
+let anotacoes = [];
+let anotacaoSelecionadaId = null;
+
+function carregarAnotacoes() {
+  const key = getStorageKey('viva_anotacoes');
+  const salvas = localStorage.getItem(key);
+  if (salvas) {
+    anotacoes = JSON.parse(salvas);
+  } else {
+    anotacoes = [
+      {
+        id: '1',
+        titulo: 'Minha primeira anotação',
+        categoria: 'Geral',
+        conteudo: 'Escreve aqui os teus resumos e lembretes para teres acesso rápido durante os estudos.'
+      }
+    ];
+    salvarAnotacoesStorage();
+  }
+
+  renderizarListaAnotacoes();
+  if (anotacoes.length > 0) {
+    selecionarAnotacao(anotacoes[0].id);
+  } else {
+    anotacaoSelecionadaId = null;
+  }
+}
+
+function salvarAnotacoesStorage() {
+  const key = getStorageKey('viva_anotacoes');
+  localStorage.setItem(key, JSON.stringify(anotacoes));
+}
+
+function renderizarListaAnotacoes() {
+  const container = document.getElementById('notesList');
+  if (anotacoes.length === 0) {
+    container.innerHTML = `<p style="text-align:center; color:var(--text-soft); font-size:0.85rem; padding:1rem;">Nenhuma anotação criada.</p>`;
+    document.getElementById('noteEditor').style.display = 'none';
+    return;
+  }
+
+  document.getElementById('noteEditor').style.display = 'flex';
+  container.innerHTML = anotacoes.map(item => `
+    <div class="note-item ${item.id === anotacaoSelecionadaId ? 'active' : ''}" onclick="selecionarAnotacao('${item.id}')">
+      <h4>${item.titulo || 'Sem título'}</h4>
+      <p>${item.categoria ? '🏷️ ' + item.categoria + ' — ' : ''}${item.conteudo || 'Vazia'}</p>
+    </div>
+  `).join('');
+}
+
+function selecionarAnotacao(id) {
+  anotacaoSelecionadaId = id;
+  const note = anotacoes.find(n => n.id === id);
+  if (!note) return;
+
+  document.getElementById('noteCurrentId').value = note.id;
+  document.getElementById('noteTitleInput').value = note.titulo;
+  document.getElementById('noteTagInput').value = note.categoria || '';
+  document.getElementById('noteBodyInput').value = note.conteudo;
+
+  renderizarListaAnotacoes();
+}
+
+function criarNovaAnotacao() {
+  const nova = {
+    id: Date.now().toString(),
+    titulo: 'Nova Anotação',
+    categoria: 'Estudos',
+    conteudo: ''
+  };
+  anotacoes.unshift(nova);
+  salvarAnotacoesStorage();
+  selecionarAnotacao(nova.id);
+  document.getElementById('noteTitleInput').focus();
+}
+
+function autoSalvarAnotacao() {
+  const id = document.getElementById('noteCurrentId').value;
+  if (!id) return;
+
+  const index = anotacoes.findIndex(n => n.id === id);
+  if (index !== -1) {
+    anotacoes[index].titulo = document.getElementById('noteTitleInput').value;
+    anotacoes[index].categoria = document.getElementById('noteTagInput').value;
+    anotacoes[index].conteudo = document.getElementById('noteBodyInput').value;
+
+    salvarAnotacoesStorage();
+    renderizarListaAnotacoes();
+
+    const status = document.getElementById('noteSaveStatus');
+    status.textContent = 'Salvo automaticamente ✨';
+    setTimeout(() => { status.textContent = 'Salvo automaticamente'; }, 2000);
+  }
+}
+
+function deletarAnotacaoAtual() {
+  const id = document.getElementById('noteCurrentId').value;
+  if (!id) return;
+
+  if (confirm('Desejas eliminar esta anotação?')) {
+    anotacoes = anotacoes.filter(n => n.id !== id);
+    salvarAnotacoesStorage();
+    anotacaoSelecionadaId = anotacoes.length > 0 ? anotacoes[0].id : null;
+    carregarAnotacoes();
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  executarSplashScreen();
   initTheme();
+  carregarUsuarioSessao();
+  carregarMaterias();
 });
 </script>
 </body>
