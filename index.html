@@ -382,7 +382,7 @@ h1, h2, h3, .btn-primary, .step-num {
 .btn-secondary { background: var(--bg-card-subtle); color: var(--text); border: 1px solid var(--border); padding: 0.75rem 1.25rem; border-radius: 12px; font-size: 0.9rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; }
 .btn-secondary:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-.section-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem; }
+.section-header-flex { display: flex; justify-between: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem; }
 .section-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 0; }
 
 .subjects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; }
@@ -447,7 +447,7 @@ h1, h2, h3, .btn-primary, .step-num {
 .note-editor { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; }
 
 .config-group { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }
-.config-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.config-item { display: flex; justify-between: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
 .config-item:last-child { border-bottom: none; }
 .config-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
 .config-info p { font-size: 0.85rem; color: var(--text-soft); }
@@ -460,9 +460,9 @@ input:checked + .slider { background-color: var(--accent); }
 input:checked + .slider:before { transform: translateX(24px); }
 
 .history-container { margin-top: 1.5rem; }
-.history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+.history-header { display: flex; justify-between: space-between; align-items: center; margin-bottom: 1.25rem; }
 .history-list { display: flex; flex-direction: column; gap: 0.85rem; }
-.history-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.1rem 1.4rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.25s ease; box-shadow: var(--shadow-sm); }
+.history-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.1rem 1.4rem; display: flex; justify-between: space-between; align-items: center; transition: all 0.25s ease; box-shadow: var(--shadow-sm); }
 .history-card:hover { border-color: var(--accent); transform: translateX(5px); box-shadow: var(--shadow-md); }
 .history-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.15rem; }
 .history-info span { font-size: 0.82rem; color: var(--text-soft); }
@@ -536,6 +536,10 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
         <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
         <span>Aprender com IA</span>
       </button>
+      <button class="nav-item" data-view="solucoes" onclick="showView('solucoes')">
+        <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+        <span>Soluções & Exercícios</span>
+      </button>
       <button class="nav-item" data-view="anotacoes" onclick="showView('anotacoes')">
         <span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
         <span>Anotações</span>
@@ -588,8 +592,11 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           </div>
 
           <h1>Compreenda conteúdos escolares com <span class="highlight-text">IA visual</span> e linguagem direta</h1>
-          <p>O V.I.V.A adapta matérias escolares em tempo real gerando resumos claros e ilustrações didáticas personalizadas com SeeDream 5.0 Pro.</p>
-          <button class="btn-primary" onclick="showView('app')">Explorar matérias →</button>
+          <p>O V.I.V.A adapta matérias escolares em tempo real gerando resumos claros, soluções passo a passo e ilustrações didáticas personalizadas com os melhores modelos FLUX e GPT-4o.</p>
+          <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+            <button class="btn-primary" onclick="showView('app')">Explorar matérias →</button>
+            <button class="btn-secondary" onclick="showView('solucoes')">Resolver exercícios 📝</button>
+          </div>
         </section>
 
         <section class="video-section-card">
@@ -672,14 +679,14 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
             <div class="result-grid">
               <div class="explanation-box">
                 <h3 style="margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
-                  <span>📝</span> Explicação por IA
+                  <span>📝</span> Explicação por IA (GPT-4o)
                 </h3>
                 <div id="explanationContent"></div>
               </div>
               <div class="image-box">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
                   <h3 style="margin:0; display:flex; align-items:center; gap:0.5rem;" id="imageBoxTitle">
-                    <span>🎨</span> Ilustração Didática (SeeDream 5.0 Pro)
+                    <span>🎨</span> Ilustração Didática (FLUX.1)
                   </h3>
                   <button class="btn-sm" id="btnRegerarImagem" onclick="regerarApenasImagem()" style="display:none;">🔄 Nova Imagem</button>
                 </div>
@@ -691,6 +698,59 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
             </div>
           </div>
         </section>
+      </div>
+    </section>
+
+    <!-- NOVA SECÇÃO: SOLUÇÕES E EXERCÍCIOS -->
+    <section class="view" id="view-solucoes">
+      <div class="view-inner">
+        <div class="section-header-flex">
+          <div>
+            <h2 class="section-title">Soluções & Resolução de Exercícios</h2>
+            <p style="color:var(--text-soft); font-size:0.9rem;">Escreva ou cole uma pergunta, problema ou dever de casa para obter uma resolução guiada e didática.</p>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="input-group">
+            <label for="solucaoInput">Pergunta ou Exercício Escolar:</label>
+            <textarea id="solucaoInput" rows="4" placeholder="Exemplo: Resolva 2x + 8 = 20 ou Explique as causas principais do Ciclo da Água..."></textarea>
+          </div>
+          <div class="input-group">
+            <label for="solucaoMateriaSelect">Disciplina ou Área:</label>
+            <select id="solucaoMateriaSelect">
+              <option value="Matemática">Matemática</option>
+              <option value="Português">Português</option>
+              <option value="História">História</option>
+              <option value="Geografia">Geografia</option>
+              <option value="Ciências / Biologia">Ciências / Biologia</option>
+              <option value="Geral">Outra / Geral</option>
+            </select>
+          </div>
+          <button class="btn-primary" id="btnGerarSolucao" onclick="gerarSolucaoExercicio()">Gerar Solução Passo a Passo ✨</button>
+        </div>
+
+        <div class="result-area" id="resultAreaSolucao">
+          <div class="result-grid">
+            <div class="explanation-box">
+              <h3 style="margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+                <span>💡</span> Solução Guiada por IA
+              </h3>
+              <div id="solucaoContent"></div>
+            </div>
+            <div class="image-box">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                <h3 style="margin:0; display:flex; align-items:center; gap:0.5rem;">
+                  <span>🎨</span> Esquema Visual Didático
+                </h3>
+              </div>
+              <div class="image-placeholder">
+                <div class="skeleton-loader" id="skeletonLoaderSolucao"></div>
+                <img id="solucaoImage" alt="Esquema visual da solução" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -760,32 +820,14 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           <div class="config-item">
             <div class="config-info">
               <h4>Modelo de Gerador de Imagens</h4>
-              <p>Selecione a IA utilizada para criar as ilustrações didáticas das matérias.</p>
+              <p>Selecione a IA de alta qualidade utilizada para criar as ilustrações didáticas.</p>
             </div>
             <select id="imageModelSelect" onchange="alterarModeloImagem(this.value)" style="padding:0.4rem 0.8rem; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-weight:600;">
-              <option value="bytedance/seedream-5.0-pro">ByteDance SeeDream 5.0 Pro ✨ (Padrão)</option>
-              <option value="turbo">SDXL Turbo (Rápido)</option>
-              <option value="flux">FLUX</option>
+              <option value="flux">FLUX.1 Schnell / Pro ✨ (Padrão)</option>
+              <option value="flux-realism">FLUX Realismo Fotográfico</option>
+              <option value="bytedance/seedream-5.0-pro">ByteDance SeeDream 5.0 Pro</option>
+              <option value="turbo">SDXL Turbo (Ultra Rápido)</option>
             </select>
-          </div>
-        </div>
-
-        <div class="config-group">
-          <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent);">🍯 Conta e Chave de Pólens (Pollinations AI)</h3>
-          
-          <div class="config-item" style="flex-direction:column; align-items:flex-start; gap:0.5rem;">
-            <div class="config-info">
-              <h4>Token / API Key de Pólens</h4>
-              <p>Ao inserir a tua chave, a geração de texto e imagem passa a utilizar o teu saldo de pólens, removendo anúncios e aumentando a velocidade.</p>
-            </div>
-            <div style="width:100%; margin-top:0.5rem;">
-              <label for="pollenApiKeyInput" style="font-size:0.85rem; font-weight:700; display:block; margin-bottom:0.3rem;">Chave da API de Pólens (Pollinations):</label>
-              <div style="display:flex; gap:0.5rem;">
-                <input type="password" id="pollenApiKeyInput" placeholder="Cole a sua Pollinations / Pollen API Key aqui..." style="flex:1; padding:0.6rem 0.9rem; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text);" />
-                <button class="btn-sm" onclick="salvarChavePollen()">Guardar Chave</button>
-              </div>
-              <span id="pollenKeyStatus" style="font-size:0.78rem; color:var(--text-soft); margin-top:0.3rem; display:block;"></span>
-            </div>
           </div>
         </div>
 
@@ -952,6 +994,9 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
 </footer>
 
 <script>
+// CHAVE DE API DA POLLINATIONS INCORPORADA DIRETA E GLOBALMENTE
+const POLLEN_API_KEY = 'sk_HmiG8JBOA5RdBgBR9862geoVT51yHjlj';
+
 function executarSplashScreen() {
   const splash = document.getElementById('splashScreen');
   const reduceAnim = localStorage.getItem('viva_reduce_anim') === 'true';
@@ -990,91 +1035,7 @@ function atualizarInterfaceUsuario() {
     statusEl.textContent = 'Conta Salva';
     btnSidebar.textContent = 'Perfil';
 
-    configLabel.textContent = `Conta Ativa: ${usuarioAtual.nome}${usuarioAtual.avatar || ''}`;
-    configSub.textContent = 'As tuas matérias e anotações estão associadas a este perfil local.';
-    configBtn.textContent = 'Ver Perfil';
-  } else {
-    avatarEl.textContent = '👤';
-    nameEl.textContent = 'Visitante';
-    statusEl.textContent = 'Modo Local';
-    btnSidebar.textContent = 'Entrar';
-
-    configLabel.textContent = 'Conta Atual: Visitante';
-    configSub.textContent = 'Os teus dados estão a ser guardados no modo padrão do navegador.';
-    configBtn.textContent = 'Entrar / Criar Conta';
-  }
-
-  carregarMaterias();
-}
-
-function abrirModalAuth() {
-  const modal = document.getElementById('authModal');
-  modal.classList.add('active');
-
-  if (usuarioAtual) {
-    document.getElementById('authTabs').style.display = 'none';
-    document.getElementById('formLogin').style.display = 'none';
-    document.getElementById('formCadastro').style.display = 'none';
-    document.getElementById('panelLogado').style.display = 'block';
-
-    document.getElementById('userPanelAvatar').textContent = usuarioAtual.avatar || '🌱';
-    document.getElementById('userPanelName').textContent = usuarioAtual.nome;
-  } else {
-    document.getElementById('authTabs').style.display = 'flex';
-    document.getElementById('panelLogado').style.display = 'none';
-    alternarAbaAuth('login');
-  }
-}
-
-function fecharModalAuth() {
-  document.getElementById('authModal').classList.remove('active');
-}
-
-function alternarAbaAuth(aba) {
-  const tabs = document.querySelectorAll('.auth-tab');
-  tabs.forEach(t => t.classList.remove('active'));
-
-  if (aba === 'login') {
-    tabs[0].classList.add('active');
-    document.getElementById('formLogin').style.display = 'block';
-    document.getElementById('formCadastro').style.display = 'none';
-  } else {
-    tabs[1].classList.add('active');
-    document.getElementById('formLogin').style.display = 'none';
-    document.getElementById('formCadastro').style.display = 'block';
-  }
-}
-
-function realizarCadastro() {
-  const nome = document.getElementById('cadName').value.trim();
-  const avatar = document.getElementById('cadAvatar').value;
-  const senha = document.getElementById('cadSenha').value.trim();
-
-  if (!nome || !senha) {
-    alert('Por favor, preenche o nome e a palavra-passe.');
-    return;
-  }
-
-  let usuarios = JSON.parse(localStorage.getItem('viva_usuarios')) || [];
-  const existe = usuarios.find(u => u.nome.toLowerCase() === nome.toLowerCase());
-
-  if (existe) {
-    alert('Já existe um perfil registado com este nome neste dispositivo.');
-    return;
-  }
-
-  const novoUsuario = { id: Date.now().toString(), nome, avatar, senha };
-  usuarios.push(novoUsuario);
-  localStorage.setItem('viva_usuarios', JSON.stringify(usuarios));
-
-  usuarioAtual = novoUsuario;
-  localStorage.setItem('viva_sessao_ativa', JSON.stringify(novoUsuario));
-  atualizarInterfaceUsuario();
-  fecharModalAuth();
-
-  document.getElementById('cadName').value = '';
-  document.getElementById('cadSenha').value = '';
-  alert(`Bem-vindo(a), ${nome}! A tua conta local foi criada com sucesso.`);
+    configLabel.textContent = `Conta Ativa: ${usuarioAtual.nome}${usuarioAtual.avatar \vert{}\vert{} ''}`;     configSub.textContent = 'As tuas matérias e anotações estão associadas a este perfil local.';     configBtn.textContent = 'Ver Perfil';   } else {     avatarEl.textContent = '👤';     nameEl.textContent = 'Visitante';     statusEl.textContent = 'Modo Local';     btnSidebar.textContent = 'Entrar';      configLabel.textContent = 'Conta Atual: Visitante';     configSub.textContent = 'Os teus dados estão a ser guardados no modo padrão do navegador.';     configBtn.textContent = 'Entrar / Criar Conta';   }    carregarMaterias(); }  function abrirModalAuth() {   const modal = document.getElementById('authModal');   modal.classList.add('active');    if (usuarioAtual) {     document.getElementById('authTabs').style.display = 'none';     document.getElementById('formLogin').style.display = 'none';     document.getElementById('formCadastro').style.display = 'none';     document.getElementById('panelLogado').style.display = 'block';      document.getElementById('userPanelAvatar').textContent = usuarioAtual.avatar \vert{}\vert{} '🌱';     document.getElementById('userPanelName').textContent = usuarioAtual.nome;   } else {     document.getElementById('authTabs').style.display = 'flex';     document.getElementById('panelLogado').style.display = 'none';     alternarAbaAuth('login');   } }  function fecharModalAuth() {   document.getElementById('authModal').classList.remove('active'); }  function alternarAbaAuth(aba) {   const tabs = document.querySelectorAll('.auth-tab');   tabs.forEach(t => t.classList.remove('active'));    if (aba === 'login') {     tabs[0].classList.add('active');     document.getElementById('formLogin').style.display = 'block';     document.getElementById('formCadastro').style.display = 'none';   } else {     tabs[1].classList.add('active');     document.getElementById('formLogin').style.display = 'none';     document.getElementById('formCadastro').style.display = 'block';   } }  function realizarCadastro() {   const nome = document.getElementById('cadName').value.trim();   const avatar = document.getElementById('cadAvatar').value;   const senha = document.getElementById('cadSenha').value.trim();    if (!nome \vert{}\vert{} !senha) {     alert('Por favor, preenche o nome e a palavra-passe.');     return;   }    let usuarios = JSON.parse(localStorage.getItem('viva_usuarios')) \vert{}\vert{} [];   const existe = usuarios.find(u => u.nome.toLowerCase() === nome.toLowerCase());    if (existe) {     alert('Já existe um perfil registado com este nome neste dispositivo.');     return;   }    const novoUsuario = { id: Date.now().toString(), nome, avatar, senha };   usuarios.push(novoUsuario);   localStorage.setItem('viva_usuarios', JSON.stringify(usuarios));    usuarioAtual = novoUsuario;   localStorage.setItem('viva_sessao_ativa', JSON.stringify(novoUsuario));   atualizarInterfaceUsuario();   fecharModalAuth();    document.getElementById('cadName').value = '';   document.getElementById('cadSenha').value = '';   alert(`Bem-vindo(a), ${nome}! A tua conta local foi criada com sucesso.`);
 }
 
 function realizarLogin() {
@@ -1135,11 +1096,7 @@ function initTheme() {
   document.getElementById('fontSizeSelect').value = fontSize;
   alterarTamanhoFonte(fontSize);
 
-  const savedPollenKey = localStorage.getItem('viva_pollen_key') || '';
-  document.getElementById('pollenApiKeyInput').value = savedPollenKey;
-  atualizarStatusChavePollen();
-
-  const savedImageModel = localStorage.getItem('viva_image_model') || 'bytedance/seedream-5.0-pro';
+  const savedImageModel = localStorage.getItem('viva_image_model') || 'flux';
   document.getElementById('imageModelSelect').value = savedImageModel;
   atualizarTituloModeloImagem(savedImageModel);
 }
@@ -1185,46 +1142,11 @@ function alterarModeloImagem(modelo) {
 function atualizarTituloModeloImagem(modelo) {
   const titleEl = document.getElementById('imageBoxTitle');
   if (titleEl) {
-    let nomeExibicao = 'SeeDream 5.0 Pro';
+    let nomeExibicao = 'FLUX.1';
+    if (modelo === 'flux-realism') nomeExibicao = 'FLUX Realismo';
+    if (modelo === 'bytedance/seedream-5.0-pro') nomeExibicao = 'SeeDream 5.0 Pro';
     if (modelo === 'turbo') nomeExibicao = 'SDXL Turbo';
-    if (modelo === 'flux') nomeExibicao = 'FLUX';
-    titleEl.innerHTML = `<span>🎨</span> Ilustração Didática (${nomeExibicao})`;
-  }
-}
-
-function salvarChavePollen() {
-  const key = document.getElementById('pollenApiKeyInput').value.trim();
-  localStorage.setItem('viva_pollen_key', key);
-  atualizarStatusChavePollen();
-  alert('Chave de Pólens guardada com sucesso!');
-}
-
-function atualizarStatusChavePollen() {
-  const key = localStorage.getItem('viva_pollen_key');
-  const statusEl = document.getElementById('pollenKeyStatus');
-  if (key) {
-    statusEl.textContent = '🟢 Conta de Pólens ativa e autenticada (Sem anúncios / Alta Prioridade).';
-    statusEl.style.color = '#10B981';
-  } else {
-    statusEl.textContent = '🔵 A utilizar modo público gratuito. Adicione a sua chave para usar o saldo de Pólens.';
-    statusEl.style.color = 'var(--text-soft)';
-  }
-}
-
-function showView(view) {
-  const currentView = document.querySelector('.view.active');
-  const targetView = document.getElementById('view-' + view);
-
-  if (currentView === targetView) return;
-
-  if (currentView) {
-    currentView.classList.remove('active');
-  }
-  
-  targetView.classList.add('active');
-
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const activeNav = document.querySelector(`.nav-item[data-view="${view}"]`);
+    titleEl.innerHTML = `<span>🎨</span> Ilustração Didática (${nomeExibicao})`;   } }  function showView(view) {   const currentView = document.querySelector('.view.active');   const targetView = document.getElementById('view-' + view);    if (currentView === targetView) return;    if (currentView) {     currentView.classList.remove('active');   }      targetView.classList.add('active');    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));   const activeNav = document.querySelector(`.nav-item[data-view="${view}"]`);
   if (activeNav) activeNav.classList.add('active');
 
   if (view === 'historico') carregarHistorico();
@@ -1264,7 +1186,7 @@ function renderizarMaterias() {
   grid.innerHTML = materias.map(item => `
     <div class="subject-card" onclick="selecionarMateria('${item.nome}')">
       <div class="subject-header-action" onclick="event.stopPropagation();">
-        <button class="icon-btn-sm" title="Editar" onclick="editarMateria('${item.id}')">✏️️</button>
+        <button class="icon-btn-sm" title="Editar" onclick="editarMateria('${item.id}')">✏</button>
         <button class="icon-btn-sm" title="Eliminar" onclick="excluirMateria('${item.id}')">🗑️</button>
       </div>
       <div>
@@ -1356,16 +1278,14 @@ function handleKeyPress(e) {
 }
 
 function construirPromptImagem(tema, materia) {
-  return `${tema}${materia} educational illustration, clear minimalist vector graphic, clean isolated background, vibrant child friendly colors, simple diagram style, flat design, high quality, no text noise`;
+  return `${tema} (${materia}), educational illustration, clean minimalist vector diagram, high detail, vibrant friendly colors, flat visual style, HD quality, no text noise`;
 }
 
-// GERAÇÃO DE IMAGEM OTIMIZADA COM BYTEDANCE SEEDREAM 5.0 PRO
 function carregarImagemIA(tema, materia) {
   const imgElem = document.getElementById('aiImage');
   const skeleton = document.getElementById('skeletonLoader');
   const btnRegerar = document.getElementById('btnRegerarImagem');
-  const pollenKey = localStorage.getItem('viva_pollen_key') || '';
-  const modelo = localStorage.getItem('viva_image_model') || 'bytedance/seedream-5.0-pro';
+  const modelo = localStorage.getItem('viva_image_model') || 'flux';
 
   skeleton.classList.add('active');
   imgElem.style.opacity = '0';
@@ -1375,12 +1295,7 @@ function carregarImagemIA(tema, materia) {
   const promptEncoded = encodeURIComponent(promptFinal);
   const seed = Math.floor(Math.random() * 900000) + 100000;
   
-  // Modelo 'bytedance/seedream-5.0-pro' configurado como modelo padrão
-  let primaryUrl = `https://image.pollinations.ai/prompt/${promptEncoded}?width=512&height=512&nologo=true&seed=${seed}&model=${encodeURIComponent(modelo)}`;
-  
-  if (pollenKey) {
-    primaryUrl += `&key=${encodeURIComponent(pollenKey)}`;
-  }
+  let primaryUrl = `https://image.pollinations.ai/prompt/${promptEncoded}?width=768&height=768&nologo=true&seed=${seed}&model=${encodeURIComponent(modelo)}&key=${POLLEN_API_KEY}`;
 
   imgElem.onload = () => {
     skeleton.classList.remove('active');
@@ -1388,10 +1303,7 @@ function carregarImagemIA(tema, materia) {
   };
 
   imgElem.onerror = () => {
-    let fallbackUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(tema + ' educational visual graphic')}?width=400&height=400&nologo=true`;
-    if (pollenKey) {
-      fallbackUrl += `&key=${encodeURIComponent(pollenKey)}`;
-    }
+    let fallbackUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(tema + ' educational visual graphic')}?width=512&height=512&nologo=true&key=${POLLEN_API_KEY}`;
     imgElem.onerror = () => {
       skeleton.classList.remove('active');
       imgElem.style.opacity = '1';
@@ -1443,33 +1355,28 @@ O utilizador deseja aprender sobre o tema "${tema}" na disciplina de "${materia}
 INSTRUÇÕES DE FORMATO:
 - Responde em Português.
 - Usa formatação HTML simples (<p>, <ul>, <li>, <strong>). NÃO uses blocos de código nem marcadores \`\`\`html.
-- Mantém o texto conciso, direto e dividido nestes 3 pontos claros:
+- Mantém o texto claro, motivador, conciso e dividido nestes 3 pontos:
   1. <strong>O que é:</strong> Definição simples e acolhedora em poucas frases.
   2. <strong>Como funciona / Exemplo:</strong> Explicação prática passo a passo.
   3. <strong>Ponto-chave para memorizar:</strong> Uma dica rápida de fixação.`;
 
   try {
-    let textoResultado = '';
-    const pollenKey = localStorage.getItem('viva_pollen_key');
-
-    const headers = { 'Content-Type': 'application/json' };
-    if (pollenKey) {
-      headers['Authorization'] = `Bearer ${pollenKey}`;
-    }
-
     const respPollinations = await fetch('https://text.pollinations.ai/', {
       method: 'POST',
-      headers: headers,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${POLLEN_API_KEY}`
+      },
       body: JSON.stringify({
         messages: [
-          { role: 'system', content: 'És um assistente pedagógico. Responde apenas em HTML limpo.' },
+          { role: 'system', content: 'És um assistente pedagógico amigável e especialista em ensino neuroinclusivo. Responde estritamente em HTML limpo.' },
           { role: 'user', content: promptSistema }
         ],
-        model: 'openai'
+        model: 'openai-large'
       })
     });
-    textoResultado = await respPollinations.text();
-
+    
+    let textoResultado = await respPollinations.text();
     textoResultado = textoResultado.replace(/```html/gi, '').replace(/```/g, '').trim();
     explanationBox.innerHTML = textoResultado || `<p>Não foi possível gerar a explicação. Tenta novamente.</p>`;
 
@@ -1487,6 +1394,112 @@ INSTRUÇÕES DE FORMATO:
     btnGerar.style.opacity = '1';
     resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+}
+
+// LÓGICA DO MÓDULO DE SOLUÇÕES & EXERCÍCIOS
+async function gerarSolucaoExercicio() {
+  const inputElem = document.getElementById('solucaoInput');
+  const materiaElem = document.getElementById('solucaoMateriaSelect');
+  const btnGerar = document.getElementById('btnGerarSolucao');
+  const questao = inputElem.value.trim();
+  const materia = materiaElem.value;
+
+  if (!questao) {
+    alert('Por favor, escreva ou cole uma pergunta ou exercício.');
+    return;
+  }
+
+  const solucaoBox = document.getElementById('solucaoContent');
+  const resultArea = document.getElementById('resultAreaSolucao');
+
+  resultArea.classList.add('visible');
+  solucaoBox.innerHTML = `
+    <div style="padding:1rem; text-align:center;">
+      <p style="font-weight:700; color:var(--accent); margin-bottom:0.3rem;">⏳ A resolver o exercício passo a passo...</p>
+      <p style="font-size:0.85rem; color:var(--text-soft);">A organizar etapas sequenciais e diagrama didático.</p>
+    </div>
+  `;
+
+  btnGerar.disabled = true;
+  btnGerar.style.opacity = '0.7';
+
+  carregarImagemSolucao(questao, materia);
+
+  const promptSistema = `És o assistente pedagógico V.I.V.A., especializado em resolver exercícios e deveres escolares para alunos neurodivergentes.
+Resolve o seguinte exercício da disciplina de "${materia}":
+"${questao}"
+
+INSTRUÇÕES DE FORMATO:
+- Responde em Português.
+- Usa formatação HTML simples (<p>, <ol>, <li>, <strong>). NÃO uses blocos de código nem marcadores \`\`\`html.
+- Estrutura a resposta nestes pontos claros:
+  1. <strong>Objetivo da Questão:</strong> Explicação direta do que o exercício pede.
+  2. <strong>Resolução Passo a Passo:</strong> Lista numerada com passos curtos e fáceis de acompanhar.
+  3. <strong>Resposta Final:</strong> O resultado definitivo em destaque.
+  4. <strong>Dica de Verificação:</strong> Como confirmar se a resposta está correta.`;
+
+  try {
+    const respPollinations = await fetch('https://text.pollinations.ai/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${POLLEN_API_KEY}`
+      },
+      body: JSON.stringify({
+        messages: [
+          { role: 'system', content: 'És um assistente pedagógico focado em resoluções acessíveis e inclusivas. Responde estritamente em HTML limpo.' },
+          { role: 'user', content: promptSistema }
+        ],
+        model: 'openai-large'
+      })
+    });
+    
+    let textoResultado = await respPollinations.text();
+    textoResultado = textoResultado.replace(/```html/gi, '').replace(/```/g, '').trim();
+    solucaoBox.innerHTML = textoResultado || `<p>Não foi possível gerar a solução. Tenta novamente.</p>`;
+
+    salvarHistorico(`[Solução] ${questao}`, materia);
+  } catch (error) {
+    console.error('Erro ao gerar solução:', error);
+    solucaoBox.innerHTML = `
+      <div style="color:#991B1B; background:#FEF2F2; padding:1rem; border-radius:12px;">
+        <p><strong>Não foi possível gerar a solução do exercício.</strong></p>
+        <p style="font-size:0.85rem; margin-top:0.3rem;">Verifica a tua ligação à Internet e tenta novamente.</p>
+      </div>
+    `;
+  } finally {
+    btnGerar.disabled = false;
+    btnGerar.style.opacity = '1';
+    resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+function carregarImagemSolucao(questao, materia) {
+  const imgElem = document.getElementById('solucaoImage');
+  const skeleton = document.getElementById('skeletonLoaderSolucao');
+  const modelo = localStorage.getItem('viva_image_model') || 'flux';
+
+  skeleton.classList.add('active');
+  imgElem.style.opacity = '0';
+
+  const promptFinal = `${questao} (${materia}), step by step solution educational diagram, infographics, simple minimalist vector design, clear HD style`;
+  const promptEncoded = encodeURIComponent(promptFinal);
+  const seed = Math.floor(Math.random() * 900000) + 100000;
+  
+  let primaryUrl = `https://image.pollinations.ai/prompt/${promptEncoded}?width=768&height=768&nologo=true&seed=${seed}&model=${encodeURIComponent(modelo)}&key=${POLLEN_API_KEY}`;
+
+  imgElem.onload = () => {
+    skeleton.classList.remove('active');
+    imgElem.style.opacity = '1';
+  };
+
+  imgElem.onerror = () => {
+    skeleton.classList.remove('active');
+    imgElem.style.opacity = '1';
+    imgElem.alt = 'Não foi possível carregar o esquema visual da solução.';
+  };
+
+  imgElem.src = primaryUrl;
 }
 
 function salvarHistorico(tema, materia) {
@@ -1532,7 +1545,7 @@ function carregarHistorico() {
         <span>${item.materia} • ${item.data}</span>
       </div>
       <div class="history-actions">
-        <button class="btn-sm" onclick="revisarConsulta('${item.tema}', '${item.materia}')">Revisar</button>
+        <button class="btn-sm" onclick="revisarConsulta('${item.tema.replace('[Solução] ', '')}', '${item.materia}')">Revisar</button>
         <button class="btn-danger-sm" onclick="removerItemHistorico(${item.id})">✕</button>
       </div>
     </div>
