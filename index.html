@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -337,7 +337,7 @@ h1, h2, h3, .btn-primary, .step-num {
 }
 .modal-overlay.active .auth-card { transform: translateY(0); }
 
-.auth-header { display: flex; justify-between: space-between; align-items: center; margin-bottom: 1.5rem; }
+.auth-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
 .auth-tabs { display: flex; background: var(--bg-card-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 4px; margin-bottom: 1.5rem; }
 .auth-tab { flex: 1; padding: 0.6rem; border: none; background: transparent; color: var(--text-soft); font-weight: 700; font-size: 0.88rem; border-radius: 8px; cursor: pointer; transition: all 0.2s ease; }
 .auth-tab.active { background: var(--bg-card); color: var(--text); box-shadow: var(--shadow-sm); }
@@ -382,7 +382,7 @@ h1, h2, h3, .btn-primary, .step-num {
 .btn-secondary { background: var(--bg-card-subtle); color: var(--text); border: 1px solid var(--border); padding: 0.75rem 1.25rem; border-radius: 12px; font-size: 0.9rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.2s ease; }
 .btn-secondary:hover { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
 
-.section-header-flex { display: flex; justify-between: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem; }
+.section-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 1rem; }
 .section-title { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 0; }
 
 .subjects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.25rem; }
@@ -447,7 +447,7 @@ h1, h2, h3, .btn-primary, .step-num {
 .note-editor { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; }
 
 .config-group { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }
-.config-item { display: flex; justify-between: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.config-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid var(--border); }
 .config-item:last-child { border-bottom: none; }
 .config-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
 .config-info p { font-size: 0.85rem; color: var(--text-soft); }
@@ -460,9 +460,9 @@ input:checked + .slider { background-color: var(--accent); }
 input:checked + .slider:before { transform: translateX(24px); }
 
 .history-container { margin-top: 1.5rem; }
-.history-header { display: flex; justify-between: space-between; align-items: center; margin-bottom: 1.25rem; }
+.history-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
 .history-list { display: flex; flex-direction: column; gap: 0.85rem; }
-.history-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.1rem 1.4rem; display: flex; justify-between: space-between; align-items: center; transition: all 0.25s ease; box-shadow: var(--shadow-sm); }
+.history-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.1rem 1.4rem; display: flex; justify-content: space-between; align-items: center; transition: all 0.25s ease; box-shadow: var(--shadow-sm); }
 .history-card:hover { border-color: var(--accent); transform: translateX(5px); box-shadow: var(--shadow-md); }
 .history-info h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.15rem; }
 .history-info span { font-size: 0.82rem; color: var(--text-soft); }
@@ -575,7 +575,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           <div>
             <h4 style="font-size:0.98rem; font-weight:800; color:var(--text); margin-bottom:0.15rem;">Ambiente Acolhedor & Acessível</h4>
             <p style="font-size:0.86rem; color:var(--text-soft); margin:0;">
-              Projetado respeitando as necessidades de estudantes com Autismo, TDAH, Dislexia e Altas Habilidades.
+              Projetado respeitando as necessidades de estudantes com Autismo, TDAH, Dislexia, Deficiência Auditiva e Altas Habilidades.
             </p>
           </div>
         </div>
@@ -592,7 +592,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           </div>
 
           <h1>Compreenda conteúdos escolares com <span class="highlight-text">IA visual</span> e linguagem direta</h1>
-          <p>O V.I.V.A adapta matérias escolares em tempo real gerando resumos claros, soluções passo a passo e ilustrações didáticas personalizadas com os melhores modelos FLUX e GPT-4o.</p>
+          <p>O V.I.V.A adapta matérias escolares em tempo real gerando resumos claros, soluções passo a passo em texto corrido e ilustrações didáticas personalizadas com os melhores modelos de IA visual.</p>
           <div style="display:flex; gap:1rem; flex-wrap:wrap;">
             <button class="btn-primary" onclick="showView('app')">Explorar matérias →</button>
             <button class="btn-secondary" onclick="showView('solucoes')">Resolver exercícios 📝</button>
@@ -616,7 +616,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
               </svg>
             </div>
             <h3 style="font-size:1.15rem; font-weight:700; margin-bottom:0.3rem;">Espaço Reservado para o Vídeo</h3>
-            <p style="font-size:0.88rem; opacity:0.85; max-width:480px;">Este player receberá o vídeo demonstrativo com explicações visuais de como utilizar todos os recursos do V.I.V.A.</p>
+            <p style="font-size:0.88rem; opacity:0.85; max-width:480px;">Este player receberá o vídeo demonstrativo com explicações visuais e legendadas de como utilizar todos os recursos do V.I.V.A.</p>
           </div>
         </section>
       </div>
@@ -669,7 +669,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           </div>
 
           <div class="input-group">
-            <label for="topicInput">O que gostarias de compreender agora?</label>
+            <label for="topicInput">O que você gostaria de compreender agora?</label>
             <input type="text" id="topicInput" placeholder="Exemplo: O que é a fotossíntese? Como funciona o sistema solar?" onkeypress="handleKeyPress(event)" />
           </div>
 
@@ -678,15 +678,20 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           <div class="result-area" id="resultArea">
             <div class="result-grid">
               <div class="explanation-box">
-                <h3 style="margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
-                  <span>📝</span> Explicação por IA (GPT-4o)
-                </h3>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+                  <h3 style="margin:0; display:flex; align-items:center; gap:0.5rem;">
+                    <span>📝</span> Explicação por IA
+                  </h3>
+                  <button class="btn-sm btn-audio-read" onclick="lerTextoContent('explanationContent')" style="display:inline-flex; align-items:center; gap:0.4rem;">
+                    🔊 Ler em Voz Alta
+                  </button>
+                </div>
                 <div id="explanationContent"></div>
               </div>
               <div class="image-box">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
                   <h3 style="margin:0; display:flex; align-items:center; gap:0.5rem;" id="imageBoxTitle">
-                    <span>🎨</span> Ilustração Didática (FLUX.1)
+                    <span>🎨</span> Ilustração Didática
                   </h3>
                   <button class="btn-sm" id="btnRegerarImagem" onclick="regerarApenasImagem()" style="display:none;">🔄 Nova Imagem</button>
                 </div>
@@ -701,13 +706,13 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
       </div>
     </section>
 
-    <!-- NOVA SECÇÃO: SOLUÇÕES E EXERCÍCIOS -->
+    <!-- SECÇÃO: SOLUÇÕES E EXERCÍCIOS -->
     <section class="view" id="view-solucoes">
       <div class="view-inner">
         <div class="section-header-flex">
           <div>
             <h2 class="section-title">Soluções & Resolução de Exercícios</h2>
-            <p style="color:var(--text-soft); font-size:0.9rem;">Escreva ou cole uma pergunta, problema ou dever de casa para obter uma resolução guiada e didática.</p>
+            <p style="color:var(--text-soft); font-size:0.9rem;">Escreva ou cole uma pergunta, problema ou dever de casa para obter uma resolução textual guiada e didática.</p>
           </div>
         </div>
 
@@ -731,24 +736,16 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
         </div>
 
         <div class="result-area" id="resultAreaSolucao">
-          <div class="result-grid">
-            <div class="explanation-box">
-              <h3 style="margin-bottom:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+          <div class="explanation-box" style="width: 100%;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <h3 style="margin:0; display:flex; align-items:center; gap:0.5rem;">
                 <span>💡</span> Solução Guiada por IA
               </h3>
-              <div id="solucaoContent"></div>
+              <button class="btn-sm btn-audio-read" onclick="lerTextoContent('solucaoContent')" style="display:inline-flex; align-items:center; gap:0.4rem;">
+                🔊 Ouvir Solução
+              </button>
             </div>
-            <div class="image-box">
-              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-                <h3 style="margin:0; display:flex; align-items:center; gap:0.5rem;">
-                  <span>🎨</span> Esquema Visual Didático
-                </h3>
-              </div>
-              <div class="image-placeholder">
-                <div class="skeleton-loader" id="skeletonLoaderSolucao"></div>
-                <img id="solucaoImage" alt="Esquema visual da solução" />
-              </div>
-            </div>
+            <div id="solucaoContent"></div>
           </div>
         </div>
       </div>
@@ -771,7 +768,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
             <input type="hidden" id="noteCurrentId" value="" />
             <div class="input-group" style="margin:0;">
               <label for="noteTitleInput">Título da Anotação</label>
-              <input type="text" id="noteTitleInput" placeholder="Escreve o título..." oninput="autoSalvarAnotacao()" />
+              <input type="text" id="noteTitleInput" placeholder="Escreva o título..." oninput="autoSalvarAnotacao()" />
             </div>
 
             <div class="input-group" style="margin:0;">
@@ -781,7 +778,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
 
             <div class="input-group" style="margin:0; flex:1; display:flex; flex-direction:column;">
               <label for="noteBodyInput">Conteúdo da Anotação</label>
-              <textarea id="noteBodyInput" rows="10" placeholder="Escreve as tuas anotações aqui..." oninput="autoSalvarAnotacao()"></textarea>
+              <textarea id="noteBodyInput" rows="10" placeholder="Escreva as suas anotações aqui..." oninput="autoSalvarAnotacao()"></textarea>
             </div>
 
             <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem;">
@@ -798,7 +795,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
         <div class="history-header">
           <div>
             <h2 class="section-title" style="margin-bottom:0.25rem;">Histórico de pesquisas</h2>
-            <p style="color:var(--text-soft);">As tuas consultas recentes ficam registadas para revisão rápida.</p>
+            <p style="color:var(--text-soft);">As suas consultas recentes ficam registradas para revisão rápida.</p>
           </div>
           <button class="btn-danger-sm" id="clearHistoryBtn" onclick="limparHistorico()" style="display:none;">Limpar tudo</button>
         </div>
@@ -812,7 +809,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
     <section class="view" id="view-configuracoes">
       <div class="view-inner">
         <h2 class="section-title" style="margin-bottom: 0.25rem;">Configurações e Preferências</h2>
-        <p style="color:var(--text-soft); margin-bottom: 2rem;">Personaliza a tua experiência de utilização e escolha os modelos de IA preferidos.</p>
+        <p style="color:var(--text-soft); margin-bottom: 2rem;">Personalize a sua experiência de utilização e escolha os recursos de acessibilidade e modelos de IA preferidos.</p>
 
         <div class="config-group">
           <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent);">🎨 Modelo de IA para Imagens</h3>
@@ -820,10 +817,10 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           <div class="config-item">
             <div class="config-info">
               <h4>Modelo de Gerador de Imagens</h4>
-              <p>Selecione a IA de alta qualidade utilizada para criar as ilustrações didáticas.</p>
+              <p>Selecione a IA utilizada para criar ilustrações na aba Aprender com IA.</p>
             </div>
             <select id="imageModelSelect" onchange="alterarModeloImagem(this.value)" style="padding:0.4rem 0.8rem; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-weight:600;">
-              <option value="flux">FLUX.1 Schnell / Pro ✨ (Padrão)</option>
+              <option value="flux">FLUX.1 Schnell / Pro ✨ (Recomendado)</option>
               <option value="flux-realism">FLUX Realismo Fotográfico</option>
               <option value="bytedance/seedream-5.0-pro">ByteDance SeeDream 5.0 Pro</option>
               <option value="turbo">SDXL Turbo (Ultra Rápido)</option>
@@ -836,15 +833,26 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           <div class="config-item">
             <div class="config-info">
               <h4 id="configUserLabel">Conta Atual: Visitante</h4>
-              <p id="configUserSub">Os teus dados estão a ser guardados no navegador deste dispositivo.</p>
+              <p id="configUserSub">Os seus dados estão salvos no navegador deste dispositivo.</p>
             </div>
-            <button class="btn-secondary" id="configAccountBtn" onclick="abrirModalAuth()">Gerir Conta</button>
+            <button class="btn-secondary" id="configAccountBtn" onclick="abrirModalAuth()">Gerenciar Conta</button>
           </div>
         </div>
 
         <div class="config-group">
-          <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent);">♿ Acessibilidade e Estímulo Visual</h3>
+          <h3 style="font-size:1.1rem; margin-bottom:1rem; color:var(--accent);">♿ Acessibilidade, Leitura de Texto & Estímulo Visual</h3>
           
+          <div class="config-item">
+            <div class="config-info">
+              <h4>Leitura de Texto em Voz Alta / Síntese Audível</h4>
+              <p>Ativa botões de áudio para leitura guiada do conteúdo textual e apoio a alunos surdos/com deficiência auditiva ou dificuldades de leitura.</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggleTextToSpeech" checked onchange="alterarLeituraTexto(this.checked)" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
           <div class="config-item">
             <div class="config-info">
               <h4>Reduzir Animações</h4>
@@ -906,7 +914,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           </div>
 
           <p style="font-size:0.95rem; color:var(--text-soft); line-height:1.7; margin-bottom:1.25rem;">
-            Incorporamos elementos visuais reconhecidos internacionalmente pela comunidade neurodivergente para garantir acolhimento imediato:
+            Incorporamos elementos visuais e recursos inclusivos reconhecidos para garantir acolhimento e acessibilidade imediata:
           </p>
 
           <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem;">
@@ -940,14 +948,14 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
     <div id="formLogin">
       <div class="input-group">
         <label for="loginName">Nome do Utilizador</label>
-        <input type="text" id="loginName" placeholder="Escreve o teu nome..." />
+        <input type="text" id="loginName" placeholder="Escreva o seu nome..." />
       </div>
       <div class="input-group">
         <label for="loginSenha">Palavra-passe</label>
         <input type="password" id="loginSenha" placeholder="••••••••" />
       </div>
       <p style="font-size:0.78rem; color:var(--text-soft); margin-bottom:1rem;">
-        🔒 Os teus dados ficam guardados de forma segura diretamente no teu navegador (localStorage).
+        🔒 Os seus dados ficam salvos de forma segura diretamente no seu navegador (localStorage).
       </p>
       <button class="btn-primary" style="width:100%; justify-content:center;" onclick="realizarLogin()">Entrar na Conta ✨</button>
     </div>
@@ -968,7 +976,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
         </select>
       </div>
       <div class="input-group">
-        <label for="cadSenha">Cria uma Palavra-passe</label>
+        <label for="cadSenha">Crie uma Palavra-passe</label>
         <input type="password" id="cadSenha" placeholder="••••••••" />
       </div>
       <button class="btn-primary" style="width:100%; justify-content:center;" onclick="realizarCadastro()">Criar Conta Local ✨</button>
@@ -977,7 +985,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
     <div id="panelLogado" style="display:none; text-align:center;">
       <div style="font-size:3rem; margin-bottom:0.5rem;" id="userPanelAvatar">🌱</div>
       <h3 style="font-size:1.2rem; font-weight:800;" id="userPanelName">Nome</h3>
-      <p style="font-size:0.85rem; color:var(--text-soft); margin-bottom:1.5rem;">A tua conta local está ativa e protegida nesta máquina.</p>
+      <p style="font-size:0.85rem; color:var(--text-soft); margin-bottom:1.5rem;">A sua conta local está ativa e protegida nesta máquina.</p>
       <button class="btn-danger-sm" style="width:100%; padding:0.75rem;" onclick="realizarLogout()">Sair da Conta</button>
     </div>
   </div>
@@ -994,7 +1002,6 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
 </footer>
 
 <script>
-// CHAVE DE API DA POLLINATIONS INCORPORADA DIRETA E GLOBALMENTE
 const POLLEN_API_KEY = 'sk_HmiG8JBOA5RdBgBR9862geoVT51yHjlj';
 
 function executarSplashScreen() {
@@ -1035,7 +1042,89 @@ function atualizarInterfaceUsuario() {
     statusEl.textContent = 'Conta Salva';
     btnSidebar.textContent = 'Perfil';
 
-    configLabel.textContent = `Conta Ativa: ${usuarioAtual.nome}${usuarioAtual.avatar \vert{}\vert{} ''}`;     configSub.textContent = 'As tuas matérias e anotações estão associadas a este perfil local.';     configBtn.textContent = 'Ver Perfil';   } else {     avatarEl.textContent = '👤';     nameEl.textContent = 'Visitante';     statusEl.textContent = 'Modo Local';     btnSidebar.textContent = 'Entrar';      configLabel.textContent = 'Conta Atual: Visitante';     configSub.textContent = 'Os teus dados estão a ser guardados no modo padrão do navegador.';     configBtn.textContent = 'Entrar / Criar Conta';   }    carregarMaterias(); }  function abrirModalAuth() {   const modal = document.getElementById('authModal');   modal.classList.add('active');    if (usuarioAtual) {     document.getElementById('authTabs').style.display = 'none';     document.getElementById('formLogin').style.display = 'none';     document.getElementById('formCadastro').style.display = 'none';     document.getElementById('panelLogado').style.display = 'block';      document.getElementById('userPanelAvatar').textContent = usuarioAtual.avatar \vert{}\vert{} '🌱';     document.getElementById('userPanelName').textContent = usuarioAtual.nome;   } else {     document.getElementById('authTabs').style.display = 'flex';     document.getElementById('panelLogado').style.display = 'none';     alternarAbaAuth('login');   } }  function fecharModalAuth() {   document.getElementById('authModal').classList.remove('active'); }  function alternarAbaAuth(aba) {   const tabs = document.querySelectorAll('.auth-tab');   tabs.forEach(t => t.classList.remove('active'));    if (aba === 'login') {     tabs[0].classList.add('active');     document.getElementById('formLogin').style.display = 'block';     document.getElementById('formCadastro').style.display = 'none';   } else {     tabs[1].classList.add('active');     document.getElementById('formLogin').style.display = 'none';     document.getElementById('formCadastro').style.display = 'block';   } }  function realizarCadastro() {   const nome = document.getElementById('cadName').value.trim();   const avatar = document.getElementById('cadAvatar').value;   const senha = document.getElementById('cadSenha').value.trim();    if (!nome \vert{}\vert{} !senha) {     alert('Por favor, preenche o nome e a palavra-passe.');     return;   }    let usuarios = JSON.parse(localStorage.getItem('viva_usuarios')) \vert{}\vert{} [];   const existe = usuarios.find(u => u.nome.toLowerCase() === nome.toLowerCase());    if (existe) {     alert('Já existe um perfil registado com este nome neste dispositivo.');     return;   }    const novoUsuario = { id: Date.now().toString(), nome, avatar, senha };   usuarios.push(novoUsuario);   localStorage.setItem('viva_usuarios', JSON.stringify(usuarios));    usuarioAtual = novoUsuario;   localStorage.setItem('viva_sessao_ativa', JSON.stringify(novoUsuario));   atualizarInterfaceUsuario();   fecharModalAuth();    document.getElementById('cadName').value = '';   document.getElementById('cadSenha').value = '';   alert(`Bem-vindo(a), ${nome}! A tua conta local foi criada com sucesso.`);
+    configLabel.textContent = `Conta Ativa: ${usuarioAtual.nome}${usuarioAtual.avatar || ''}`;
+    configSub.textContent = 'As suas matérias e anotações estão associadas a este perfil local.';
+    configBtn.textContent = 'Ver Perfil';
+  } else {
+    avatarEl.textContent = '👤';
+    nameEl.textContent = 'Visitante';
+    statusEl.textContent = 'Modo Local';
+    btnSidebar.textContent = 'Entrar';
+    configLabel.textContent = 'Conta Atual: Visitante';
+    configSub.textContent = 'Os seus dados estão salvos no modo padrão do navegador.';
+    configBtn.textContent = 'Entrar / Criar Conta';
+  }
+
+  carregarMaterias();
+}
+
+function abrirModalAuth() {
+  const modal = document.getElementById('authModal');
+  modal.classList.add('active');
+
+  if (usuarioAtual) {
+    document.getElementById('authTabs').style.display = 'none';
+    document.getElementById('formLogin').style.display = 'none';
+    document.getElementById('formCadastro').style.display = 'none';
+    document.getElementById('panelLogado').style.display = 'block';
+    document.getElementById('userPanelAvatar').textContent = usuarioAtual.avatar || '🌱';
+    document.getElementById('userPanelName').textContent = usuarioAtual.nome;
+  } else {
+    document.getElementById('authTabs').style.display = 'flex';
+    document.getElementById('panelLogado').style.display = 'none';
+    alternarAbaAuth('login');
+  }
+}
+
+function fecharModalAuth() {
+  document.getElementById('authModal').classList.remove('active');
+}
+
+function alternarAbaAuth(aba) {
+  const tabs = document.querySelectorAll('.auth-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+
+  if (aba === 'login') {
+    tabs[0].classList.add('active');
+    document.getElementById('formLogin').style.display = 'block';
+    document.getElementById('formCadastro').style.display = 'none';
+  } else {
+    tabs[1].classList.add('active');
+    document.getElementById('formLogin').style.display = 'none';
+    document.getElementById('formCadastro').style.display = 'block';
+  }
+}
+
+function realizarCadastro() {
+  const nome = document.getElementById('cadName').value.trim();
+  const avatar = document.getElementById('cadAvatar').value;
+  const senha = document.getElementById('cadSenha').value.trim();
+
+  if (!nome || !senha) {
+    alert('Por favor, preencha o nome e a palavra-passe.');
+    return;
+  }
+
+  let usuarios = JSON.parse(localStorage.getItem('viva_usuarios')) || [];
+  const existe = usuarios.find(u => u.nome.toLowerCase() === nome.toLowerCase());
+
+  if (existe) {
+    alert('Já existe um perfil registrado com este nome neste dispositivo.');
+    return;
+  }
+
+  const novoUsuario = { id: Date.now().toString(), nome, avatar, senha };
+  usuarios.push(novoUsuario);
+  localStorage.setItem('viva_usuarios', JSON.stringify(usuarios));
+
+  usuarioAtual = novoUsuario;
+  localStorage.setItem('viva_sessao_ativa', JSON.stringify(novoUsuario));
+  atualizarInterfaceUsuario();
+  fecharModalAuth();
+
+  document.getElementById('cadName').value = '';
+  document.getElementById('cadSenha').value = '';
+  alert(`Bem-vindo(a), ${nome}! A sua conta local foi criada com sucesso.`);
 }
 
 function realizarLogin() {
@@ -1092,6 +1181,11 @@ function initTheme() {
   document.getElementById('toggleAnimations').checked = reduceAnim;
   alterarAnimacoes(reduceAnim);
 
+  const ttsEnabled = localStorage.getItem('viva_tts_enabled') !== 'false';
+  const ttsToggle = document.getElementById('toggleTextToSpeech');
+  if (ttsToggle) ttsToggle.checked = ttsEnabled;
+  alterarLeituraTexto(ttsEnabled);
+
   const fontSize = localStorage.getItem('viva_font_size') || 'normal';
   document.getElementById('fontSizeSelect').value = fontSize;
   alterarTamanhoFonte(fontSize);
@@ -1113,6 +1207,44 @@ themeBtn.addEventListener('click', () => {
     themeBtn.textContent = 'Modo Claro';
   }
 });
+
+let leituraTextoAtiva = true;
+
+function alterarLeituraTexto(ativo) {
+  leituraTextoAtiva = ativo;
+  localStorage.setItem('viva_tts_enabled', ativo);
+  const btns = document.querySelectorAll('.btn-audio-read');
+  btns.forEach(btn => {
+    btn.style.display = ativo ? 'inline-flex' : 'none';
+  });
+  if (!ativo && window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+}
+
+function lerTextoContent(elementId) {
+  if (!('speechSynthesis' in window)) {
+    alert('O seu navegador não suporta a função de síntese de voz.');
+    return;
+  }
+
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    return;
+  }
+
+  const el = document.getElementById(elementId);
+  if (!el) return;
+
+  const texto = el.innerText || el.textContent;
+  if (!texto.trim()) return;
+
+  const utterance = new SpeechSynthesisUtterance(texto);
+  utterance.lang = 'pt-BR';
+  utterance.rate = 0.95;
+
+  window.speechSynthesis.speak(utterance);
+}
 
 function alterarAnimacoes(reduzir) {
   if (reduzir) {
@@ -1146,7 +1278,24 @@ function atualizarTituloModeloImagem(modelo) {
     if (modelo === 'flux-realism') nomeExibicao = 'FLUX Realismo';
     if (modelo === 'bytedance/seedream-5.0-pro') nomeExibicao = 'SeeDream 5.0 Pro';
     if (modelo === 'turbo') nomeExibicao = 'SDXL Turbo';
-    titleEl.innerHTML = `<span>🎨</span> Ilustração Didática (${nomeExibicao})`;   } }  function showView(view) {   const currentView = document.querySelector('.view.active');   const targetView = document.getElementById('view-' + view);    if (currentView === targetView) return;    if (currentView) {     currentView.classList.remove('active');   }      targetView.classList.add('active');    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));   const activeNav = document.querySelector(`.nav-item[data-view="${view}"]`);
+    titleEl.innerHTML = `<span>🎨</span> Ilustração Didática (${nomeExibicao})`;
+  }
+}
+
+function showView(view) {
+  const currentView = document.querySelector('.view.active');
+  const targetView = document.getElementById('view-' + view);
+
+  if (currentView === targetView) return;
+
+  if (currentView) {
+    currentView.classList.remove('active');
+  }
+
+  targetView.classList.add('active');
+
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const activeNav = document.querySelector(`.nav-item[data-view="${view}"]`);
   if (activeNav) activeNav.classList.add('active');
 
   if (view === 'historico') carregarHistorico();
@@ -1156,7 +1305,7 @@ function atualizarTituloModeloImagem(modelo) {
 const materiasPadrao = [
   { id: '1', nome: 'Português', emoji: '📖', desc: 'Gramática, leitura e ortografia' },
   { id: '2', nome: 'Matemática', emoji: '🔢', desc: 'Cálculos, operações e formas' },
-  { id: '3', nome: 'História', emoji: '🏛️', desc: 'Factos históricos e sociedade' },
+  { id: '3', nome: 'História', emoji: '🏛️', desc: 'Fatos históricos e sociedade' },
   { id: '4', nome: 'Geografia', emoji: '🌍', desc: 'Mapas, natureza e regiões' }
 ];
 
@@ -1219,7 +1368,7 @@ function salvarMateria() {
   const desc = document.getElementById('materiaDesc').value.trim() || 'Matéria de estudo';
 
   if (!nome) {
-    alert('Por favor, indica o nome da matéria.');
+    alert('Por favor, informe o nome da matéria.');
     return;
   }
 
@@ -1251,7 +1400,7 @@ function editarMateria(id) {
 }
 
 function excluirMateria(id) {
-  if (confirm('Desejas eliminar esta matéria?')) {
+  if (confirm('Deseja eliminar esta matéria?')) {
     materias = materias.filter(item => item.id !== id);
     salvarMateriasStorage();
     renderizarMaterias();
@@ -1285,7 +1434,9 @@ function carregarImagemIA(tema, materia) {
   const imgElem = document.getElementById('aiImage');
   const skeleton = document.getElementById('skeletonLoader');
   const btnRegerar = document.getElementById('btnRegerarImagem');
-  const modelo = localStorage.getItem('viva_image_model') || 'flux';
+  let modelo = localStorage.getItem('viva_image_model') || 'flux';
+
+  if (modelo === 'gptimage') modelo = 'flux';
 
   skeleton.classList.add('active');
   imgElem.style.opacity = '0';
@@ -1295,7 +1446,7 @@ function carregarImagemIA(tema, materia) {
   const promptEncoded = encodeURIComponent(promptFinal);
   const seed = Math.floor(Math.random() * 900000) + 100000;
   
-  let primaryUrl = `https://image.pollinations.ai/prompt/${promptEncoded}?width=768&height=768&nologo=true&seed=${seed}&model=${encodeURIComponent(modelo)}&key=${POLLEN_API_KEY}`;
+  let primaryUrl = `https://gen.pollinations.ai/image/${promptEncoded}?width=768&height=768&nologo=true&seed=${seed}&model=${encodeURIComponent(modelo)}&key=${POLLEN_API_KEY}`;
 
   imgElem.onload = () => {
     skeleton.classList.remove('active');
@@ -1303,7 +1454,7 @@ function carregarImagemIA(tema, materia) {
   };
 
   imgElem.onerror = () => {
-    let fallbackUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(tema + ' educational visual graphic')}?width=512&height=512&nologo=true&key=${POLLEN_API_KEY}`;
+    let fallbackUrl = `https://gen.pollinations.ai/image/${encodeURIComponent(tema + ' educational visual graphic')}?width=512&height=512&nologo=true&key=${POLLEN_API_KEY}`;
     imgElem.onerror = () => {
       skeleton.classList.remove('active');
       imgElem.style.opacity = '1';
@@ -1328,7 +1479,7 @@ async function gerarExplicacao(temaBusca = null, materiaBusca = null) {
   const materia = materiaBusca || materiaAtual;
 
   if (!tema) {
-    alert('Por favor, introduz um tema ou pergunta.');
+    alert('Por favor, introduza um tema ou pergunta.');
     return;
   }
 
@@ -1349,7 +1500,7 @@ async function gerarExplicacao(temaBusca = null, materiaBusca = null) {
 
   carregarImagemIA(tema, materia);
 
-  const promptSistema = `És o assistente pedagógico V.I.V.A., especialista em educação neuroinclusiva (Autismo, TDAH, Dislexia).
+  const promptSistema = `És o assistente pedagógico V.I.V.A., especialista em educação neuroinclusiva (Autismo, TDAH, Dislexia, Deficiência Auditiva).
 O utilizador deseja aprender sobre o tema "${tema}" na disciplina de "${materia}".
 
 INSTRUÇÕES DE FORMATO:
@@ -1361,7 +1512,7 @@ INSTRUÇÕES DE FORMATO:
   3. <strong>Ponto-chave para memorizar:</strong> Uma dica rápida de fixação.`;
 
   try {
-    const respPollinations = await fetch('https://text.pollinations.ai/', {
+    const respPollinations = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1375,18 +1526,21 @@ INSTRUÇÕES DE FORMATO:
         model: 'openai-large'
       })
     });
-    
-    let textoResultado = await respPollinations.text();
+
+    if (!respPollinations.ok) throw new Error('Falha na resposta da IA (' + respPollinations.status + ')');
+
+    const dadosResposta = await respPollinations.json();
+    let textoResultado = dadosResposta?.choices?.[0]?.message?.content || '';
     textoResultado = textoResultado.replace(/```html/gi, '').replace(/```/g, '').trim();
-    explanationBox.innerHTML = textoResultado || `<p>Não foi possível gerar a explicação. Tenta novamente.</p>`;
+    explanationBox.innerHTML = textoResultado || `<p>Não foi possível gerar a explicação. Tente novamente.</p>`;
 
     salvarHistorico(tema, materia);
   } catch (error) {
     console.error('Erro na integração com a IA:', error);
     explanationBox.innerHTML = `
       <div style="color:#991B1B; background:#FEF2F2; padding:1rem; border-radius:12px;">
-        <p><strong>Não foi possível ligar aos serviços de IA.</strong></p>
-        <p style="font-size:0.85rem; margin-top:0.3rem;">Verifica a tua ligação à Internet e tenta novamente.</p>
+        <p><strong>Não foi possível conectar aos serviços de IA.</strong></p>
+        <p style="font-size:0.85rem; margin-top:0.3rem;">Verifique a sua conexão com a Internet e tente novamente.</p>
       </div>
     `;
   } finally {
@@ -1396,7 +1550,6 @@ INSTRUÇÕES DE FORMATO:
   }
 }
 
-// LÓGICA DO MÓDULO DE SOLUÇÕES & EXERCÍCIOS
 async function gerarSolucaoExercicio() {
   const inputElem = document.getElementById('solucaoInput');
   const materiaElem = document.getElementById('solucaoMateriaSelect');
@@ -1416,16 +1569,14 @@ async function gerarSolucaoExercicio() {
   solucaoBox.innerHTML = `
     <div style="padding:1rem; text-align:center;">
       <p style="font-weight:700; color:var(--accent); margin-bottom:0.3rem;">⏳ A resolver o exercício passo a passo...</p>
-      <p style="font-size:0.85rem; color:var(--text-soft);">A organizar etapas sequenciais e diagrama didático.</p>
+      <p style="font-size:0.85rem; color:var(--text-soft);">A organizar etapas sequenciais e texto instrutivo simples.</p>
     </div>
   `;
 
   btnGerar.disabled = true;
   btnGerar.style.opacity = '0.7';
 
-  carregarImagemSolucao(questao, materia);
-
-  const promptSistema = `És o assistente pedagógico V.I.V.A., especializado em resolver exercícios e deveres escolares para alunos neurodivergentes.
+  const promptSistema = `És o assistente pedagógico V.I.V.A., especializado em resolver exercícios e deveres escolares com linguagem clara, direta e acessível para todos os alunos.
 Resolve o seguinte exercício da disciplina de "${materia}":
 "${questao}"
 
@@ -1439,7 +1590,7 @@ INSTRUÇÕES DE FORMATO:
   4. <strong>Dica de Verificação:</strong> Como confirmar se a resposta está correta.`;
 
   try {
-    const respPollinations = await fetch('https://text.pollinations.ai/', {
+    const respPollinations = await fetch('https://gen.pollinations.ai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -1453,10 +1604,13 @@ INSTRUÇÕES DE FORMATO:
         model: 'openai-large'
       })
     });
-    
-    let textoResultado = await respPollinations.text();
+
+    if (!respPollinations.ok) throw new Error('Falha na resposta da IA (' + respPollinations.status + ')');
+
+    const dadosResposta = await respPollinations.json();
+    let textoResultado = dadosResposta?.choices?.[0]?.message?.content || '';
     textoResultado = textoResultado.replace(/```html/gi, '').replace(/```/g, '').trim();
-    solucaoBox.innerHTML = textoResultado || `<p>Não foi possível gerar a solução. Tenta novamente.</p>`;
+    solucaoBox.innerHTML = textoResultado || `<p>Não foi possível gerar a solução. Tente novamente.</p>`;
 
     salvarHistorico(`[Solução] ${questao}`, materia);
   } catch (error) {
@@ -1464,7 +1618,7 @@ INSTRUÇÕES DE FORMATO:
     solucaoBox.innerHTML = `
       <div style="color:#991B1B; background:#FEF2F2; padding:1rem; border-radius:12px;">
         <p><strong>Não foi possível gerar a solução do exercício.</strong></p>
-        <p style="font-size:0.85rem; margin-top:0.3rem;">Verifica a tua ligação à Internet e tenta novamente.</p>
+        <p style="font-size:0.85rem; margin-top:0.3rem;">Verifique a sua conexão com a Internet e tente novamente.</p>
       </div>
     `;
   } finally {
@@ -1472,34 +1626,6 @@ INSTRUÇÕES DE FORMATO:
     btnGerar.style.opacity = '1';
     resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
-}
-
-function carregarImagemSolucao(questao, materia) {
-  const imgElem = document.getElementById('solucaoImage');
-  const skeleton = document.getElementById('skeletonLoaderSolucao');
-  const modelo = localStorage.getItem('viva_image_model') || 'flux';
-
-  skeleton.classList.add('active');
-  imgElem.style.opacity = '0';
-
-  const promptFinal = `${questao} (${materia}), step by step solution educational diagram, infographics, simple minimalist vector design, clear HD style`;
-  const promptEncoded = encodeURIComponent(promptFinal);
-  const seed = Math.floor(Math.random() * 900000) + 100000;
-  
-  let primaryUrl = `https://image.pollinations.ai/prompt/${promptEncoded}?width=768&height=768&nologo=true&seed=${seed}&model=${encodeURIComponent(modelo)}&key=${POLLEN_API_KEY}`;
-
-  imgElem.onload = () => {
-    skeleton.classList.remove('active');
-    imgElem.style.opacity = '1';
-  };
-
-  imgElem.onerror = () => {
-    skeleton.classList.remove('active');
-    imgElem.style.opacity = '1';
-    imgElem.alt = 'Não foi possível carregar o esquema visual da solução.';
-  };
-
-  imgElem.src = primaryUrl;
 }
 
 function salvarHistorico(tema, materia) {
@@ -1514,7 +1640,7 @@ function salvarHistorico(tema, materia) {
     id: Date.now(),
     tema: tema,
     materia: materia,
-    data: new Date().toLocaleDateString('pt-PT', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
+    data: new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })
   });
 
   localStorage.setItem(key, JSON.stringify(historico));
@@ -1529,7 +1655,7 @@ function carregarHistorico() {
   if (historico.length === 0) {
     historyList.innerHTML = `
       <div class="empty-state">
-        <p>Ainda não realizaste consultas recentes.</p>
+        <p>Ainda não realizou consultas recentes.</p>
         <button class="btn-primary" style="margin-top:1rem; font-size:0.9rem;" onclick="showView('app')">Ir para as matérias</button>
       </div>
     `;
@@ -1568,7 +1694,7 @@ function removerItemHistorico(id) {
 }
 
 function limparHistorico() {
-  if (confirm('Desejas apagar todo o teu histórico de pesquisas?')) {
+  if (confirm('Deseja apagar todo o seu histórico de pesquisas?')) {
     const key = getStorageKey('viva_historico');
     localStorage.removeItem(key);
     carregarHistorico();
@@ -1589,7 +1715,7 @@ function carregarAnotacoes() {
         id: '1',
         titulo: 'Minha primeira anotação',
         categoria: 'Geral',
-        conteudo: 'Escreve aqui os teus resumos e lembretes para teres acesso rápido durante os estudos.'
+        conteudo: 'Escreva aqui os seus resumos e lembretes para ter acesso rápido durante os estudos.'
       }
     ];
     salvarAnotacoesStorage();
@@ -1674,7 +1800,7 @@ function deletarAnotacaoAtual() {
   const id = document.getElementById('noteCurrentId').value;
   if (!id) return;
 
-  if (confirm('Desejas eliminar esta anotação?')) {
+  if (confirm('Deseja eliminar esta anotação?')) {
     anotacoes = anotacoes.filter(n => n.id !== id);
     salvarAnotacoesStorage();
     anotacaoSelecionadaId = anotacoes.length > 0 ? anotacoes[0].id : null;
