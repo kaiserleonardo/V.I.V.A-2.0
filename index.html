@@ -820,7 +820,8 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
               <p>Selecione a IA utilizada para criar ilustrações na aba Aprender com IA.</p>
             </div>
             <select id="imageModelSelect" onchange="alterarModeloImagem(this.value)" style="padding:0.4rem 0.8rem; border-radius:10px; border:1px solid var(--border); background:var(--bg); color:var(--text); font-weight:600;">
-              <option value="flux">FLUX.1 Schnell / Pro ✨ (Recomendado)</option>
+              <option value="gptimage">GPT Image ✨ (Recomendado — melhor compreensão do pedido)</option>
+              <option value="flux">FLUX.1 Schnell / Pro</option>
               <option value="flux-realism">FLUX Realismo Fotográfico</option>
               <option value="bytedance/seedream-5.0-pro">ByteDance SeeDream 5.0 Pro</option>
               <option value="turbo">SDXL Turbo (Ultra Rápido)</option>
@@ -1190,7 +1191,7 @@ function initTheme() {
   document.getElementById('fontSizeSelect').value = fontSize;
   alterarTamanhoFonte(fontSize);
 
-  const savedImageModel = localStorage.getItem('viva_image_model') || 'flux';
+  const savedImageModel = localStorage.getItem('viva_image_model') || 'gptimage';
   document.getElementById('imageModelSelect').value = savedImageModel;
   atualizarTituloModeloImagem(savedImageModel);
 }
@@ -1273,13 +1274,18 @@ function alterarModeloImagem(modelo) {
 
 function atualizarTituloModeloImagem(modelo) {
   const titleEl = document.getElementById('imageBoxTitle');
-  if (titleEl) {
-    let nomeExibicao = 'FLUX.1';
-    if (modelo === 'flux-realism') nomeExibicao = 'FLUX Realismo';
-    if (modelo === 'bytedance/seedream-5.0-pro') nomeExibicao = 'SeeDream 5.0 Pro';
-    if (modelo === 'turbo') nomeExibicao = 'SDXL Turbo';
-    titleEl.innerHTML = `<span>🎨</span> Ilustração Didática (${nomeExibicao})`;
-  }
+  if (!titleEl) return;
+
+  const nomesModelos = {
+    'gptimage': 'GPT Image',
+    'flux': 'FLUX.1',
+    'flux-realism': 'FLUX Realismo',
+    'bytedance/seedream-5.0-pro': 'SeeDream 5.0 Pro',
+    'turbo': 'SDXL Turbo'
+  };
+  const nomeExibicao = nomesModelos[modelo] || modelo;
+
+  titleEl.innerHTML = `<span>🎨</span> Ilustração Didática (${nomeExibicao})`;
 }
 
 function showView(view) {
@@ -1434,9 +1440,7 @@ function carregarImagemIA(tema, materia) {
   const imgElem = document.getElementById('aiImage');
   const skeleton = document.getElementById('skeletonLoader');
   const btnRegerar = document.getElementById('btnRegerarImagem');
-  let modelo = localStorage.getItem('viva_image_model') || 'flux';
-
-  if (modelo === 'gptimage') modelo = 'flux';
+  let modelo = localStorage.getItem('viva_image_model') || 'gptimage';
 
   skeleton.classList.add('active');
   imgElem.style.opacity = '0';
