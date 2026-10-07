@@ -40,7 +40,7 @@
   --on-accent: #FFFFFF;
   --sidebar-w: 260px;
   
-  --font-scale: 1rem;
+  --font-scale: 16px;
 }
 
 [data-theme="dark"] {
@@ -84,6 +84,8 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html { font-size: var(--font-scale); }
+
 body {
   font-family: 'Inter', system-ui, sans-serif;
   background: var(--bg);
@@ -92,7 +94,6 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
-  font-size: var(--font-scale);
 }
 
 h1, h2, h3, .btn-primary, .step-num {
@@ -197,6 +198,17 @@ h1, h2, h3, .btn-primary, .step-num {
   50% { transform: translate(40px, 60px) scale(1.1); }
   100% { transform: translate(-30px, -40px) scale(0.95); }
 }
+
+.bg-symbols {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.11;
+}
+[data-theme="dark"] .bg-symbols { opacity: 0.09; }
 
 .app-shell { display: flex; min-height: 100vh; }
 
@@ -485,7 +497,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
   <div class="splash-logo">
     <div class="splash-icon">
       <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-        <path d="M12 12C10.5 9.5 8 8 5.5 8C3 8 10 1 12.5C1 15 3 17 5.5 17C8 17 10.5 15.5 12 13C13.5 15.5 16 17 18.5 17C21 17 23 15 23 12.5C23 10 21 8 18.5 8C16 8 13.5 9.5 12 12Z" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M12 12C10.5 9.5 8 8 5.5 8C3 8 1 10 1 12.5C1 15 3 17 5.5 17C8 17 10.5 15.5 12 13C13.5 15.5 16 17 18.5 17C21 17 23 15 23 12.5C23 10 21 8 18.5 8C16 8 13.5 9.5 12 12Z" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
       </svg>
     </div>
     <div>
@@ -501,6 +513,120 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
 <div class="bg-orb orb-1"></div>
 <div class="bg-orb orb-2"></div>
 <div class="bg-orb orb-3"></div>
+
+<svg class="bg-symbols" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs>
+    <linearGradient id="infGradMuted" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#B5675A"/>
+      <stop offset="25%" stop-color="#C08A4E"/>
+      <stop offset="50%" stop-color="#8D9A5C"/>
+      <stop offset="75%" stop-color="#5E7A8C"/>
+      <stop offset="100%" stop-color="#7C6A8C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cordão (colar) 1 -->
+  <g transform="translate(95,130) rotate(-14) scale(1.15)" opacity="0.55">
+    <path d="M0,-40 C-22,-30 -24,0 0,14 C24,28 22,58 0,70" stroke="#8A9A7B" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <rect x="-10" y="68" width="20" height="26" rx="3" fill="#9C8B76"/>
+  </g>
+
+  <!-- Girassol -->
+  <g transform="translate(845,95) rotate(9) scale(0.85)" opacity="0.4">
+    <g fill="#C9A227">
+      <ellipse cx="0" cy="-20" rx="6.5" ry="14"/>
+      <ellipse cx="14" cy="-14" rx="6.5" ry="14" transform="rotate(45 14 -14)"/>
+      <ellipse cx="20" cy="0" rx="6.5" ry="14" transform="rotate(90 20 0)"/>
+      <ellipse cx="14" cy="14" rx="6.5" ry="14" transform="rotate(135 14 14)"/>
+      <ellipse cx="0" cy="20" rx="6.5" ry="14" transform="rotate(180 0 20)"/>
+      <ellipse cx="-14" cy="14" rx="6.5" ry="14" transform="rotate(225 -14 14)"/>
+      <ellipse cx="-20" cy="0" rx="6.5" ry="14" transform="rotate(270 -20 0)"/>
+      <ellipse cx="-14" cy="-14" rx="6.5" ry="14" transform="rotate(315 -14 -14)"/>
+    </g>
+    <circle cx="0" cy="0" r="8" fill="#5C4433"/>
+  </g>
+
+  <!-- Infinito (neurodiversidade) -->
+  <g transform="translate(470,55) rotate(-3) scale(0.75)" opacity="0.5">
+    <path d="M-36,0 C-36,-24 -11,-24 0,0 C11,24 36,24 36,0 C36,-24 11,-24 0,0 C-11,24 -36,24 -36,0 Z"
+      stroke="url(#infGradMuted)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Peças de quebra-cabeça (autismo) -->
+  <g transform="translate(715,300) rotate(21) scale(0.95)" opacity="0.45">
+    <g fill="#5E7A8C">
+      <rect x="-30" y="-11" width="22" height="22" rx="4"/>
+      <circle cx="-9" cy="0" r="6"/>
+    </g>
+    <g fill="#B5675A">
+      <rect x="-4" y="-11" width="22" height="22" rx="4"/>
+      <circle cx="18" cy="0" r="6"/>
+    </g>
+  </g>
+
+  <!-- Fita -->
+  <g transform="translate(75,415) rotate(11) scale(0.8)" opacity="0.5">
+    <path d="M0,-26 C14,-20 14,7 0,14 C-14,21 -14,39 0,46" stroke="#6E8C78" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <path d="M0,-26 C-14,-20 -14,7 0,14 C14,21 14,39 0,46" stroke="#6E8C78" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.75"/>
+  </g>
+
+  <!-- Cordão (colar) 2 -->
+  <g transform="translate(930,540) rotate(26) scale(0.9)" opacity="0.35">
+    <path d="M0,-40 C-22,-30 -24,0 0,14 C24,28 22,58 0,70" stroke="#8A9A7B" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <rect x="-10" y="68" width="20" height="26" rx="3" fill="#9C8B76"/>
+  </g>
+
+  <!-- Infinito 2 -->
+  <g transform="translate(250,615) rotate(-17) scale(1.0)" opacity="0.45">
+    <path d="M-36,0 C-36,-24 -11,-24 0,0 C11,24 36,24 36,0 C36,-24 11,-24 0,0 C-11,24 -36,24 -36,0 Z"
+      stroke="url(#infGradMuted)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Girassol 2 -->
+  <g transform="translate(575,715) rotate(-7) scale(0.65)" opacity="0.35">
+    <g fill="#C9A227">
+      <ellipse cx="0" cy="-20" rx="6.5" ry="14"/>
+      <ellipse cx="14" cy="-14" rx="6.5" ry="14" transform="rotate(45 14 -14)"/>
+      <ellipse cx="20" cy="0" rx="6.5" ry="14" transform="rotate(90 20 0)"/>
+      <ellipse cx="14" cy="14" rx="6.5" ry="14" transform="rotate(135 14 14)"/>
+      <ellipse cx="0" cy="20" rx="6.5" ry="14" transform="rotate(180 0 20)"/>
+      <ellipse cx="-14" cy="14" rx="6.5" ry="14" transform="rotate(225 -14 14)"/>
+      <ellipse cx="-20" cy="0" rx="6.5" ry="14" transform="rotate(270 -20 0)"/>
+      <ellipse cx="-14" cy="-14" rx="6.5" ry="14" transform="rotate(315 -14 -14)"/>
+    </g>
+    <circle cx="0" cy="0" r="8" fill="#5C4433"/>
+  </g>
+
+  <!-- Peças de quebra-cabeça 2 -->
+  <g transform="translate(150,845) rotate(4) scale(1.05)" opacity="0.5">
+    <g fill="#C9A227">
+      <rect x="-30" y="-11" width="22" height="22" rx="4"/>
+      <circle cx="-9" cy="0" r="6"/>
+    </g>
+    <g fill="#5E7A8C">
+      <rect x="-4" y="-11" width="22" height="22" rx="4"/>
+      <circle cx="18" cy="0" r="6"/>
+    </g>
+  </g>
+
+  <!-- Fita 2 -->
+  <g transform="translate(805,880) rotate(-22) scale(0.9)" opacity="0.4">
+    <path d="M0,-26 C14,-20 14,7 0,14 C-14,21 -14,39 0,46" stroke="#6E8C78" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <path d="M0,-26 C-14,-20 -14,7 0,14 C14,21 14,39 0,46" stroke="#6E8C78" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.75"/>
+  </g>
+
+  <!-- Cordão (colar) 3 -->
+  <g transform="translate(440,935) rotate(15) scale(0.75)" opacity="0.45">
+    <path d="M0,-40 C-22,-30 -24,0 0,14 C24,28 22,58 0,70" stroke="#8A9A7B" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <rect x="-10" y="68" width="20" height="26" rx="3" fill="#9C8B76"/>
+  </g>
+
+  <!-- Infinito 3 -->
+  <g transform="translate(915,790) rotate(7) scale(0.6)" opacity="0.35">
+    <path d="M-36,0 C-36,-24 -11,-24 0,0 C11,24 36,24 36,0 C36,-24 11,-24 0,0 C-11,24 -36,24 -36,0 Z"
+      stroke="url(#infGradMuted)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>
 
 <div class="app-shell">
   <aside class="sidebar">
@@ -846,10 +972,10 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           <div class="config-item">
             <div class="config-info">
               <h4>Leitura de Texto em Voz Alta / Síntese Audível</h4>
-              <p>Ativa botões de áudio para leitura guiada do conteúdo textual e apoio a alunos surdos/com deficiência auditiva ou dificuldades de leitura.</p>
+              <p>Ativa botões de áudio para leitura guiada do conteúdo textual — útil para alunos com dificuldades de leitura, dislexia ou baixa visão.</p>
             </div>
             <label class="toggle-switch">
-              <input type="checkbox" id="toggleTextToSpeech" checked onchange="alterarLeituraTexto(this.checked)" />
+              <input type="checkbox" id="toggleTextToSpeech" onchange="alterarLeituraTexto(this.checked)" />
               <span class="slider"></span>
             </label>
           </div>
@@ -927,64 +1053,6 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
               <h4 style="font-size:0.9rem; font-weight:700; color:#854D0E; margin-bottom:0.3rem;">🌻 Cordão de Girassol</h4>
               <p style="font-size:0.83rem; color:var(--text-soft);">Símbolo de conscientização para deficiências e condições ocultas.</p>
             </div>
-          </div>
-        </div>
-
-        <!-- Histórico de Atualizações / Changelog Visual -->
-        <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:20px; padding:1.8rem; box-shadow:var(--shadow-sm);">
-          <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;">
-            <div style="width:42px; height:42px; background:var(--accent-soft); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">
-              🚀
-            </div>
-            <div>
-              <h3 style="font-size:1.2rem; font-weight:800; color:var(--text); margin:0;">Histórico de Atualizações</h3>
-              <p style="font-size:0.85rem; color:var(--text-soft); margin:0.15rem 0 0 0;">Conheça as novidades e a evolução contínua da plataforma V.I.V.A.</p>
-            </div>
-          </div>
-
-          <div style="display:flex; flex-direction:column; gap:1.25rem; position:relative; padding-left:1.5rem; border-left:2px dashed var(--border); margin-left:0.5rem;">
-            
-            <!-- Atualização 3.0 -->
-            <div style="position:relative; background:var(--bg-card-subtle); padding:1.2rem 1.4rem; border-radius:16px; border:1px solid var(--border); transition:all 0.25s ease;">
-              <div style="position:absolute; left:-1.95rem; top:1.35rem; width:14px; height:14px; border-radius:50%; background:var(--accent); border:3px solid var(--bg-card);"></div>
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.4rem; flex-wrap:wrap; gap:0.5rem;">
-                <span style="background:var(--accent-soft); color:var(--accent); font-weight:800; font-size:0.8rem; padding:0.25rem 0.75rem; border-radius:20px;">
-                  ✨ Atualização 3.0 (Versão Atual)
-                </span>
-                <span style="font-size:0.75rem; color:var(--accent); font-weight:700;">Nova Lançada</span>
-              </div>
-              <p style="font-size:0.92rem; color:var(--text); line-height:1.5; margin:0;">
-                Mudança completa na estrutura, interface, IAs e adicionado novas opções.
-              </p>
-            </div>
-
-            <!-- Atualização 2.0 -->
-            <div style="position:relative; background:var(--bg-card-subtle); padding:1.2rem 1.4rem; border-radius:16px; border:1px solid var(--border); transition:all 0.25s ease;">
-              <div style="position:absolute; left:-1.95rem; top:1.35rem; width:14px; height:14px; border-radius:50%; background:var(--accent); opacity:0.6; border:3px solid var(--bg-card);"></div>
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.4rem; flex-wrap:wrap; gap:0.5rem;">
-                <span style="background:var(--bg); color:var(--text-soft); font-weight:700; font-size:0.8rem; padding:0.25rem 0.75rem; border-radius:20px; border:1px solid var(--border);">
-                  ⚙️ Atualização 2.0
-                </span>
-              </div>
-              <p style="font-size:0.92rem; color:var(--text); line-height:1.5; margin:0;">
-                Adicionado mais opções, e mudança nas IAs.
-              </p>
-            </div>
-
-            <!-- Atualização 1.0 -->
-            <div style="position:relative; background:var(--bg-card-subtle); padding:1.2rem 1.4rem; border-radius:16px; border:1px solid var(--border); transition:all 0.25s ease;">
-              <div style="position:absolute; left:-1.95rem; top:1.35rem; width:14px; height:14px; border-radius:50%; background:var(--border); border:3px solid var(--bg-card);"></div>
-              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.4rem; flex-wrap:wrap; gap:0.5rem;">
-                <span style="background:var(--bg); color:var(--text-soft); font-weight:700; font-size:0.8rem; padding:0.25rem 0.75rem; border-radius:20px; border:1px solid var(--border);">
-                  🌱 Atualização 1.0
-                </span>
-                <span style="font-size:0.75rem; color:var(--text-soft);">Lançamento Inicial</span>
-              </div>
-              <p style="font-size:0.92rem; color:var(--text); line-height:1.5; margin:0;">
-                Adicionado uma nova estrutura do site completo.
-              </p>
-            </div>
-
           </div>
         </div>
       </div>
@@ -1240,7 +1308,7 @@ function initTheme() {
   document.getElementById('toggleAnimations').checked = reduceAnim;
   alterarAnimacoes(reduceAnim);
 
-  const ttsEnabled = localStorage.getItem('viva_tts_enabled') !== 'false';
+  const ttsEnabled = localStorage.getItem('viva_tts_enabled') === 'true';
   const ttsToggle = document.getElementById('toggleTextToSpeech');
   if (ttsToggle) ttsToggle.checked = ttsEnabled;
   alterarLeituraTexto(ttsEnabled);
@@ -1268,6 +1336,28 @@ themeBtn.addEventListener('click', () => {
 });
 
 let leituraTextoAtiva = true;
+
+// Carrega a lista de vozes do navegador (é assíncrono em vários navegadores)
+let vozesDisponiveis = [];
+function atualizarListaVozes() {
+  vozesDisponiveis = window.speechSynthesis.getVoices();
+}
+if ('speechSynthesis' in window) {
+  atualizarListaVozes();
+  window.speechSynthesis.onvoiceschanged = atualizarListaVozes;
+}
+
+function escolherMelhorVoz() {
+  const candidatas = vozesDisponiveis.filter(v => v.lang && v.lang.toLowerCase().indexOf('pt') === 0);
+  if (!candidatas.length) return null;
+
+  return (
+    candidatas.find(v => /google/i.test(v.name)) ||
+    candidatas.find(v => /natural|neural|online|wavenet/i.test(v.name)) ||
+    candidatas.find(v => v.lang.toLowerCase() === 'pt-br') ||
+    candidatas[0]
+  );
+}
 
 function alterarLeituraTexto(ativo) {
   leituraTextoAtiva = ativo;
@@ -1301,6 +1391,10 @@ function lerTextoContent(elementId) {
   const utterance = new SpeechSynthesisUtterance(texto);
   utterance.lang = 'pt-BR';
   utterance.rate = 0.95;
+  utterance.pitch = 1;
+
+  const voz = escolherMelhorVoz();
+  if (voz) utterance.voice = voz;
 
   window.speechSynthesis.speak(utterance);
 }
@@ -1316,11 +1410,11 @@ function alterarAnimacoes(reduzir) {
 
 function alterarTamanhoFonte(tamanho) {
   if (tamanho === 'grande') {
-    html.style.setProperty('--font-scale', '1.12rem');
+    html.style.setProperty('--font-scale', '18px');
   } else if (tamanho === 'extragrande') {
-    html.style.setProperty('--font-scale', '1.25rem');
+    html.style.setProperty('--font-scale', '21px');
   } else {
-    html.style.setProperty('--font-scale', '1rem');
+    html.style.setProperty('--font-scale', '16px');
   }
   localStorage.setItem('viva_font_size', tamanho);
 }
