@@ -226,6 +226,8 @@ h1, h2, h3, .btn-primary, .step-num {
   top: 0;
   height: 100vh;
   z-index: 100;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .sidebar-logo {
@@ -289,7 +291,23 @@ h1, h2, h3, .btn-primary, .step-num {
 .user-name { font-size: 0.88rem; font-weight: 700; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .user-status { font-size: 0.72rem; color: var(--text-soft); }
 
-.sidebar-nav { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; overflow-y: auto; }
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.sidebar::-webkit-scrollbar,
+.sidebar-nav::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
 
 .nav-item {
   display: flex;
@@ -308,7 +326,7 @@ h1, h2, h3, .btn-primary, .step-num {
   width: 100%;
 }
 
-.nav-item:hover { background: var(--bg-card-subtle); color: var(--text); transform: translateX(4px); }
+.nav-item:hover { background: var(--bg-card-subtle); color: var(--text); transform: translateX(2px); }
 .nav-item.active { background: var(--accent-soft); color: var(--accent); border-color: rgba(45, 90, 70, 0.2); font-weight: 700; box-shadow: var(--shadow-sm); }
 .nav-icon { display: flex; align-items: center; justify-content: center; width: 20px; }
 .nav-icon svg { width: 18px; height: 18px; transition: transform 0.2s ease; }
@@ -339,7 +357,7 @@ h1, h2, h3, .btn-primary, .step-num {
 .view-inner { max-width: 980px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
 
 .modal-overlay {
-  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(4px);
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(6px);
   z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem;
 }
 .modal-overlay.active { opacity: 1; visibility: visible; }
@@ -348,6 +366,72 @@ h1, h2, h3, .btn-primary, .step-num {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: 22px; width: 100%; max-width: 420px; padding: 2.25rem; box-shadow: var(--shadow-float); transform: translateY(20px); transition: transform 0.3s ease;
 }
 .modal-overlay.active .auth-card { transform: translateY(0); }
+
+.role-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 600px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-float);
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+.modal-overlay.active .role-card { transform: translateY(0); }
+
+.role-badge-tag {
+  display: inline-block;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  border: 1px solid rgba(45, 90, 70, 0.2);
+}
+
+.role-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 1.75rem;
+}
+@media (max-width: 600px) {
+  .role-options-grid { grid-template-columns: 1fr; }
+}
+
+.role-option-card {
+  background: var(--bg-card-subtle);
+  border: 2px solid var(--border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+.role-option-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  background: var(--bg-card);
+}
+
+.role-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.75rem;
+  background: var(--bg);
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+}
 
 .auth-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
 .auth-tabs { display: flex; background: var(--bg-card-subtle); border: 1px solid var(--border); border-radius: 12px; padding: 4px; margin-bottom: 1.5rem; }
@@ -549,13 +633,11 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
     </linearGradient>
   </defs>
 
-  <!-- Cordão (colar) 1 -->
   <g transform="translate(95,130) rotate(-14) scale(1.15)" opacity="0.55">
     <path d="M0,-40 C-22,-30 -24,0 0,14 C24,28 22,58 0,70" stroke="#8A9A7B" stroke-width="7" fill="none" stroke-linecap="round"/>
     <rect x="-10" y="68" width="20" height="26" rx="3" fill="#9C8B76"/>
   </g>
 
-  <!-- Girassol -->
   <g transform="translate(845,95) rotate(9) scale(0.85)" opacity="0.4">
     <g fill="#C9A227">
       <ellipse cx="0" cy="-20" rx="6.5" ry="14"/>
@@ -570,13 +652,11 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
     <circle cx="0" cy="0" r="8" fill="#5C4433"/>
   </g>
 
-  <!-- Infinito (neurodiversidade) -->
   <g transform="translate(470,55) rotate(-3) scale(0.75)" opacity="0.5">
     <path d="M-36,0 C-36,-24 -11,-24 0,0 C11,24 36,24 36,0 C36,-24 11,-24 0,0 C-11,24 -36,24 -36,0 Z"
       stroke="url(#infGradMuted)" stroke-width="8" fill="none" stroke-linecap="round"/>
   </g>
 
-  <!-- Peças de quebra-cabeça (autismo) -->
   <g transform="translate(715,300) rotate(21) scale(0.95)" opacity="0.45">
     <g fill="#5E7A8C">
       <rect x="-30" y="-11" width="22" height="22" rx="4"/>
@@ -588,25 +668,21 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
     </g>
   </g>
 
-  <!-- Fita -->
   <g transform="translate(75,415) rotate(11) scale(0.8)" opacity="0.5">
     <path d="M0,-26 C14,-20 14,7 0,14 C-14,21 -14,39 0,46" stroke="#6E8C78" stroke-width="9" fill="none" stroke-linecap="round"/>
     <path d="M0,-26 C-14,-20 -14,7 0,14 C14,21 14,39 0,46" stroke="#6E8C78" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.75"/>
   </g>
 
-  <!-- Cordão (colar) 2 -->
   <g transform="translate(930,540) rotate(26) scale(0.9)" opacity="0.35">
     <path d="M0,-40 C-22,-30 -24,0 0,14 C24,28 22,58 0,70" stroke="#8A9A7B" stroke-width="7" fill="none" stroke-linecap="round"/>
     <rect x="-10" y="68" width="20" height="26" rx="3" fill="#9C8B76"/>
   </g>
 
-  <!-- Infinito 2 -->
   <g transform="translate(250,615) rotate(-17) scale(1.0)" opacity="0.45">
     <path d="M-36,0 C-36,-24 -11,-24 0,0 C11,24 36,24 36,0 C36,-24 11,-24 0,0 C-11,24 -36,24 -36,0 Z"
       stroke="url(#infGradMuted)" stroke-width="8" fill="none" stroke-linecap="round"/>
   </g>
 
-  <!-- Girassol 2 -->
   <g transform="translate(575,715) rotate(-7) scale(0.65)" opacity="0.35">
     <g fill="#C9A227">
       <ellipse cx="0" cy="-20" rx="6.5" ry="14"/>
@@ -621,7 +697,6 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
     <circle cx="0" cy="0" r="8" fill="#5C4433"/>
   </g>
 
-  <!-- Peças de quebra-cabeça 2 -->
   <g transform="translate(150,845) rotate(4) scale(1.05)" opacity="0.5">
     <g fill="#C9A227">
       <rect x="-30" y="-11" width="22" height="22" rx="4"/>
@@ -633,19 +708,16 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
     </g>
   </g>
 
-  <!-- Fita 2 -->
   <g transform="translate(805,880) rotate(-22) scale(0.9)" opacity="0.4">
     <path d="M0,-26 C14,-20 14,7 0,14 C-14,21 -14,39 0,46" stroke="#6E8C78" stroke-width="9" fill="none" stroke-linecap="round"/>
     <path d="M0,-26 C-14,-20 -14,7 0,14 C14,21 14,39 0,46" stroke="#6E8C78" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.75"/>
   </g>
 
-  <!-- Cordão (colar) 3 -->
   <g transform="translate(440,935) rotate(15) scale(0.75)" opacity="0.45">
     <path d="M0,-40 C-22,-30 -24,0 0,14 C24,28 22,58 0,70" stroke="#8A9A7B" stroke-width="7" fill="none" stroke-linecap="round"/>
     <rect x="-10" y="68" width="20" height="26" rx="3" fill="#9C8B76"/>
   </g>
 
-  <!-- Infinito 3 -->
   <g transform="translate(915,790) rotate(7) scale(0.6)" opacity="0.35">
     <path d="M-36,0 C-36,-24 -11,-24 0,0 C11,24 36,24 36,0 C36,-24 11,-24 0,0 C-11,24 -36,24 -36,0 Z"
       stroke="url(#infGradMuted)" stroke-width="8" fill="none" stroke-linecap="round"/>
@@ -749,7 +821,7 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
           <p>O V.I.V.A adapta matérias escolares em tempo real gerando resumos claros, soluções passo a passo em texto corrido e ilustrações didáticas personalizadas com os melhores modelos de IA visual.</p>
           <div style="display:flex; gap:1rem; flex-wrap:wrap;">
             <button class="btn-primary" onclick="showView('app')">Explorar matérias →</button>
-            <button class="btn-secondary" onclick="showView('solucoes')">Resolver exercícios 📝</button>
+            <button class="btn-secondary" id="btnHeroSolucoes" onclick="showView('solucoes')">Resolver exercícios 📝</button>
           </div>
         </section>
 
@@ -1150,6 +1222,45 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
   </main>
 </div>
 
+<!-- MODAL HUMANIZADO: SELEÇÃO DE PERFIL (ALUNO OU PROFESSOR) -->
+<div class="modal-overlay" id="roleModal">
+  <div class="role-card">
+    <div style="margin-bottom: 1.25rem;">
+      <span class="role-badge-tag">✨ Seja muito bem-vindo(a)</span>
+      <h2 style="font-weight: 800; font-size: 1.55rem; color: var(--text); margin-top: 0.6rem;">Como você vai usar o V.I.V.A?</h2>
+      <p style="font-size: 0.92rem; color: var(--text-soft); margin-top: 0.35rem;">
+        Escolha o seu perfil para navegar nesta sessão.
+      </p>
+    </div>
+
+    <div class="role-options-grid">
+      <!-- Opção Aluno -->
+      <div class="role-option-card" onclick="selecionarPapelUsuario('aluno')">
+        <div class="role-icon">🎓</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem;">Sou Aluno(a)</h3>
+        <p style="font-size: 0.85rem; color: var(--text-soft); line-height: 1.45; flex: 1;">
+          Explore matérias escolares com explicações simples, ilustrações dinâmicas, questionários interativos e bloco de anotações.
+        </p>
+        <button class="btn-primary" style="width: 100%; margin-top: 1.25rem; justify-content: center; padding: 0.75rem;">
+          Acessar como Aluno 🎓
+        </button>
+      </div>
+
+      <!-- Opção Professor -->
+      <div class="role-option-card" onclick="selecionarPapelUsuario('professor')">
+        <div class="role-icon">👨‍🏫</div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 0.35rem;">Sou Professor(a)</h3>
+        <p style="font-size: 0.85rem; color: var(--text-soft); line-height: 1.45; flex: 1;">
+          Acesso ilimitado a todas as ferramentas pedagógicas, incluindo o gerador de Soluções e Resoluções Guiadas de Exercícios.
+        </p>
+        <button class="btn-primary" style="width: 100%; margin-top: 1.25rem; justify-content: center; padding: 0.75rem;">
+          Acessar como Professor 👨‍🏫
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="authModal">
   <div class="auth-card">
     <div class="auth-header">
@@ -1221,18 +1332,59 @@ footer { text-align: center; padding: 2.2rem; border-top: 1px solid var(--border
 <script>
 const POLLEN_API_KEY = 'sk_HmiG8JBOA5RdBgBR9862geoVT51yHjlj';
 
+let papelUsuario = null;
+
 function executarSplashScreen() {
   const splash = document.getElementById('splashScreen');
   const reduceAnim = localStorage.getItem('viva_reduce_anim') === 'true';
 
   if (reduceAnim) {
     splash.classList.add('hidden');
+    verificarPapelUsuario();
     return;
   }
 
   setTimeout(() => {
     splash.classList.add('hidden');
+    verificarPapelUsuario();
   }, 1300);
+}
+
+function verificarPapelUsuario() {
+  papelUsuario = null;
+  localStorage.removeItem('viva_papel_usuario');
+  sessionStorage.removeItem('viva_papel_usuario');
+
+  const roleModal = document.getElementById('roleModal');
+  if (roleModal) roleModal.classList.add('active');
+}
+
+function selecionarPapelUsuario(papel) {
+  papelUsuario = papel;
+
+  const roleModal = document.getElementById('roleModal');
+  if (roleModal) roleModal.classList.remove('active');
+
+  aplicarPermissoesPapel();
+  atualizarInterfaceUsuario();
+}
+
+function aplicarPermissoesPapel() {
+  const navSolucoes = document.querySelector('.nav-item[data-view="solucoes"]');
+  const btnHeroSolucoes = document.getElementById('btnHeroSolucoes');
+
+  if (papelUsuario === 'aluno') {
+    if (navSolucoes) navSolucoes.style.display = 'none';
+    if (btnHeroSolucoes) btnHeroSolucoes.style.display = 'none';
+
+    const currentView = document.querySelector('.view.active');
+    if (currentView && currentView.id === 'view-solucoes') {
+      showView('inicio');
+    }
+  } else if (papelUsuario === 'professor') {
+    if (navSolucoes) navSolucoes.style.display = 'flex';
+    if (btnHeroSolucoes) btnHeroSolucoes.style.display = 'inline-flex';
+  }
 }
 
 let usuarioAtual = null;
@@ -1253,21 +1405,23 @@ function atualizarInterfaceUsuario() {
   const configSub = document.getElementById('configUserSub');
   const configBtn = document.getElementById('configAccountBtn');
 
+  let textoPerfil = papelUsuario === 'professor' ? 'Professor 👨‍🏫' : (papelUsuario === 'aluno' ? 'Aluno 🎓' : 'Aguardando Perfil');
+
   if (usuarioAtual) {
     avatarEl.textContent = usuarioAtual.avatar || '👤';
     nameEl.textContent = usuarioAtual.nome;
-    statusEl.textContent = 'Conta Salva';
+    statusEl.textContent = textoPerfil;
     btnSidebar.textContent = 'Perfil';
 
-    configLabel.textContent = `Conta Ativa: ${usuarioAtual.nome}${usuarioAtual.avatar || ''}`;
+    configLabel.textContent = `Conta Ativa: ${usuarioAtual.nome} (${textoPerfil})`;
     configSub.textContent = 'As suas matérias e anotações estão associadas a este perfil local.';
     configBtn.textContent = 'Ver Perfil';
   } else {
     avatarEl.textContent = '👤';
     nameEl.textContent = 'Visitante';
-    statusEl.textContent = 'Modo Local';
+    statusEl.textContent = textoPerfil;
     btnSidebar.textContent = 'Entrar';
-    configLabel.textContent = 'Conta Atual: Visitante';
+    configLabel.textContent = `Conta Atual: Visitante (${textoPerfil})`;
     configSub.textContent = 'Os seus dados estão salvos no modo padrão do navegador.';
     configBtn.textContent = 'Entrar / Criar Conta';
   }
@@ -1427,7 +1581,6 @@ themeBtn.addEventListener('click', () => {
 
 let leituraTextoAtiva = true;
 
-// Carrega a lista de vozes do navegador (é assíncrono em vários navegadores)
 let vozesDisponiveis = [];
 function atualizarListaVozes() {
   vozesDisponiveis = window.speechSynthesis.getVoices();
@@ -1531,6 +1684,11 @@ function atualizarTituloModeloImagem(modelo) {
 }
 
 function showView(view) {
+  if (view === 'solucoes' && papelUsuario === 'aluno') {
+    alert('A área de Soluções & Exercícios é restrita ao perfil de Professor.');
+    return;
+  }
+
   const currentView = document.querySelector('.view.active');
   const targetView = document.getElementById('view-' + view);
 
@@ -1797,7 +1955,7 @@ INSTRUÇÕES DE FORMATO:
   }
 }
 
-// ===== Questionário de Estudo (gerado por IA) =====
+// ===== Questionário de Estudo =====
 let quizPerguntas = [];
 let quizIndiceAtual = 0;
 let quizAcertos = 0;
@@ -1817,7 +1975,6 @@ function prepararQuiz() {
   sel.innerHTML = materias.map(m => `<option value="${m.nome}">${m.emoji} ${m.nome}</option>`).join('');
 }
 
-// ----- Comunicação com a IA (com tentativas, modelos alternativos e erros legíveis) -----
 const QUIZ_MODELOS = ['openai-large', 'openai', 'openai-fast'];
 const QUIZ_POR_LOTE = 5;
 const QUIZ_FOCOS = ['conceitos básicos', 'exemplos práticos do dia a dia', 'detalhes importantes', 'aplicação e raciocínio'];
@@ -1870,14 +2027,14 @@ async function chamarIA(messages) {
           const texto = dados?.choices?.[0]?.message?.content;
           if (texto) return texto;
           ultimoErro = new ErroIA('resposta vazia', 'formato', resp.status);
-          break; // tenta o próximo modelo
+          break;
         }
 
         let detalhe = '';
         try {
           const j = await resp.json();
           detalhe = j?.error?.message || JSON.stringify(j).slice(0, 160);
-        } catch (e) { /* sem corpo legível */ }
+        } catch (e) {}
 
         if (resp.status === 401 || resp.status === 403) throw new ErroIA(detalhe, 'auth', resp.status);
         if (resp.status === 402) throw new ErroIA(detalhe, 'saldo', 402);
@@ -1885,11 +2042,11 @@ async function chamarIA(messages) {
         if (resp.status === 429 || resp.status >= 500) {
           ultimoErro = new ErroIA(detalhe, resp.status === 429 ? 'limite' : 'servidor', resp.status);
           await esperar(800 * (tentativa + 1));
-          continue; // repete com o mesmo modelo
+          continue;
         }
 
         ultimoErro = new ErroIA(detalhe || 'pedido recusado', 'modelo', resp.status);
-        break; // erro de pedido/modelo: passa ao próximo modelo
+        break;
       } catch (e) {
         clearTimeout(timer);
         if (e instanceof ErroIA && (e.tipo === 'auth' || e.tipo === 'saldo')) throw e;
@@ -1914,7 +2071,6 @@ function perguntaValida(q) {
 function extrairPerguntas(bruto) {
   const texto = String(bruto || '').replace(/```json/gi, '').replace(/```/g, '').trim();
 
-  // 1) Tenta ler o array JSON completo
   try {
     const i = texto.indexOf('[');
     const f = texto.lastIndexOf(']');
@@ -1925,9 +2081,8 @@ function extrairPerguntas(bruto) {
         if (ok.length) return ok;
       }
     }
-  } catch (e) { /* cai para o resgate abaixo */ }
+  } catch (e) {}
 
-  // 2) Resgate: se a resposta veio cortada, aproveita cada objeto { ... } completo
   const resgatadas = [];
   const pilha = [];
   let emTexto = false;
@@ -1948,7 +2103,7 @@ function extrairPerguntas(bruto) {
         try {
           const obj = JSON.parse(texto.slice(ini, k + 1));
           if (perguntaValida(obj)) resgatadas.push(obj);
-        } catch (e) { /* objeto incompleto, ignora */ }
+        } catch (e) {}
       }
     }
   }
@@ -1959,7 +2114,7 @@ async function gerarLoteQuiz(materia, tema, qtd, indice, totalLotes) {
   const assunto = tema ? `${materia}, especificamente sobre "${tema}"` : materia;
   const foco = QUIZ_FOCOS[indice % QUIZ_FOCOS.length];
   const variacao = totalLotes > 1
-    ? `\nEste é o lote ${indice + 1} de ${totalLotes}: dá ênfase a ${foco} para que as perguntas não se repitam entre lotes.`
+    ? `\nEste é o lote ${indice + 1} de${totalLotes}: dá ênfase a ${foco} para que as perguntas não se repitam entre lotes.`
     : '';
 
   const prompt = `Cria ${qtd} perguntas de escolha múltipla sobre ${assunto}, adequadas a um estudante com necessidades neuroinclusivas (Autismo, TDAH, Dislexia): linguagem simples, direta e sem ambiguidade.${variacao}
@@ -2068,7 +2223,7 @@ async function gerarQuiz() {
 
 function renderizarPerguntaAtual() {
   const q = quizPerguntas[quizIndiceAtual];
-  document.getElementById('quizProgressLabel').textContent = `Pergunta ${quizIndiceAtual + 1} de ${quizPerguntas.length}`;
+  document.getElementById('quizProgressLabel').textContent = `Pergunta ${quizIndiceAtual + 1} de${quizPerguntas.length}`;
   document.getElementById('quizProgressFill').style.width = `${(quizIndiceAtual / quizPerguntas.length) * 100}%`;
   document.getElementById('quizPerguntaTexto').textContent = q.pergunta;
 
@@ -2144,8 +2299,7 @@ function revisarRespostas() {
     const respostaUser = quizRespostasUsuario[i];
     return `
       <div class="form-card" style="margin-top:1rem;">
-        <p style="font-weight:700; margin-bottom:0.75rem;">${i + 1}. ${escaparHtml(q.pergunta)}</p>
-        ${q.opcoes.map((op, j) => {
+        <p style="font-weight:700; margin-bottom:0.75rem;">${i + 1}. ${escaparHtml(q.pergunta)}</p>${q.opcoes.map((op, j) => {
           let cls = '';
           if (j === q.respostaCorreta) cls = 'correct';
           else if (j === respostaUser) cls = 'incorrect';
