@@ -1,0 +1,56 @@
+{
+  "app_name": "AcessoTotal Pro - Platforma de Acessibilidade Digital",
+  "context": "Accessibility platform providing tools, widget features, audit checks, and inclusive digital solutions for web developers and organizations",
+  "archetype": "ORGANIC & EARTHY / SWISS AUTHORITY (High contrast, empathetic, warm sage & slate with high accessibility focus)",
+  "typography": {
+    "headings": {
+      "font_family": "Plus Jakarta Sans, sans-serif",
+      "weights": ["600", "800"],
+      "letter_spacing": "tracking-tight"
+    },
+    "body": {
+      "font_family": "Inter, sans-serif",
+      "weights": ["400", "500", "700"]
+    }
+  },
+  "colors": {
+    "primary": "#0F172A",
+    "secondary": "#3B82F6",
+    "accent": "#10B981",
+    "background": "#F8FAFC",
+    "surface": "#FFFFFF",
+    "muted": "#64748B",
+    "border": "#E2E8F0"
+  },
+  "image_urls": [
+    {
+      "category": "accessibility_hero",
+      "description": "Woman in wheelchair outdoors near nature representing active accessibility",
+      "image_url": "https://images.unsplash.com/photo-1570793005299-c091be91bbad?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAxODF8MHwxfHNlYXJjaHwzfHxhY2Nlc3NpYmlsaXR5JTIwaHVtYW4lMjBjb25uZWN0aW9uJTIwaW5jbHVzaXZpdHl8ZW58MHx8fHwxNzkyMTA2ODU3fDA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      "category": "team_inclusive",
+      "description": "Diverse people collaborating on technology and inclusive design",
+      "image_url": "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzR8MHwxfHNlYXJjaHwxfHxkaXZlcnNlJTIwcGVvcGxlJTIwdGVjaG5vbG9neSUyMGluY2x1c2l2ZSUyMGRlc2lnbnxlbnwwfHx8fDE3OTIxMDY4NTl8MA&ixlib=rb-4.1.0&q=85"
+    },
+    {
+      "category": "accessibility_symbol",
+      "description": "Handicap accessibility symbol painted on wall",
+      "image_url": "https://images.unsplash.com/photo-1633904244276-b57f72c983a6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAxODF8MHwxfHNlYXJjaHwyfHxhY2Nlc3NpYmlsaXR5JTIwaHVtYW4lMjBjb25uZWN0aW9uJTIwaW5jbHVzaXZpdHl8ZW58MHx8fHwxNzkyMTA2ODU3fDA&ixlib=rb-4.1.0&q=85"
+    }
+  ],
+  "components_to_enhance": [
+    "Interactive Accessibility Toolbar (Text resizing, high contrast, dyslexia font, screen reader simulation, grayscale)",
+    "WCAG Compliance Audit Checker Simulator with real-time scoring",
+    "Solutions & Features Bento Grid with high contrast cards",
+    "Testimonials & Case Studies Section",
+    "Interactive Pricing & Integration Code Generator for developers"
+  ],
+  "instructions_to_main_agent": "Preserve all existing accessibility features and functionalities from the reference site. Elevate the design using high contrast, generous spacing, smooth typography, interactive widgets, and robust testids for all interactive elements.",
+  "universal_guidelines": [
+    "All interactive elements must include data-testid attributes",
+    "Do not use transparent headers or overlays without proper blur",
+    "Ensure APCA/WCAG contrast compliance across all components",
+    "Rotate font weights and use distinct headings"
+  ]
+}
