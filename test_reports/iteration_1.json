@@ -1,0 +1,30 @@
+{
+  "summary": "Frontend-only regression test of the redesigned Settings 'Perfil atual' card and new Home hero illustration. All requested flows pass: hero image loads (naturalWidth 848, static.prod-images.emergentagent.com URL, descriptive pt-BR alt) and looks good in light and dark themes; profile card shows avatar/name/email/role tag on separate labelled rows (Nome/E-mail/Tipo de perfil) with no overflow at 1920 and 390 widths, including Extra grande font and a long name/email (overflow-wrap works); change-role toggles Aluno<->Professor, updates role tag, button label and sidebar chip, and enables/disables Soluções nav; settings-manage-account opens auth modal, registration updates card name+email, logout returns to Visitante, admin@viva.app login works (Administrador / Professor). Regression: toggle-tts, toggle-motion (data-reduce-animations), toggle-theme (data-theme), sidebar theme-toggle, image-model-select (persists after reload) and note creation all work.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "Font size setting (font-size-select)", "issue": "Extra grande only sets --font-scale on .viva-shell, but almost every element (including profile card dd 12px, dt 9px, role-tag 10px, small 10px) has a hardcoded px font-size, so the setting barely changes text size (profile name stays 12px at Extra grande). This bug existed before this change, but it matters for an accessibility-focused app.", "selector": "[data-testid='font-size-select']", "priority": "MEDIUM"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Settings profile card", "issues": ["Labels are 9px and helper text is 10px, which is very small for an accessibility app; consider using rem/em units tied to --font-scale"]},
+      {"screen": "Settings toggles", "issues": ["Toggle buttons have no role='switch'/aria-checked, so screen readers cannot tell their state (minor a11y)"]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Optional: switch the hardcoded px font sizes (at least in the profile card and settings) to em/rem so font-size-select really scales the text",
+    "Optional: add role='switch' and aria-checked to SettingRow toggles"
+  ],
+  "critical_code_review_comments": [
+    "App.js is one 241-line file with very long single-line components (Home, SettingsView, Notes), which makes it hard to maintain; consider splitting it into component files",
+    "--font-scale is applied only via inheritance, but App.css overrides it almost everywhere with px values"
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (skipped)", "frontend": "100% of requested flows"},
+  "seed_data_creation": "Registered test user test_longemail_<ts>@exemplo-dominio-grande.com.br (name TEST_Joana Silva Pereira de Albuquerque); created a local note TEST_nota regressão",
+  "test_credentials": "admin@viva.app / VivaAdmin#2026 (taken from the review request; /app/memory/test_credentials.md has no entries)",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "First load shows role-modal (role-student/role-teacher). On mobile (390) use mobile-menu before nav-*. AI features are not testable (placeholder POLLEN_API_KEY). Overflow checks may flag zero-size dev-tooling spans (x-excluded); ignore them."
+}

@@ -28,7 +28,12 @@ Melhorar muito a aparência do site existente, estudando o HTML de referência, 
 - (16/07/2026) Correção P0 de overflow de texto: modal de perfil reestruturado (texto agrupado em coluna própria na grade), `min-width: 0` + `overflow-wrap` aplicados em chip de perfil, cartões de matérias, histórico, anotações, configurações, quiz e títulos. Verificado em 375/768/1366px e em teste de estresse com fonte Extra grande + textos longos: zero overflow.
 - (16/07/2026) Polimento de movimento: animações de entrada suaves (fade/slide escalonado) que são automaticamente desativadas pela opção "Reduzir animações", rolagem suave e contorno de foco visível para navegação por teclado.
 
+- (16/10/2026) Bloco "Perfil atual" nas Configurações reorganizado: avatar, nome, e-mail e tipo de perfil, cada um em sua linha com rótulo, mais botões "Trocar perfil" e "Gerenciar conta". Fica empilhado no celular e acompanha o tamanho de texto escolhido. Os interruptores agora informam o estado para leitores de tela (role=switch).
+- (16/10/2026) Imagem do hero trocada por ilustração própria: jovem com fones abafadores e símbolo do infinito colorido da neurodiversidade.
+
 ## Backlog priorizado
+- P1: Fazer o seletor de tamanho de texto valer no site todo (muitos textos usam px fixos).
+- P2: Revisar textos e espaçamentos de outras telas (Fase 2). Avatar escolhível no perfil (Fase 3).
 - P1: Adicionar edição e exclusão de matérias diretamente nos cartões.
 - P1: Persistir questionários concluídos no histórico de estudos.
 - P2: Criar modo de foco com temporizador visual e pausas personalizáveis.

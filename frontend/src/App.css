@@ -78,16 +78,17 @@ html{scroll-behavior:smooth}
 .profile-card-head{display:flex;align-items:center;gap:14px}
 .profile-card-head>div{min-width:0}
 .profile-card-head b,.profile-card-head small{display:block}
-.profile-card-head b{font-size:13px}
-.profile-card-head small{font-size:10px;color:var(--muted);margin-top:4px;line-height:1.4}
+.profile-card-head b{font-size:.875em}
+.profile-card-head small{font-size:.72em;color:var(--muted);margin-top:4px;line-height:1.4}
 .profile-card-avatar{display:grid;place-items:center;flex:none;width:46px;height:46px;border-radius:14px;background:var(--sage);font-size:23px}
 .profile-card-info{margin:0;display:grid;gap:0;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:4px 16px}
-.profile-card-info>div{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);min-width:0}
+.profile-card-info>div{display:grid;grid-template-columns:minmax(110px,9em) 1fr;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);min-width:0}
 .profile-card-info>div:last-child{border-bottom:0}
-.profile-card-info dt{font:500 9px 'DM Mono';letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.profile-card-info dd{margin:0;font-size:12px;font-weight:600;color:var(--ink);min-width:0;overflow-wrap:anywhere}
-.role-tag{display:inline-block;background:var(--sage);color:var(--green);font:600 10px Manrope;padding:5px 11px;border-radius:20px}
+.profile-card-info dt{font:500 .66em 'DM Mono';letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.profile-card-info dd{margin:0;font-size:.82em;font-weight:600;color:var(--ink);min-width:0;overflow-wrap:anywhere}
+.role-tag{display:inline-block;background:var(--sage);color:var(--green);font:600 .9em Manrope;padding:.35em .9em;border-radius:20px}
 .profile-card-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
 .hero-art img{aspect-ratio:4/5;object-position:center 35%;filter:saturate(.92)}
 [data-theme=dark] .hero-art img{filter:saturate(.85) brightness(.92)}
 @media(max-width:560px){.profile-card-info>div{grid-template-columns:1fr;gap:5px}.profile-card-actions{flex-direction:column;align-items:stretch}.profile-card-actions .btn-outline{width:100%}.profile-card-actions .btn-quiet{justify-content:flex-start}}
+.profile-card-actions .btn-outline,.profile-card-actions .btn-quiet{font-size:.75em}
